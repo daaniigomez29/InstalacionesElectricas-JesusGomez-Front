@@ -2,6 +2,7 @@
 import Header from "../sections/Header.astro";
 import HeaderSecondary from "../sections/HeaderSecondary.astro";
 import Hero from "../sections/Hero.astro";
+import AboutUs from "../sections/AboutUs.astro";
 import Footer from "../sections/Footer.astro";
 import WhatsappIcon from "../icons/WhatsappIcon.astro";
 ---
@@ -38,22 +39,27 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 		<title>Instalaciones Eléctricas Jesús Gómez</title>
 	</head>
 	<body class="">
-		
 		<!--Whatsapp button-->
-        <a href="whatsappContactLink"
-            target="_blank"
-            class="rounded-full fixed bottom-0 end-0 m-4 whatsapp-icon flex justify-center items-center"
-            style="z-index: 1001;"
-            data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover"
-            data-bs-content="Contacta con nosotros!"
-            >
-           <WhatsappIcon fill="#FFFF" width="30" height="30" />
-        </a>
+		<a
+			href="whatsappContactLink"
+			target="_blank"
+			class="rounded-full fixed bottom-0 end-0 m-4 whatsapp-icon flex justify-center items-center"
+			style="z-index: 1001;"
+			data-bs-container="body"
+			data-bs-toggle="popover"
+			data-bs-trigger="hover"
+			data-bs-content="Contacta con nosotros!"
+		>
+			<WhatsappIcon fill="#FFFF" width="30" height="30" />
+		</a>
 
-		<HeaderSecondary />
-		<Header />
-		<Hero />
-		<Footer />
+		<div class="min-h-full">
+			<HeaderSecondary />
+			<Header />
+			<Hero />
+			<AboutUs />
+			<Footer />
+		</div>
 	</body>
 </html>
 
@@ -61,36 +67,60 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 	@import "../styles/global.css";
 
 	/* Encabezados base (móvil) */
-h1 { font-size: 1.875rem; } /* 30px */
-h2 { font-size: 1.5rem; }   /* 24px */
-p  { font-size: 0.875rem; }     /* 14px */
-span  { font-size: 0.875rem; }     /* 14px */
-li  { font-size: 0.875rem; }     /* 14px */
+	h1 {
+		font-size: 1.875rem;
+	} /* 30px */
+	h2 {
+		font-size: 1.5rem;
+	} /* 24px */
+	p {
+		font-size: 0.875rem;
+	} /* 14px */
+	span {
+		font-size: 0.875rem;
+	} /* 14px */
+	li {
+		font-size: 0.875rem;
+	} /* 14px */
 
-/* Tablet / PC */
-@media (min-width: 768px) {
-  h1 { font-size: 2.5rem; }  /* 40px */
-  h2 { font-size: 2rem; }    /* 32px */
-  p  { font-size: 1rem; }     /* 16px */
-  span { font-size: 1rem; }     /* 16px */
-  li  { font-size: 1rem; }     /* 16px */
-}
+	/* Tablet / PC */
+	@media (min-width: 768px) {
+		h1 {
+			font-size: 2.5rem;
+		} /* 40px */
+		h2 {
+			font-size: 2rem;
+		} /* 32px */
+		p {
+			font-size: 1rem;
+		} /* 16px */
+		span {
+			font-size: 1rem;
+		} /* 16px */
+		li {
+			font-size: 1rem;
+		} /* 16px */
+	}
 
-/* Pantallas grandes */
-@media (min-width: 1440px) {
-  h1 { font-size: 3rem; }    /* 48px */
-  h2 { font-size: 2.25rem; } /* 36px */
-}
+	/* Pantallas grandes */
+	@media (min-width: 1440px) {
+		h1 {
+			font-size: 2.875rem;
+		} /* 48px */
+		h2 {
+			font-size: 2.25rem;
+		} /* 36px */
+	}
 
-.whatsapp-icon{
-  height: 70px; 
-  width:70px; 
-  background:#25d366; 
-  color:white; 
-  box-shadow: 3px 3px 3px black;
-  min-width: 50px;
-  min-height: 50px;
-  max-width: 80px;
-  max-height: 80px;
-}
+	.whatsapp-icon {
+		height: 70px;
+		width: 70px;
+		background: #25d366;
+		color: white;
+		box-shadow: 3px 3px 3px black;
+		min-width: 50px;
+		min-height: 50px;
+		max-width: 80px;
+		max-height: 80px;
+	}
 </style>
