@@ -1,12 +1,14 @@
 ---
 import LocationIcon from "../icons/LocationIcon.astro"
 import ToolsIcon from "../icons/ToolsIcon.astro"
+import ToolsIcon2 from "../icons/ToolsIcon2.astro"
+import QualityIcon from "../icons/QualityIcon.astro"
 ---
 
-<div class="bg-[url(/src/assets/aboutus-bg-black.jpeg)] bg-no-repeat bg-cover">
+<section id="sobre-nosotros" class="bg-[url(/src/assets/aboutus-bg-black.jpeg)]  bg-no-repeat bg-cover scroll-m-25 md:scroll-m-45">
     <div class="container mx-auto flex flex-col justify-center p-10 lg:p-30 gap-10 text-white">
         <div class="flex justify-center">
-            <h1 class="bg-primary-orange text-white font-bold inline-block px-5">Tu energía, en buenas manos</h1>
+            <h1 class="background-h1">Tu energía, en buenas manos</h1>
         </div>
 
         <div class="flex flex-col gap-5 pb-5">
@@ -14,23 +16,25 @@ import ToolsIcon from "../icons/ToolsIcon.astro"
             <p>En Instalaciones Eléctricas Jesús Gómez somos electricistas profesionales especializados en obras eléctricas integrales, tanto en reformas como en proyectos nuevos.
                 Realizamos la instalación eléctrica completa de viviendas, locales comerciales, oficinas, naves y comunidades, cuidando cada detalle para garantizar seguridad, eficiencia y cumplimiento normativo.</p>
         </div>
-            <div class="md:grid grid-cols-2 flex flex-col items-center gap-10 font-semibold">
+            <div class="md:grid grid-cols-2 flex flex-col items-start gap-10 font-semibold">
                 <div class="flex gap-2 items-center">
                     <LocationIcon />
                     <p>Presencia en toda Andalucía, operando desde Sevilla.</p>
                 </div>
                 <div class="flex gap-2 items-center">
-                    <ToolsIcon />
+                    <QualityIcon />
                     <p>Nos compromentemos con los más altos estándares de calidad y seguridad, cumpliendo con todas las normativas vigentes.</p>
                 </div>
             </div>
             <div class="md:grid grid-cols-2 flex flex-col gap-10 font-semibold">
-                <div>
+                <div class="flex gap-2 items-center">
+                    <ToolsIcon2 />
                     <p>Utilizamos las últimas tecnologías y herramientas para garantizar instalaciones seguras, eficientes y duraderas.</p>
                 </div>
-                <div>
+                <div class="flex gap-2 items-center">
+                    <ToolsIcon />
                     <p>Ofrecemos soluciones a medida, adaptadas a las necesidades específicas de cada proyecto industrial.</p>
                 </div>
             </div>
     </div>
-</div>
+</section>

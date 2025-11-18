@@ -11,6 +11,14 @@
     --font-montserrat: "Montserrat", system-ui, sans-serif;
 }
 
+.background-h1 {
+  background-color: #F39615;
+  color: white;
+  padding-inline: 1.25rem;
+  font-weight: bold;
+  display: inline-block;
+}
+
 html,
 	body {
 		margin: 0;
