@@ -19,6 +19,14 @@
   display: inline-block;
 }
 
+.background-h1-blue {
+  background-color: #1E3A8A;
+  color: white;
+  padding-inline: 1.25rem;
+  font-weight: bold;
+  display: inline-block;
+}
+
 html,
 	body {
 		margin: 0;
