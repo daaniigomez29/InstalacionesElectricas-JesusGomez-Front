@@ -40,6 +40,20 @@
 
 <script src="https://unpkg.com/flowbite@latest/dist/flowbite.min.js"></script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const navLinks = document.querySelectorAll('#navbar-default a');
+    const toggleButton = document.querySelector('[data-collapse-toggle="navbar-default"]') as HTMLButtonElement;
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 1024) {
+          toggleButton.click();  // ← ahora ya no da error
+        }
+      });
+    });
+  });
+</script>
 
 <style>
     .shadow{ 

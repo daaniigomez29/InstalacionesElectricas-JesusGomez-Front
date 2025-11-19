@@ -4,6 +4,7 @@ import HeaderSecondary from "../sections/HeaderSecondary.astro";
 import Hero from "../sections/Hero.astro";
 import AboutUs from "../sections/AboutUs.astro";
 import Solution from "../sections/Solution.astro";
+import Services from "../sections/Services.astro";
 import Footer from "../sections/Footer.astro";
 import WhatsappIcon from "../icons/WhatsappIcon.astro";
 ---
@@ -13,7 +14,7 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/src/assets/logo_jesus_trans.png" />
 
 		<meta
 			name="description"
@@ -61,6 +62,7 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 				<Hero />
 				<AboutUs />
 				<Solution />
+				<Services />
 			</main>
 			<Footer />
 		</div>
@@ -116,6 +118,10 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 		} /* 36px */
 	}
 
+	h6 {
+		font-weight: bold;
+	}
+
 	.whatsapp-icon {
 		height: 70px;
 		width: 70px;
@@ -126,5 +132,9 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 		min-height: 50px;
 		max-width: 80px;
 		max-height: 80px;
+	}
+
+	.background-fade {
+		background: linear-gradient(45deg, #F9FAFC 0%, #EAEFF6 100%);
 	}
 </style>

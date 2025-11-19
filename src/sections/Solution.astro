@@ -4,49 +4,94 @@ import HandshakeIcon from "../icons/HandshakeIcon.astro";
 import WarrantyIcon from "../icons/WarrantyIcon.astro";
 ---
 
-<section id="soluciones" class="container mx-auto p-10 pt-30 scroll-m-25">
-    <div class="lg:grid lg:grid-cols-2 gap-10">
-
-        <!--Columna de texto -->
-        <div class="flex flex-col gap-5">
-            <div>
-                <h1 class="background-h1">Soluciones a medida</h1>
-            </div>
+<section id="soluciones" class="p-10 pt-30 scroll-m-25 background-fade">
+    <div class="container mx-auto">
+        <div class="lg:grid lg:grid-cols-2 gap-10">
+            <!--Columna de texto -->
             <div class="flex flex-col gap-5">
-                <p>En <b>Instalaciones Eléctricas Jesús Gómez</b>, diagnosticamos y resolvemos cualquier fallo eléctrico de forma <b>rápida, segura y eficaz.</b></p>
-                <p>Nuestros técnicos analizan tu instalación para detectar el origen del problema y ofrecerte la <b>mejor solución adaptada a tus necesidades.</b></p>
-                <p>Ya sea una reparación puntual de electricidad, una revisión completa o una renovación de tu sistema eléctrico, nos encargamos de todo para que <b>vuelvas a tener energía sin preocupaciones.</b></p>
-                <p> <b>Confía en profesionales cualificados</b> y <b>disfruta de la tranquilidad</b> de saber que tu instalación está en <b>buenas manos</b> ⚡.</p>
+                <div>
+                    <h1 class="background-h1">Soluciones a medida</h1>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <p>
+                        En <b>Instalaciones Eléctricas Jesús Gómez</b>,
+                        diagnosticamos y resolvemos cualquier fallo eléctrico de
+                        forma <b>rápida, segura y eficaz.</b>
+                    </p>
+                    <p>
+                        Nuestros técnicos analizan tu instalación para detectar
+                        el origen del problema y ofrecerte la <b
+                            >mejor solución adaptada a tus necesidades.</b>
+                    </p>
+                    <p>
+                        Ya sea una reparación puntual de electricidad, una
+                        revisión completa o una renovación de tu sistema
+                        eléctrico, nos encargamos de todo para que <b
+                            >vuelvas a tener energía sin preocupaciones.</b>
+                    </p>
+                    <p>
+                        <b>Confía en profesionales cualificados</b> y <b
+                            >disfruta de la tranquilidad</b
+                        > de saber que tu instalación está en <b>buenas manos</b
+                        > ⚡.
+                    </p>
+                </div>
+            </div>
+
+            <!--Columna de imagen -->
+            <div class="flex justify-center">
+                <img
+                    src="/src/assets/solution-img.jpeg"
+                    class="md:img-solution"
+                    alt=""
+                />
             </div>
         </div>
 
-        <!--Columna de imagen -->
-        <div class="flex justify-center">
-            <img src="/src/assets/solution-img.jpeg" class="md:img-solution" alt="">
-        </div>
-    </div>
-
-    <div class="flex flex-col pt-20 gap-y-20">
-        <div class="flex justify-center">
-            <h1 class="background-h1-blue">Beneficios de elegirnos</h1>
-        </div>
-        <div class="flex flex-col md:flex-row gap-y-20 gap-x-10 text-center justify-between">
-            <div class="flex flex-col justify-center items-center gap-y-3 lg:w-100">
-                <CertificateIcon />
-                <span class="font-bold">Profesionales certificados y de confianza</span>
-                <p class="font-medium">Contamos con electricistas autorizados que garantizan un trabajo seguro, legal y conforme a la normativa vigente.</p>
+        <div class="flex flex-col pt-20 gap-y-20">
+            <div class="flex justify-center">
+                <h1 class="background-h1-blue">Beneficios de elegirnos</h1>
             </div>
+            <div
+                class="flex flex-col md:flex-row gap-y-20 gap-x-10 text-center justify-between"
+            >
+                <div
+                    class="flex flex-col justify-center items-center gap-y-3 lg:w-100"
+                >
+                    <CertificateIcon />
+                    <span class="font-bold"
+                        >Profesionales certificados y de confianza</span
+                    >
+                    <p class="font-medium">
+                        Contamos con electricistas autorizados que garantizan un
+                        trabajo seguro, legal y conforme a la normativa vigente.
+                    </p>
+                </div>
 
-            <div class="flex flex-col justify-center items-center gap-y-3 lg:w-100">
-                <HandshakeIcon />
-                <span class="font-bold">Compromiso y atención personalizada</span>
-                <p class="font-medium">En instalaciones Jesús Gómez cuidamos la puntualidad y cada detalle ofreciendo a nuestros clientes un trato personal.</p>
-            </div>
+                <div
+                    class="flex flex-col justify-center items-center gap-y-3 lg:w-100"
+                >
+                    <HandshakeIcon />
+                    <span class="font-bold"
+                        >Compromiso y atención personalizada</span
+                    >
+                    <p class="font-medium">
+                        En instalaciones Jesús Gómez cuidamos la puntualidad y
+                        cada detalle ofreciendo a nuestros clientes un trato
+                        personal.
+                    </p>
+                </div>
 
-            <div class="flex flex-col justify-center items-center gap-y-3 lg:w-100">
-                <WarrantyIcon />
-                <span class="font-bold">Garantía y respaldo total</span>
-                <p class="font-medium">Nuestras instalaciones cumplen con todas las normativas y cuentan con garantía de funcionamiento y seguridad.</p>
+                <div
+                    class="flex flex-col justify-center items-center gap-y-3 lg:w-100"
+                >
+                    <WarrantyIcon />
+                    <span class="font-bold">Garantía y respaldo total</span>
+                    <p class="font-medium">
+                        Nuestras instalaciones cumplen con todas las normativas
+                        y cuentan con garantía de funcionamiento y seguridad.
+                    </p>
+                </div>
             </div>
         </div>
     </div>

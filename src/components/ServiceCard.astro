@@ -1,0 +1,26 @@
+---
+import { string } from "astro:schema";
+
+export interface Props {
+    img: string;
+    title: string;
+    content: string;
+}
+
+const { img, title, content } = Astro.props;
+---
+
+<div class="w-72 bg-white rounded-xl shadow-md overflow-hidden">
+    <img src={img} alt="" class="w-full h-40 object-cover"/>
+
+    <div class="p-5 space-y-2">
+        <h6 class="font-semibold text-gray-900">
+            {title}
+        </h6>
+        <p class="text-gray-600 text-sm">
+            {content}
+        </p>
+    </div>
+</div>
+
+<style></style>
