@@ -5,6 +5,7 @@ import Hero from "../sections/Hero.astro";
 import AboutUs from "../sections/AboutUs.astro";
 import Solution from "../sections/Solution.astro";
 import Services from "../sections/Services.astro";
+import Contact from "../sections/Contact.astro";
 import Footer from "../sections/Footer.astro";
 import WhatsappIcon from "../icons/WhatsappIcon.astro";
 ---
@@ -45,14 +46,14 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 		<a
 			href="whatsappContactLink"
 			target="_blank"
-			class="rounded-full fixed bottom-0 end-0 m-4 whatsapp-icon flex justify-center items-center"
+			class="group hover:scale-110 transition duration-300 rounded-full fixed bottom-0 end-0 m-4 whatsapp-icon flex justify-center items-center"
 			style="z-index: 1001;"
 			data-bs-container="body"
 			data-bs-toggle="popover"
 			data-bs-trigger="hover"
 			data-bs-content="Contacta con nosotros!"
 		>
-			<WhatsappIcon fill="#FFFF" width="30" height="30" />
+			<WhatsappIcon class="" fill="#FFFF" width="30" height="30" />
 		</a>
 
 		<div class="min-h-full">
@@ -63,6 +64,7 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 				<AboutUs />
 				<Solution />
 				<Services />
+				<Contact />
 			</main>
 			<Footer />
 		</div>
@@ -98,14 +100,14 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 			font-size: 2rem;
 		} /* 32px */
 		p {
-			font-size: 1rem;
-		} /* 16px */
+			font-size: 0.875rem;
+		} /* 14px */
 		span {
-			font-size: 1rem;
-		} /* 16px */
+			font-size: 0.875rem;
+		} /* 14px */
 		li {
-			font-size: 1rem;
-		} /* 16px */
+			font-size: 0.875rem;
+		} /* 14px */
 	}
 
 	/* Pantallas grandes */
@@ -116,6 +118,15 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 		h2 {
 			font-size: 2.25rem;
 		} /* 36px */
+		p {
+			font-size: 1rem;
+		} /* 16px */
+		span {
+			font-size: 1rem;
+		} /* 16px */
+		li {
+			font-size: 1rem;
+		} /* 16px */
 	}
 
 	h6 {

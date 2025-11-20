@@ -1,10 +1,14 @@
 <section id="inicio" class=" hero-full pt-10 px-5 md:p-0 background-fade scroll-m-35">
     <div class="lg:grid lg:grid-cols-2 flex flex-col justify-center bg-background-fade w-full max-w-7xl mx-auto pt-10 sm:px-10 lg:p-0 items-center gap-y-10">
-        <div class="">
+        <div class="flex flex-col">
                 <h1 class="font-bold">Expertos en energía, comprometidos contigo</h1>
-                <h1 class="background-h1">y con tu seguridad.</h1>
-                <p class="pt-10">Instalaciones, reparaciones y mantenimiento eléctrico rápido, limpio y con garantía. Tú solo disfruta de la tranquilidad.</p>
-                <button class="btn bg-accent-blue rounded-xl mt-5 p-3 text-white font-semibold">Solicita presupuesto -></button>
+                <div>
+                    <h1 class="background-h1">y con tu seguridad.</h1>
+                </div>
+                <p class="pt-5">Instalaciones, reparaciones y mantenimiento eléctrico rápido, limpio y con garantía. Tú solo disfruta de la tranquilidad.</p>
+                <div class="pt-5">
+                    <a href="#contacto" class="btn bg-accent-blue rounded-xl  p-3 text-white font-semibold">Solicita presupuesto -></a>
+                </div>
         </div>
         <div class="flex items-end justify-end h-full">
             <img src="/src/assets/jesus_transparente.png" class=" object-contain max-h-[82vh] 2xl:max-h-full" alt="">
@@ -13,7 +17,17 @@
 </section>
 
 <style>
-    .hero-full {
-    }
+    .btn {
+  background-image:
+    linear-gradient(135deg, #1e4cb1  50%, transparent 50%);
+  background-position: bottom right;
+  background-size: 200% 200%;
+  transition: 0.4s;
+}
+
+.btn:hover {
+  background-position: top left;
+  color: white;
+}
 
 </style>
