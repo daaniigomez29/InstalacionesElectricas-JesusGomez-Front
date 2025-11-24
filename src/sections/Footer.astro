@@ -6,7 +6,7 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro"
 <footer class="p-10 flex flex-col lg:flex-row gap-10 lg:gap-30 justify-center">
     <div class="flex flex-col gap-3">
         <img src="/src/assets/logo_jesus_completo.png" class="w-40" alt="">
-        <p>Confianza, rapidez y profesionalidad.</p>
+        <p class="font-medium">Confianza, rapidez y profesionalidad.</p>
         <div class="flex gap-2">
             <a href="facebook.com"><FacebookIcon /></a>
             <a href="whatsapp.com"><WhatsappIcon /></a>
@@ -14,21 +14,23 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro"
     </div>
     <div class="flex flex-col gap-2">
         <h6 class="text-primary-orange text-2xl">Acceso directo</h6>
-        <ul>
-            <li>Inicio</li>
-            <li>Sobre nosotros</li>
-            <li>Soluciones</li>
-            <li>Servicios</li>
-            <li>Opiniones</li>
-            <li>Contacto</li>
+        <ul class="font-medium">
+            <li>
+               <a href="#inicio" class="hover:text-primary-orange">Inicio</a>
+            </li>
+            <li><a href="#sobre-nosotros" class="hover:text-primary-orange">Sobre nosotros</a></li>
+            <li><a href="#soluciones" class="hover:text-primary-orange">Soluciones</a></li>
+            <li><a href="#servicios" class="hover:text-primary-orange">Servicios</a></li>
+            <li><a href="#opiniones" class="hover:text-primary-orange">Opiniones</a></li>
+            <li><a href="#contacto" class="hover:text-primary-orange">Contacto</a></li>
         </ul>
     </div>
     <div class="flex flex-col gap-2">
         <h6 class="text-primary-orange text-2xl">Contacta con nosotros</h6>
-        <ul>
+        <ul class="font-medium">
             <li>C. Tungsteno, Norte, 41007 Sevilla</li>
             <li>691 88 63 70</li>
-            <li>instalaciones_electricas_jesus@gmail.com</li>
+            <li>jesusgomezgranado@gmail.com</li>
             <li>Whatsapp</li>
             <li>Facebook</li>
             <li>Lunes a Sábado: 7:00 - 22:00</li>
@@ -36,7 +38,7 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro"
     </div>
     <div class="flex flex-col gap-2">
         <h6 class="text-primary-orange text-2xl">Enlaces de interés</h6>
-        <ul>
+        <ul class="font-medium">
             <li>Aviso legal</li>
             <li>Política de protección de datos</li>
             <li>Cookies</li>
