@@ -15,22 +15,25 @@
     <div class="hidden w-full lg:block md:w-auto" id="navbar-default">
       <ul class="font-semibold flex flex-col items-center p-4 md:p-0 md:flex-row md:space-x-8 gap-y-3 md:gap-y-0  md:mt-0 md:border-0 mt-4">
         <li>
-          <a href="#inicio" class="block py-2 px-3 md:p-0 md:text-primary-orange transition" aria-current="page">Inicio</a>
+          <a href="#inicio" aria-label="inicio" class="block py-2 px-3 md:p-0 nav-link transition" aria-current="page">Inicio</a>
         </li>
         <li>
-          <a href="#sobre-nosotros" class="block py-2 px-3  md:border-0 md:p-0 nav-link transition">Sobre nosotros</a>
+          <a href="#sobre-nosotros" aria-label="sobre-nosotros" class="block py-2 px-3  md:border-0 md:p-0 nav-link transition">Sobre nosotros</a>
         </li>
         <li>
-          <a href="#soluciones" class="block py-2 px-3  md:border-0  md:p-0 nav-link">Soluciones</a>
+          <a href="#soluciones" aria-label="soluciones" class="block py-2 px-3  md:border-0  md:p-0 nav-link">Soluciones</a>
         </li>
         <li>
-          <a href="#servicios" class="block py-2 px-3 md:border-0  md:p-0 nav-link">Servicios</a>
+          <a href="#servicios" aria-label="servicios" class="block py-2 px-3 md:border-0  md:p-0 nav-link">Servicios</a>
         </li>
         <li>
-          <a href="#opiniones" class="block py-2 px-3 md:border-0 md:p-0 nav-link">Opiniones</a>
+          <a href="#nuestros-trabajos" aria-label="nuestros-trabajos" class="block py-2 px-3 md:border-0  md:p-0 nav-link">Nuestros trabajos</a>
         </li>
         <li>
-            <a href="#contacto" class="btn bg-accent-blue  p-3 gap-y-20 text-white font-semibold">
+          <a href="#opiniones" aria-label="opiniones" class="block py-2 px-3 md:border-0 md:p-0 nav-link">Opiniones</a>
+        </li>
+        <li>
+            <a href="#contacto" aria-label="contacto" class="btn bg-accent-blue p-3 gap-y-20 text-white font-semibold">
               Contáctanos
             </a>
         </li>
@@ -50,11 +53,52 @@
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         if (window.innerWidth < 1024) {
-          toggleButton.click();  // ← ahora ya no da error
+          toggleButton.click();
         }
       });
     });
   });
+
+  document.addEventListener("DOMContentLoaded", () => {
+  
+      const sections = document.querySelectorAll("section");
+      const navItems = document.querySelectorAll("header nav ul a");
+      
+      const callback = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+  
+            navItems.forEach((item) => {
+              if (item.getAttribute("aria-label") === entry.target.id) {
+                item.classList.add("nav-link-selected");
+              } else {
+                item.classList.remove("nav-link-selected");
+              }
+            });
+          }
+        });
+      };
+  
+      const observer = new IntersectionObserver(callback, {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.3,
+      });
+  
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+  
+      document.onvisibilitychange = () => {
+        if (document.visibilityState === "hidden") {
+          observer.disconnect();
+        } else {
+          sections.forEach((section) => {
+            observer.observe(section);
+          });
+        }
+      };
+    });
 </script>
 
 <style>
@@ -69,6 +113,15 @@
 
     .nav-link:hover {
       color: #F39615;
+    }
+
+    .nav-link-selected {
+      color: #F39615;
+    }
+
+    .nav-link-selected[aria-label="contacto"] {
+      background-color: #F39615;
+      color: white;
     }
 
     .btn {
