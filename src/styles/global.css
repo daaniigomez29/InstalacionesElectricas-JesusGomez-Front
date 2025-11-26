@@ -15,6 +15,7 @@
   padding-inline: 1.25rem;
   font-weight: bold;
   display: inline-block;
+  text-align: center;
 }
 
 .background-h1-blue {
@@ -23,6 +24,7 @@
   padding-inline: 1.25rem;
   font-weight: bold;
   display: inline-block;
+  text-align: center;
 }
 
 html,
