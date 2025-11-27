@@ -1,0 +1,88 @@
+---
+import JobComponent from "../components/JobComponent.astro";
+
+const JOBS = [
+    {
+        img:"/src/assets/ourJobs/trabajo-president.jpeg",
+        text:"Instalación eléctrica integral con acometida nueva y optimizada para máxima seguridad y rendimiento. Entubado y cableado con acabado profesional en todo el local. Cuadro eléctrico completamente equipado y preparado para futuras ampliaciones. Iluminación moderna y eficiente que realza el espacio y reduce el consumo."
+    },
+    {
+        img:"/src/assets/ourJobs/trabajo-demetrio.jpeg",
+        text:"l.kasdjvhekwrjvhwerjkvejkhwejkvbwhjkwj"
+    }
+]
+---
+
+<section class="relative min-h-screen overflow-hidden">
+
+  <!-- CARRUSEL PRINCIPAL (fondo + contenido sincronizados) -->
+  <div id="job-carousel" class="relative w-full h-full" data-carousel="static">
+
+    {JOBS.map((job) => (
+      <div 
+        class="hidden absolute inset-0 duration-700 ease-in-out"
+        data-carousel-item
+      >
+
+        <!-- ✅ FONDO AMBIENTAL -->
+        <div
+          class="absolute inset-0 bg-cover bg-center scale-105 blur-sm"
+          style={`background-image: url(${job.img});`}
+        ></div>
+        <div class="absolute inset-0 bg-black/70"></div>
+
+        <!-- ✅ CONTENIDO PRINCIPAL -->
+        <div class="relative z-10 container mx-auto min-h-screen flex flex-col justify-center px-6">
+
+          <!-- ✅ BLOQUE DEL TÍTULO (FIJO, NO FLOTA) -->
+          <div class="mb-10">
+            <span class="text-neutral-400 uppercase tracking-widest text-sm">
+              Portfolio
+            </span>
+            <h2 class="text-4xl md:text-5xl font-bold text-white">
+              Nuestros trabajos
+            </h2>
+          </div>
+
+          <!-- ✅ TARJETA PRINCIPAL -->
+          <div class="bg-black/80 backdrop-blur-xl rounded-3xl shadow-2xl p-10 grid md:grid-cols-2 gap-12 items-center">
+
+            <!-- ✅ IMAGEN PROTAGONISTA -->
+            <div class="relative">
+              <img
+                src={job.img}
+                class="rounded-2xl shadow-2xl w-20 object-cover"
+              />
+            </div>
+
+            <!-- ✅ TEXTO ESTRUCTURADO -->
+            <div class="text-white space-y-4">
+              <p class="text-neutral-300 leading-relaxed">
+                {job.text}
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    ))}
+
+    <!-- ✅ CONTROLES -->
+    <button
+      type="button"
+      class="absolute top-1/2 left-6 z-20 flex items-center justify-center w-12 h-12 rounded-full bg-black/60 text-white hover:scale-110 transition"
+      data-carousel-prev
+    >
+      ‹
+    </button>
+
+    <button
+      type="button"
+      class="absolute top-1/2 right-6 z-20 flex items-center justify-center w-12 h-12 rounded-full bg-black/60 text-white hover:scale-110 transition"
+      data-carousel-next
+    >
+      ›
+    </button>
+
+  </div>
+</section>

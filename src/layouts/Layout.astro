@@ -5,6 +5,7 @@ import Hero from "../sections/Hero.astro";
 import AboutUs from "../sections/AboutUs.astro";
 import Solution from "../sections/Solution.astro";
 import Services from "../sections/Services.astro";
+import OurJobs from "../sections/OurJobs.astro";
 import Opinions from "../sections/Opinions.astro";
 import Contact from "../sections/Contact.astro";
 import Footer from "../sections/Footer.astro";
@@ -49,10 +50,6 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 			target="_blank"
 			class="group hover:scale-110 transition duration-300 rounded-full fixed bottom-0 end-0 m-4 whatsapp-icon flex justify-center items-center"
 			style="z-index: 1001;"
-			data-bs-container="body"
-			data-bs-toggle="popover"
-			data-bs-trigger="hover"
-			data-bs-content="Contacta con nosotros!"
 		>
 			<WhatsappIcon class="" fill="#FFFF" width="30" height="30" />
 		</a>
@@ -65,13 +62,28 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 				<AboutUs />
 				<Solution />
 				<Services />
+				<OurJobs />
 				<Opinions />
 				<Contact />
 			</main>
 			<Footer />
 		</div>
+			<script type="module" src="/src/main.js"></script>
 	</body>
 </html>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('opacity-100', 'translate-y-0');
+        entry.target.classList.remove('opacity-0', 'translate-y-10');
+      }
+    });
+  });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 <style is:global>
 	@import "../styles/global.css";

@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
 
 @theme {
     --color-primary-blue: #1E3A8A;
@@ -7,6 +10,8 @@
     --color-accent-blue: #2563EB;
 
     --font-montserrat: "Montserrat", system-ui, sans-serif;
+
+      --breakpoint-lg: 70rem;   /* 1120px = 70rem aproximadamente */
 }
 
 .background-h1 {

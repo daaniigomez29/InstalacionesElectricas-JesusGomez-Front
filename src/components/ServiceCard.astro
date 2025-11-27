@@ -10,10 +10,17 @@ export interface Props {
 const { img, title, content } = Astro.props;
 ---
 
-<div class="group w-72 bg-white rounded-xl shadow-md hover:ring-2 hover:ring-accent-blue/40 transition duration-500 overflow-hidden">
-    <img src={img} alt="" class="w-full h-40 object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-75"/>
+<div class="group w-full max-w-xl bg-white rounded-xl shadow-md hover:ring-2 hover:ring-accent-blue/40 transition duration-500 overflow-hidden flex flex-col lg:flex-row">
 
-    <div class="p-5 space-y-2">
+    <div class="w-full h-40 lg:w-40 lg:h-full overflow-hidden shrink-0">
+        <img 
+            src={img} 
+            alt="" 
+            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-75"
+        />
+    </div>
+
+    <div class="p-5 flex flex-col justify-center space-y-2">
         <h6 class="font-semibold text-gray-900 group-hover:text-accent-blue transition duration-500">
             {title}
         </h6>
@@ -21,6 +28,10 @@ const { img, title, content } = Astro.props;
             {content}
         </p>
     </div>
+
 </div>
+
+
+
 
 <style></style>
