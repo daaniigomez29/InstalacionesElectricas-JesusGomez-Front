@@ -43,7 +43,7 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 
 		<title>Instalaciones Eléctricas Jesús Gómez</title>
 	</head>
-	<body class="">
+	<body>
 		<!--Whatsapp button-->
 		<a
 			href="whatsappContactLink"
@@ -82,7 +82,17 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
     });
   });
 
+  const observer2 = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('opacity-100', 'translate-x-0');
+        entry.target.classList.remove('opacity-0', 'translate-x-20');
+      }
+    });
+  });
+
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal-2').forEach(el => observer2.observe(el));
 </script>
 
 <style is:global>
