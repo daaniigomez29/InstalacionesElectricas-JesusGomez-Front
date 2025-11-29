@@ -1,5 +1,5 @@
-<section id="inicio" class=" hero-full pt-10 px-5 md:p-0 background-fade scroll-m-35">
-    <div class="lg:grid lg:grid-cols-2 flex flex-col justify-center bg-background-fade w-full max-w-7xl mx-auto pt-10 sm:px-10 lg:p-0 items-center gap-y-10">
+<section id="inicio" class="px-10 pt-20 background-fade scroll-m-35 overflow-hidden">
+    <div class="lg:grid lg:grid-cols-2 flex flex-col justify-center bg-background-fade w-full container mx-auto  items-center gap-y-10">
         <div class="flex flex-col">
                 <h1 class="font-bold">Expertos en energía, comprometidos contigo</h1>
                 <div>
@@ -10,13 +10,68 @@
                     <a href="#contacto" class="btn bg-accent-blue rounded p-3 lg:p-4 text-white font-semibold">Solicita presupuesto -></a>
                 </div>
         </div>
-        <div class="flex items-end justify-end h-full">
-            <img src="/src/assets/jesus_transparente.png" class=" object-contain max-h-[82vh] 2xl:max-h-full" alt="">
-        </div>
+        <div class="relative flex items-end justify-center h-full w-full">
+    <!-- CÍRCULO -->
+    <div class="circle-bg"></div>
+
+    <!-- IMAGEN -->
+    <img 
+        src="/src/assets/jesus_transparente.png" 
+        class="img-size relative z-10 object-contain max-h-[82vh] 2xl:max-h-full"
+        alt=""
+    >
+</div>
     </div>
 </section>
 
 <style>
+
+.circle-bg {
+  position: absolute;
+
+  /* TAMAÑO RESPONSIVE REAL */
+  width: clamp(510px, 120vmin, 1550px);
+  height: clamp(510px, 120vmin, 1550px);
+
+  border-radius: 50%;
+  background-color: #F39615;
+  background-image: url("/src/assets/fondo-circulo.png");
+  background-repeat: repeat;
+
+  /* POSICIÓN RESPONSIVE */
+  /* right: clamp(-580px, -39vmin, -170px); */
+  bottom: clamp(-420px, -35vmin, -160px);
+
+  /* SOMBRA FIGMA */
+  box-shadow: 0px 69px 19.9px rgba(0,0,0,0.25);
+
+  z-index: 0;
+
+  /* ANIMACIÓN DIAGONAL INFINITA */
+  animation: patternMove 50s linear infinite;
+
+  /* EVITA BUGS EN LANDSCAPE */
+  
+}
+
+@media (min-width: 1280px) {
+  .circle-bg {
+    width: 1050px;
+    height: 1050px;
+    right: -420px;
+  }
+}
+
+  @keyframes patternMove {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 400px -600px;
+    }
+}
+
+
     .btn {
   background-image:
     linear-gradient(135deg, #1e3eb1  50%, transparent 50%);
@@ -30,9 +85,11 @@
   color: white;
 }
 
+/*
 h1 {
 		font-size: 1.875rem;
 }
+*/
 
 @media (min-width: 1440px) {
 		h1 {
