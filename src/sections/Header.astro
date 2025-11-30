@@ -2,7 +2,7 @@
     <nav class="w-full">
   <div class="flex flex-col lg:flex-row items-center justify-between px-4 py-2">
     <div class="w-full lg:w-auto flex justify-between items-center">
-      <a href="#" class="flex items-center space-x-3">
+      <a href="/#inicio" class="flex items-center space-x-3">
           <img src="/src/assets/logo_jesus_trans.png" class="w-32 hover:scale-110 transition duration-200" />
       </a>
       <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -12,28 +12,29 @@
           </svg>
       </button>
     </div>
-    <div class="hidden w-full lg:block md:w-auto" id="navbar-default">
-      <ul class="font-semibold flex flex-col items-center p-4 md:p-0 md:flex-row md:space-x-8 gap-y-3 md:gap-y-0  md:mt-0 md:border-0 mt-4">
+    <div class="w-full lg:block md:w-auto transition-all duration-300 ease-in-out 
+         max-h-0 opacity-0 translate-y-[-10px] lg:max-h-full lg:opacity-100 lg:translate-y-0" id="navbar-default">
+      <ul class="font-semibold flex flex-col items-center justify-center p-4 md:py-4 md:px-1 lg:p-0 md:flex-row md:space-x-5 lg:space-x-8 gap-y-5 lg:gap-y-0  md:mt-0 md:border-0 mt-4">
         <li>
-          <a href="#inicio" aria-label="inicio" class="block py-2 px-3 md:p-0 nav-link transition" aria-current="page">Inicio</a>
+          <a href="/#inicio" aria-label="inicio" class="block  md:p-0 nav-link transition" aria-current="page">Inicio</a>
         </li>
         <li>
-          <a href="#sobre-nosotros" aria-label="sobre-nosotros" class="block py-2 px-3  md:border-0 md:p-0 nav-link transition">Sobre nosotros</a>
+          <a href="/#sobre-nosotros" aria-label="sobre-nosotros" class="block   md:border-0 md:p-0 nav-link transition">Sobre nosotros</a>
         </li>
         <li>
-          <a href="#soluciones" aria-label="soluciones" class="block py-2 px-3  md:border-0  md:p-0 nav-link">Soluciones</a>
+          <a href="/#soluciones" aria-label="soluciones" class="block   md:border-0  md:p-0 nav-link">Soluciones</a>
         </li>
         <li>
-          <a href="#servicios" aria-label="servicios" class="block py-2 px-3 md:border-0  md:p-0 nav-link">Servicios</a>
+          <a href="/#servicios" aria-label="servicios" class="block  md:border-0  md:p-0 nav-link">Servicios</a>
         </li>
         <li>
-          <a href="#nuestros-trabajos" aria-label="nuestros-trabajos" class="block py-2 px-3 md:border-0  md:p-0 nav-link">Nuestros trabajos</a>
+          <a href="/#nuestros-trabajos" aria-label="nuestros-trabajos" class="block  md:border-0  md:p-0 nav-link">Nuestros trabajos</a>
         </li>
         <li>
-          <a href="#opiniones" aria-label="opiniones" class="block py-2 px-3 md:border-0 md:p-0 nav-link">Opiniones</a>
+          <a href="/#opiniones" aria-label="opiniones" class="block  md:border-0 md:p-0 nav-link">Opiniones</a>
         </li>
         <li>
-            <a href="#contacto" aria-label="contacto" class="btn bg-accent-blue p-3 gap-y-20 text-white font-semibold">
+            <a href="/#contacto" aria-label="contacto" class="btn bg-accent-blue p-3 gap-y-20 text-white font-semibold">
               Contáctanos
             </a>
         </li>
@@ -45,17 +46,34 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const navLinks = document.querySelectorAll('#navbar-default a');
-    const toggleButton = document.querySelector('[data-collapse-toggle="navbar-default"]') as HTMLButtonElement;
+  const btn = document.querySelector('[data-collapse-toggle="navbar-default"]') as HTMLButtonElement;
+  const menu = document.getElementById('navbar-default') as HTMLButtonElement;
+  const navLinks = document.querySelectorAll('#navbar-default a');
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth < 1024) {
-          toggleButton.click();
-        }
-      });
+  function openMenu() {
+    menu.classList.remove('max-h-0', 'opacity-0', 'translate-y-[-10px]');
+    menu.classList.add('max-h-[500px]', 'opacity-100', 'translate-y-0');
+  }
+
+  function closeMenu() {
+    menu.classList.remove('max-h-[500px]', 'opacity-100', 'translate-y-0');
+    menu.classList.add('max-h-0', 'opacity-0', 'translate-y-[-10px]');
+  }
+
+  btn.addEventListener('click', () => {
+    const isOpen = menu.classList.contains('max-h-[500px]');
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  // ✅ CIERRE SUAVE AL HACER CLICK EN UN LINK (MÓVIL)
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 1024) {
+        closeMenu();
+      }
     });
   });
+});
 
   document.addEventListener("DOMContentLoaded", () => {
   
@@ -100,6 +118,7 @@
 </script>
 
 <style>
+
     .shadow{ 
         box-shadow: 0px 4px 4px 0px #F39615;
     }

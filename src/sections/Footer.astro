@@ -1,28 +1,30 @@
 ---
 import FacebookIcon from "../icons/FacebookIcon.astro"
 import WhatsappIcon from "../icons/WhatsappIcon.astro"
+import InstagramIcon from "../icons/InstagramIcon.astro"
 ---
 
-<footer class="p-10 flex flex-col lg:flex-row gap-10 lg:gap-30 justify-center">
+<footer class="p-5 md:p-10 flex flex-col lg:flex-row gap-10 lg:gap-30 justify-center">
     <div class="flex flex-col gap-3">
         <img src="/src/assets/logo_jesus_completo.png" class="w-40" alt="">
         <p class="font-medium">Confianza, rapidez y profesionalidad.</p>
         <div class="flex gap-2">
-            <a href="facebook.com"><FacebookIcon /></a>
-            <a href="whatsapp.com"><WhatsappIcon /></a>
+            <a href="https://www.facebook.com/jesus.gomez.94214508/"><FacebookIcon /></a>
+            <a href="https://wa.me/691886370"><WhatsappIcon /></a>
+            <a href="whatsapp.com"><InstagramIcon /></a>
         </div>
     </div>
     <div class="flex flex-col gap-2">
         <h6 class="text-primary-orange text-2xl">Acceso directo</h6>
         <ul class="font-medium">
             <li>
-               <a href="#inicio" class="hover:text-primary-orange">Inicio</a>
+               <a href="/#inicio" class="hover:text-primary-orange transition duration-200">Inicio</a>
             </li>
-            <li><a href="#sobre-nosotros" class="hover:text-primary-orange">Sobre nosotros</a></li>
-            <li><a href="#soluciones" class="hover:text-primary-orange">Soluciones</a></li>
-            <li><a href="#servicios" class="hover:text-primary-orange">Servicios</a></li>
-            <li><a href="#opiniones" class="hover:text-primary-orange">Opiniones</a></li>
-            <li><a href="#contacto" class="hover:text-primary-orange">Contacto</a></li>
+            <li><a href="/#sobre-nosotros" class="hover:text-primary-orange transition duration-200">Sobre nosotros</a></li>
+            <li><a href="/#soluciones" class="hover:text-primary-orange transition duration-200">Soluciones</a></li>
+            <li><a href="/#servicios" class="hover:text-primary-orange transition duration-200">Servicios</a></li>
+            <li><a href="/#opiniones" class="hover:text-primary-orange transition duration-200">Opiniones</a></li>
+            <li><a href="/#contacto" class="hover:text-primary-orange transition duration-200">Contacto</a></li>
         </ul>
     </div>
     <div class="flex flex-col gap-2">
@@ -31,18 +33,18 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro"
             <li>C. Tungsteno, Norte, 41007 Sevilla</li>
             <li>691 88 63 70</li>
             <li>jesusgomezgranado@gmail.com</li>
-            <li>Whatsapp</li>
-            <li>Facebook</li>
+            <li><a href="https://wa.me/691886370" target="_blank" class="underline hover:text-green-500 transition duration-200">Whatsapp</a></li>
+            <li><a href="https://www.facebook.com/jesus.gomez.94214508/" target="_blank" class="underline hover:text-blue-500 transition duration-200">Facebook</a></li>
+            <li><a href="https://www.facebook.com/jesus.gomez.94214508/" target="_blank" class="underline hover:text-blue-500 transition duration-200">Instagram</a></li>
             <li>Lunes a Sábado: 7:00 - 22:00</li>
         </ul>
     </div>
     <div class="flex flex-col gap-2">
         <h6 class="text-primary-orange text-2xl">Enlaces de interés</h6>
         <ul class="font-medium">
-            <li>Aviso legal</li>
-            <li>Política de protección de datos</li>
-            <li>Cookies</li>
-            <li>Accesibilidad</li>
+            <li><a href="/aviso-legal" class="hover:text-primary-orange transition duration-200">Aviso legal</a></li>
+            <li><a href="/politica-privacidad" class="hover:text-primary-orange transition duration-200">Política de privacidad</a></li>
+            <li><a href="/accesibilidad" class="hover:text-primary-orange transition duration-200">Accesibilidad</a></li>
         </ul>
     </div>
 </footer>

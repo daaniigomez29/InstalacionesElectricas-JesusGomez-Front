@@ -1,15 +1,9 @@
 ---
+import WhatsappIcon from "../icons/WhatsappIcon.astro";
+import Footer from "../sections/Footer.astro";
 import Header from "../sections/Header.astro";
 import HeaderSecondary from "../sections/HeaderSecondary.astro";
-import Hero from "../sections/Hero.astro";
-import AboutUs from "../sections/AboutUs.astro";
-import Solution from "../sections/Solution.astro";
-import Services from "../sections/Services.astro";
-import OurJobs from "../sections/OurJobs.astro";
-import Opinions from "../sections/Opinions.astro";
-import Contact from "../sections/Contact.astro";
-import Footer from "../sections/Footer.astro";
-import WhatsappIcon from "../icons/WhatsappIcon.astro";
+import LegalNoticeSection from "../sections/LegalNoticeSection.astro";
 ---
 
 <!doctype html>
@@ -41,7 +35,7 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 		<meta property="og:image" content="https://ejemplo.com/imagen.jpg" />
 		<meta property="og:url" content="https://ejemplo.com" />
 
-		<title>Instalaciones Eléctricas Jesús Gómez</title>
+		<title>Aviso legal - Instalaciones Eléctricas Jesús Gómez</title>
 	</head>
 	<body>
 		<!--Whatsapp button-->
@@ -58,42 +52,12 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 			<HeaderSecondary />
 			<Header />
 			<main>
-				<Hero />
-				<AboutUs />
-				<Solution />
-				<Services />
-				<OurJobs />
-				<Opinions />
-				<Contact />
+				<LegalNoticeSection />
 			</main>
 			<Footer />
 		</div>
-			<script type="module" src="/src/main.js"></script>
 	</body>
 </html>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('opacity-100', 'translate-y-0');
-        entry.target.classList.remove('opacity-0', 'translate-y-10');
-      }
-    });
-  });
-
-  const observer2 = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('opacity-100', 'translate-x-0');
-        entry.target.classList.remove('opacity-0', 'translate-x-20');
-      }
-    });
-  });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  document.querySelectorAll('.reveal-2').forEach(el => observer2.observe(el));
-</script>
 
 <style is:global>
 	@import "../styles/global.css";
@@ -136,12 +100,6 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 
 	/* Pantallas grandes */
 	@media (min-width: 1440px) {
-		h1 {
-			font-size: 2.5rem;
-		} /* 40px */
-		h2 {
-			font-size: 2.25rem;
-		} /* 36px */
 		p {
 			font-size: 1rem;
 		} /* 16px */
