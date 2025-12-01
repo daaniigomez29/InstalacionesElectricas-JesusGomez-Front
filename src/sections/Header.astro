@@ -12,8 +12,7 @@
           </svg>
       </button>
     </div>
-    <div class="w-full lg:block md:w-auto transition-all duration-300 ease-in-out 
-         max-h-0 opacity-0 translate-y-[-10px] lg:max-h-full lg:opacity-100 lg:translate-y-0" id="navbar-default">
+    <div class="hidden w-full lg:block md:w-auto" id="navbar-default">
       <ul class="font-semibold flex flex-col items-center justify-center p-4 md:py-4 md:px-1 lg:p-0 md:flex-row md:space-x-5 lg:space-x-8 gap-y-5 lg:gap-y-0  md:mt-0 md:border-0 mt-4">
         <li>
           <a href="/#inicio" aria-label="inicio" class="block  md:p-0 nav-link transition" aria-current="page">Inicio</a>
@@ -46,30 +45,14 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.querySelector('[data-collapse-toggle="navbar-default"]') as HTMLButtonElement;
-  const menu = document.getElementById('navbar-default') as HTMLButtonElement;
+  const toggleButton = document.querySelector('[data-collapse-toggle="navbar-default"]') as HTMLButtonElement;
   const navLinks = document.querySelectorAll('#navbar-default a');
 
-  function openMenu() {
-    menu.classList.remove('max-h-0', 'opacity-0', 'translate-y-[-10px]');
-    menu.classList.add('max-h-[500px]', 'opacity-100', 'translate-y-0');
-  }
 
-  function closeMenu() {
-    menu.classList.remove('max-h-[500px]', 'opacity-100', 'translate-y-0');
-    menu.classList.add('max-h-0', 'opacity-0', 'translate-y-[-10px]');
-  }
-
-  btn.addEventListener('click', () => {
-    const isOpen = menu.classList.contains('max-h-[500px]');
-    isOpen ? closeMenu() : openMenu();
-  });
-
-  // ✅ CIERRE SUAVE AL HACER CLICK EN UN LINK (MÓVIL)
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       if (window.innerWidth < 1024) {
-        closeMenu();
+          toggleButton.click();
       }
     });
   });

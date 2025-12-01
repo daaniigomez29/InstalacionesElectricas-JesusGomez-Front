@@ -9,14 +9,9 @@ export interface Props {
 const { img, text } = Astro.props
 ---
 
-<div class="relative w-full h-full rounded-2xl overflow-hidden">
-  <!-- Fondo oscuro -->
-  <img src={img} class="absolute inset-0 w-full h-full object-cover blur-sm scale-110" />
-  <!-- Contenido principal -->
-  <div class="relative z-10 h-full flex items-center p-8">
-    <div class="grid md:grid-cols-2 gap-10 items-center w-full">
-      <img src={img} class="w-full h-64 object-cover rounded-xl shadow-xl" />
-      <p class="text-white text-lg leading-relaxed">{text}</p>
-    </div>
-  </div>
-</div>
+<article class="bg-white rounded-xl shadow-lg overflow-hidden">
+        <img src={img} alt="Trabajo 1" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <p class="text-gray-600">{text}</p>
+        </div>
+      </article>
