@@ -13,11 +13,18 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 ---
 
 <!doctype html>
-<html lang="es" class="font-montserrat scroll-smoot">
+<html lang="es" class="font-montserrat scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" sizes="32x32" href="/src/assets/logo_jesus_web.png"/>
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			sizes="32x32"
+			href="/assets/logos/logo_jesus_web.webp"
+		/>
+
+		<title>Instalaciones Eléctricas Jesús Gómez</title>
 
 		<meta
 			name="description"
@@ -38,10 +45,26 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 			property="og:description"
 			content="Electricista profesional en Sevilla ofreciendo servicios de instalación, reparación y mantenimiento eléctrico en toda Andalucía. Presupuesto rápido y garantía de calidad."
 		/>
-		<meta property="og:image" content="https://ejemplo.com/imagen.jpg" />
-		<meta property="og:url" content="https://ejemplo.com" />
+		<meta
+			property="og:image"
+			content="/assets/logos/logo_jesus_completo.webp"
+		/>
+		<meta property="og:url" content="https://instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_completo.webp" />
 
-		<title>Instalaciones Eléctricas Jesús Gómez</title>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Electrician",
+				"name": "Instalaciones Eléctricas Jesús Gómez",
+				"url": "https://instalacioneselectricasjesusgomez.es",
+				"logo": "https://instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_trans.webp",
+				"sameAs": [
+					"https://www.facebook.com/jesus.gomez.94214508/",
+					"https://www.instagram.com/instalaciones_electricas_jesus/"
+				],
+				"description": "Empresa especializada en instalaciones eléctricas, mantenimientos y servicios eléctricos."
+			}
+		</script>
 	</head>
 	<body>
 		<!--Whatsapp button-->
@@ -68,31 +91,32 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 			</main>
 			<Footer />
 		</div>
-			<script type="module" src="/src/main.js"></script>
 	</body>
 </html>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('opacity-100', 'translate-y-0');
-        entry.target.classList.remove('opacity-0', 'translate-y-10');
-      }
-    });
-  });
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add("opacity-100", "translate-y-0");
+				entry.target.classList.remove("opacity-0", "translate-y-10");
+			}
+		});
+	});
 
-  const observer2 = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('opacity-100', 'translate-x-0');
-        entry.target.classList.remove('opacity-0', 'translate-x-20');
-      }
-    });
-  });
+	const observer2 = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add("opacity-100", "translate-x-0");
+				entry.target.classList.remove("opacity-0", "translate-x-20");
+			}
+		});
+	});
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  document.querySelectorAll('.reveal-2').forEach(el => observer2.observe(el));
+	document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+	document
+		.querySelectorAll(".reveal-2")
+		.forEach((el) => observer2.observe(el));
 </script>
 
 <style is:global>
@@ -170,6 +194,6 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 	}
 
 	.background-fade {
-		background: linear-gradient(45deg, #F9FAFC 0%, #EAEFF6 100%);
+		background: linear-gradient(45deg, #f9fafc 0%, #eaeff6 100%);
 	}
 </style>
