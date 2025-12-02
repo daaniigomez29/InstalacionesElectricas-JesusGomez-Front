@@ -1,0 +1,65 @@
+---
+import type { ACTION_ERROR_CODES, ACTION_QUERY_PARAMS, ActionError } from "astro:actions";
+import ServiceCard from "../components/ServiceCard.astro";
+
+
+const SERVICES = [
+    {
+        img: "/assets/worksSection/instalaciones-electricas.webp",
+        title: "Instalaciones eléctricas",
+        content:
+            "Diseño e instalación completa de sistemas eléctricos en viviendas, locales y oficinas, incluyendo reformas y obras nuevas.",
+    },
+    {
+        img: "/assets/worksSection/iluminacion.webp",
+        title: "Iluminación",
+        content:
+            "Montaje y sustitución de luminarias, instalación de iluminación LED y proyectos de iluminación decorativa o funcional.",
+    },
+    {
+        img: "/assets/worksSection/tomas.webp",
+        title: "Tomas, Interruptores y Mecanismos",
+        content:
+            "Instalación, redistribución y reparación de enchufes, interruptores y otros mecanismos eléctricos.",
+    },
+    {
+        img: "/assets/worksSection/reparaciones.webp",
+        title: "Reparaciones y Averías Eléctricas",
+        content:
+            "Diagnóstico y solución de fallos eléctricos, sustitución de fusibles, diferenciales, magnetotérmicos y cableado antiguo.",
+    },
+    {
+        img: "/assets/worksSection/certificaciones.webp",
+        title: "Certificaciones y Cuadros Eléctricos",
+        content:
+            "Montaje y actualización de cuadros eléctricos, centralizaciones, boletines eléctricos y certificados oficiales.",
+    },
+    {
+        img: "/assets/worksSection/mantenimiento.webp",
+        title: "Mantenimiento y Energía Moderna",
+        content:
+            "Mantenimiento preventivo en comunidades, revisión de seguridad y puesta a tierra.",
+    },
+];
+---
+
+<section id="servicios" class="p-5 md:p-10 pb-15 pt-15 md:py-25 scroll-m-25 background-fade">
+    <div class="container mx-auto">
+        <div class="flex flex-col gap-y-10">
+            <div class="flex justify-center">
+                <h1 class="background-h1">Servicios</h1>
+            </div>
+            <div class="flex justify-center">
+                <p class="font-medium text-center">
+                    Estos son los diferentes servicios que ofrecemos
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-10 pt-10">
+            {SERVICES.map(service => (
+                <ServiceCard {...service} />
+            ))}
+        </div>
+    </div>
+</section>

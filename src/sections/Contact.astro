@@ -1,0 +1,147 @@
+<section id="contacto" class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 background-fade">
+    <div class="container mx-auto flex flex-col gap-y-10">
+        <div class="flex justify-center">
+            <h1 class="background-h1">Contáctanos</h1>
+        </div>
+        <div class="flex flex-col gap-y-5">
+            <p>
+                Déjenos su consulta, nos pondremos en contacto con usted en la
+                mayor brevedad posible.
+            </p>
+            <p class="font-semibold">
+                ¡No esperes más y hablemos de tu proyecto eléctrico!
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 bg-white p-7 lg:p-7 rounded-2xl">
+            <!-- FORMULARIO -->
+            <form action="https://formspree.io/f/mzzndrrj" method="post" class="space-y-6">
+                <!-- Nombre -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="text-gray-600 text-sm">Nombre</label>
+                        <input
+                            name="name"
+                            type="text"
+                            placeholder="Nombre"
+                            minlength="3"
+                            class="w-full border border-gray-300 rounded-md p-3 focus:outline-accent-blue"
+                        />
+                    </div>
+
+                <!-- Email -->
+                    <div>
+                        <label class="text-gray-600 text-sm">Email <b class="text-red-500">*</b></label>
+                        <input
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                            required
+                            
+                            class="w-full border border-gray-300 rounded-md p-3 focus:outline-accent-blue"
+                        />
+                    </div>
+                </div>
+
+                <!-- Teléfono -->
+                <div>
+                    <label class="text-gray-600 text-sm">Teléfono <b class="text-red-500">*</b></label>
+                    <input
+                        name="phone"
+                        type="text"
+                        placeholder="Teléfono"
+                        required
+                        pattern="[0-9]{9}"
+                        title="El número de teléfono debe de contener 9 números"
+                        class="w-full border border-gray-300 rounded-md p-3 focus:outline-accent-blue"
+                    />
+                </div>
+
+                <!-- Asunto -->
+                <div>
+                    <label class="text-gray-600 text-sm">Asunto <b class="text-red-500">*</b></label>
+                    <input
+                        name="subject"
+                        type="text"
+                        placeholder="Asunto"
+                        required
+                        minlength="3"
+                        class="w-full border border-gray-300 rounded-md p-3 focus:outline-accent-blue"
+                    />
+                </div>
+
+                <!-- Mensaje -->
+                <div>
+                    <label class="text-gray-600 text-sm"
+                        >Danos más detalles <b class="text-red-500">*</b></label
+                    >
+                    <textarea
+                        name="message"
+                        rows="5"
+                        placeholder="Mensaje"
+                        required
+                        class="w-full border border-gray-300 rounded-md p-3 focus:outline-accent-blue resize-none"
+                    ></textarea>
+                </div>
+
+                <div>
+                    <label class="flex items-start gap-1 text-sm text-gray-600 font-semibold">
+                        <input type="checkbox" required />
+                            He leído y acepto la<a href="/politica-privacidad" class="underline text-blue-600">política de privacidad.</a>
+                    </label>
+                </div>
+
+                <!-- Botón -->
+                <button
+                    type="submit"
+                    class="bg-accent-blue hover:bg-blue-800 cursor-pointer text-white font-bold px-8 py-3 rounded-md transition duration-300"
+                >
+                    ENVIAR
+                </button>
+            </form>
+
+            <!-- INFORMACIÓN LATERAL -->
+            <div class="space-y-8">
+                <!-- Dirección -->
+                <div class="flex items-center gap-4">
+                    <div class="p-3 border border-gray-300 rounded-full">
+                        📍
+                    </div>
+                    <p class="text-gray-600">
+                        C. Tungsteno, Norte, 41007 Sevilla
+                    </p>
+                </div>
+
+                <!-- Email -->
+                <div class="flex items-center gap-4">
+                    <div class="p-3 border border-gray-300 rounded-full">
+                        ✉️
+                    </div>
+                        <p class="text-gray-600 break-all">jesusgomezgranado@gmail.com</p>
+                </div>
+
+                <!-- Teléfono -->
+                <div class="flex items-center gap-4">
+                    <div class="p-3 border border-gray-300 rounded-full">
+                        📞
+                    </div>
+                    <p class="text-gray-600">691 88 63 70</p>
+                </div>
+
+                <!-- Texto adicional -->
+                <p class="text-gray-600 text-sm leading-relaxed font-semibold">
+                    Le llamaremos y le daremos una estimación del coste de su proyecto en cuanto nos lo envíe.
+                </p>
+
+                <!-- Logo -->
+                <div class="pt-6">
+                    <img
+                        src="/assets/logos/logo_jesus_completo.webp"
+                        alt="Logo de Instalaciones Eléctricas Jesús Gómez"
+                        class="w-56 opacity-80 mx-auto lg:mx-0"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

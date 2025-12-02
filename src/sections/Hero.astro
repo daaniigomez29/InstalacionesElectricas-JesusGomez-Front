@@ -1,0 +1,163 @@
+<section id="inicio" class="px-5 pt-10 lg:px-10 lg:pt-0  lg:min-h-[calc(100dvh-134px)] background-fad bg-[#F5F7FA] scroll-m-35 overflow-hidden flex items-center">
+    <div class="lg:grid lg:grid-cols-2 flex flex-col items-center justify-center w-full container mx-auto gap-y-10 md:gap-y-20">
+        <div class="flex flex-col">
+                <h1 class="font-bold">Expertos en energía, comprometidos contigo</h1>
+                <div>
+                    <h1 class="background-h1 text-start!">y con tu seguridad.</h1>
+                </div>
+                <p class="pt-5">Instalaciones, reparaciones y mantenimiento eléctrico rápido, limpio y con garantía. Tú solo disfruta de la tranquilidad.</p>
+                <div class="pt-7">
+                    <a href="#contacto" class="btn bg-accent-blue rounded p-3 lg:p-4 text-white font-semibold">Solicita tu presupuesto ahora</a>
+                </div>
+        </div>
+        <div class="relative flex items-end justify-center w-full md:h-[clamp(420px,75vh,1220px)] img-div">
+    <!-- CÍRCULO -->
+    <div class="circle-bg"></div>
+
+    <!-- IMAGEN -->
+    <img 
+        src="/assets/backgrounds/jesus-hero.webp" 
+        fetchpriority="high"
+        class="img-size relative z-10 object-contain h-full w-auto img-animation"
+        alt="CEO de Instalaciones eléctricas Jesús Gómez, encargado de todas las operaciones." 
+    >
+</div>
+    </div>
+</section>
+
+<style>
+
+@media (min-width: 1300px) {
+  .img-div {
+  height: clamp(460px, calc(100dvh - 134px), 940px);
+}
+  
+}
+
+.circle-bg {
+  position: absolute;
+
+  /* TAMAÑO RESPONSIVE REAL */
+  width: clamp(510px, 120vmin, 1550px);
+  height: clamp(510px, 120vmin, 1550px);
+
+  border-radius: 50%;
+  background-color: #F39615;
+  background-image: url("/assets/backgrounds/fondo-circulo.webp");
+  background-repeat: repeat;
+
+  /* POSICIÓN RESPONSIVE */
+  /* right: clamp(-580px, -39vmin, -170px); */
+  bottom: clamp(-420px, -35vmin, -160px);
+
+  /* SOMBRA FIGMA */
+  box-shadow: 0px 69px 19.9px rgba(0,0,0,0.25);
+
+  z-index: 0;
+
+  /* ANIMACIÓN DIAGONAL INFINITA */
+  animation: 
+  patternMove 50s linear infinite,
+  imgDivEnterPc 1s ease-out forwards;
+
+
+  /* EVITA BUGS EN LANDSCAPE */
+  
+}
+
+.img-animation {
+      opacity: 0;
+      animation: imgDivEnterPc2 1s ease-out forwards;
+      animation-delay: 0.6s;
+    }
+
+@media (min-width: 1280px) {
+  .circle-bg {
+    width: clamp(900px, 63vw, 1225px);
+    height: clamp(900px, 75vw, 1450px);
+
+    right: clamp(-450px, -25vw, -250px);
+  }
+}
+
+@media (max-width: 1300px) {
+    .img-animation {
+      opacity: 0;
+      animation: 
+      imgDivEnterMobile 1s ease-out forwards;
+        animation-delay: 0.7s;
+    }
+    .circle-bg {
+      animation: 
+      imgDivEnterMobile 1s ease-out forwards,
+      patternMove 50s linear infinite;
+    }
+  }
+
+  @keyframes patternMove {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 400px -600px;
+    }
+}
+
+@keyframes imgDivEnterMobile {
+  0% {
+    transform: scale(0.3) translateY(120px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes imgDivEnterPc {
+  0% {
+    transform: scale(0.3) translateX(1020px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes imgDivEnterPc2 {
+  0% {
+    transform: translateX(1020px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+    .btn {
+  background-image:
+    linear-gradient(135deg, #1e3eb1  50%, transparent 50%);
+  background-position: bottom right;
+  background-size: 200% 200%;
+  transition: 0.4s;
+}
+
+.btn:hover {
+  background-position: top left;
+  color: white;
+}
+
+/*
+h1 {
+		font-size: 1.875rem;
+}
+*/
+
+@media (min-width: 1440px) {
+		h1 {
+			font-size: 2.875rem;
+		} /* 46px */
+  }
+</style>

@@ -1,0 +1,37 @@
+---
+import { string } from "astro:schema";
+
+export interface Props {
+  img: string;
+  text: string;
+}
+
+const { img, text } = Astro.props;
+---
+
+<article class="embla__slide">
+  <div class="flex flex-col md:flex-row items-center justify-end w-full gap-6 md:gap-0 lg:gap-10">
+    <img
+      src={img}
+      alt={text}
+      class="w-full md:w-1/2 h-96 object-cover rounded-lg shadow-md"
+    />
+    <div class="text-center md:pt-0 md:p-6 h-1/2 md:h-auto md:w-1/2">
+      <p class="text-white">{text}</p>
+    </div>
+  </div>
+</article>
+
+<style>
+  .embla__slide {
+    display: flex;
+    transform: translate3d(0, 0, 0);
+    flex: 0 0 var(--slide-size);
+    min-width: 0;
+    padding-left: var(--slide-spacing);
+  }
+
+  .embla__slide img {
+  border-radius: 8px;
+}
+</style>

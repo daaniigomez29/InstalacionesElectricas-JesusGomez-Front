@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+@theme {
+    --color-primary-blue: #1E3A8A;
+    --color-primary-orange: #F39615;
+    --color-accent-blue: #2563EB;
+
+    --font-montserrat: "Montserrat", system-ui, sans-serif;
+
+      --breakpoint-lg: 70rem;   /* 1120px = 70rem aproximadamente */
+}
+
+.background-h1 {
+  background-color: #F39615;
+  color: white;
+  padding-inline: 1.25rem;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+}
+
+.background-h1-blue {
+  background-color: #1e3b8a;
+  color: white;
+  padding-inline: 1.25rem;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+}
+
+html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+    };

@@ -1,0 +1,140 @@
+<header class=" bg-[#F6F6F6F6] shadow sticky top-0 z-50">
+    <nav class="w-full">
+  <div class="flex flex-col lg:flex-row items-center justify-between px-4 py-2">
+    <div class="w-full lg:w-auto flex justify-between items-center">
+      <a href="/#inicio" class="flex items-center space-x-3">
+          <img src="/assets/logos/logo_jesus_trans.webp" class="w-32 hover:scale-110 transition duration-200" />
+      </a>
+      <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+          </svg>
+      </button>
+    </div>
+    <div class="hidden w-full lg:block md:w-auto" id="navbar-default">
+      <ul class="font-semibold flex flex-col items-center justify-center p-4 md:py-4 md:px-1 lg:p-0 md:flex-row md:space-x-5 lg:space-x-8 gap-y-5 lg:gap-y-0  md:mt-0 md:border-0 mt-4">
+        <li>
+          <a href="/#inicio" aria-label="inicio" class="block  md:p-0 nav-link transition" aria-current="page">Inicio</a>
+        </li>
+        <li>
+          <a href="/#sobre-nosotros" aria-label="sobre-nosotros" class="block   md:border-0 md:p-0 nav-link transition">Sobre nosotros</a>
+        </li>
+        <li>
+          <a href="/#soluciones" aria-label="soluciones" class="block   md:border-0  md:p-0 nav-link">Soluciones</a>
+        </li>
+        <li>
+          <a href="/#servicios" aria-label="servicios" class="block  md:border-0  md:p-0 nav-link">Servicios</a>
+        </li>
+        <li>
+          <a href="/#nuestros-trabajos" aria-label="nuestros-trabajos" class="block  md:border-0  md:p-0 nav-link">Nuestros trabajos</a>
+        </li>
+        <li>
+          <a href="/#opiniones" aria-label="opiniones" class="block  md:border-0 md:p-0 nav-link">Opiniones</a>
+        </li>
+        <li>
+            <a href="/#contacto" aria-label="contacto" class="btn bg-accent-blue p-3 gap-y-20 text-white font-semibold">
+              Contáctanos
+            </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const toggleButton = document.querySelector('[data-collapse-toggle="navbar-default"]') as HTMLButtonElement;
+  const navLinks = document.querySelectorAll('#navbar-default a');
+
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 1024) {
+          toggleButton.click();
+      }
+    });
+  });
+});
+
+  document.addEventListener("DOMContentLoaded", () => {
+  
+      const sections = document.querySelectorAll("section");
+      const navItems = document.querySelectorAll("header nav ul a");
+      
+      const callback = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+  
+            navItems.forEach((item) => {
+              if (item.getAttribute("aria-label") === entry.target.id) {
+                item.classList.add("nav-link-selected");
+              } else {
+                item.classList.remove("nav-link-selected");
+              }
+            });
+          }
+        });
+      };
+  
+      const observer = new IntersectionObserver(callback, {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.3,
+      });
+  
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+  
+      document.onvisibilitychange = () => {
+        if (document.visibilityState === "hidden") {
+          observer.disconnect();
+        } else {
+          sections.forEach((section) => {
+            observer.observe(section);
+          });
+        }
+      };
+    });
+</script>
+
+<style>
+
+    .shadow{ 
+        box-shadow: 0px 4px 4px 0px #F39615;
+    }
+
+    .nav-link {
+      color: #1e3a8a;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: #F39615;
+    }
+
+    .nav-link-selected {
+      color: #F39615;
+    }
+
+    .nav-link-selected[aria-label="contacto"] {
+      background-color: #F39615;
+      color: white;
+    }
+
+    .btn {
+  background-image:
+    linear-gradient(90deg, #F39615 50%, transparent 50%);
+  background-position: bottom right;
+  background-size: 200% 200%;
+  transition: 0.4s;
+}
+
+.btn:hover {
+  background-position: top left;
+  color: white;
+}
+
+</style>
