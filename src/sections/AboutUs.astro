@@ -3,11 +3,9 @@ import LocationIcon from "../icons/LocationIcon.astro"
 import ToolsIcon from "../icons/ToolsIcon.astro"
 import ToolsIcon2 from "../icons/ToolsIcon2.astro"
 import QualityIcon from "../icons/QualityIcon.astro"
-
-import LogoSlider from "../components/LogoSlider.astro"
 ---
 
-<section id="sobre-nosotros" class="bg-[url(/assets/backgrounds/aboutus-bg-black.webp)]  bg-no-repeat bg-cover scroll-m-25 md:scroll-m-45 overflow-hidden">
+<section id="sobre-nosotros" class="bg-[url(/assets/backgrounds/aboutus-bg-black.webp)]  bg-no-repeat bg-cover scroll-m-25 md:scroll-m-25 overflow-hidden mask-fade">
     <div class="container mx-auto flex flex-col justify-center p-5 md:p-10 py-15 md:py-25 gap-10 text-white">
         <div class="flex justify-center">
             <h1 class="background-h1">Tu energía, en buenas manos</h1>
@@ -38,7 +36,12 @@ import LogoSlider from "../components/LogoSlider.astro"
                     <p>Ofrecemos soluciones a medida, adaptadas a las necesidades específicas de cada proyecto industrial.</p>
                 </div>
             </div>
-
-            <LogoSlider />
     </div>
 </section>
+
+
+<style>
+    .mask-fade {
+          mask-image: linear-gradient(180deg, #f9fafc 97%, transparent);
+    }
+</style>
