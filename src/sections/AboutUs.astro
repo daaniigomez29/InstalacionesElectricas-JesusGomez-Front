@@ -5,7 +5,7 @@ import ToolsIcon2 from "../icons/ToolsIcon2.astro"
 import QualityIcon from "../icons/QualityIcon.astro"
 ---
 
-<section id="sobre-nosotros" class="bg-[url(/assets/backgrounds/aboutus-bg-black.webp)]  bg-no-repeat bg-cover scroll-m-25 md:scroll-m-45">
+<section id="sobre-nosotros" class="bg-[url(/assets/backgrounds/aboutus-bg-black.webp)]  bg-no-repeat bg-cover scroll-m-25 md:scroll-m-25 overflow-hidden mask-fade">
     <div class="container mx-auto flex flex-col justify-center p-5 md:p-10 py-15 md:py-25 gap-10 text-white">
         <div class="flex justify-center">
             <h1 class="background-h1">Tu energía, en buenas manos</h1>
@@ -38,3 +38,10 @@ import QualityIcon from "../icons/QualityIcon.astro"
             </div>
     </div>
 </section>
+
+
+<style>
+    .mask-fade {
+          mask-image: linear-gradient(180deg, #f9fafc 97%, transparent);
+    }
+</style>

@@ -1,0 +1,115 @@
+---
+import type { ACTION_ERROR_CODES } from "astro:actions";
+
+const IMGS = [
+    {
+        img: "/assets/logos-collaborators/eurosevilla.webp",
+        alt: "logo eurosevilla"
+    },
+    {
+        img: "/assets/logos-collaborators/agencia-tributaria.webp",
+        alt: "logo agencia tributaria"
+    },
+    {
+        img: "/assets/logos-collaborators/demetrio.webp",
+        alt: "logo demetrio"
+    },
+    {
+        img: "/assets/logos-collaborators/gohegal.webp",
+        alt: "logo gohegal"
+    },
+    {
+        img: "/assets/logos-collaborators/ralarsa.webp",
+        alt: "logo ralarsa"
+    },
+    {
+        img: "/assets/logos-collaborators/construcciones-la-estrella.webp",
+        alt: "logo construcciones la estrella"
+    },
+];
+
+const DUPLICATED = [...IMGS, ...IMGS];
+---
+
+<section class="background-fade p-5 md:p-10 py-15 md:py-15">
+    <article class="space-y-15 md:space-y-20 mask-fade container mx-auto">
+        <div class="flex justify-center">
+            <h1 class="background-h1-blue">Empresas que confían en nuestros servicios</h1>
+        </div>
+        <div class="mask">
+            <div class="flex gap-8 md:gap-15 logo-slider">
+                <!-- Originales y duplicadas -->
+                {
+                    DUPLICATED.map(imgs => (
+                        <img src={imgs.img} alt={imgs.alt} loading="lazy" />
+                    ))
+                }
+            </div>
+        </div>
+    </article>
+</section>
+
+<style>
+.mask {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(90deg, transparent, #fff 5%, #fff 95%, transparent);
+}
+
+.logo-slider {
+  display: flex;
+  flex-wrap: nowrap;
+  animation: slider 12s linear infinite;
+}
+
+.logo-slider img {
+  flex: 0 0 auto;
+  height: 80px;   
+  width: auto;
+  object-fit: contain;
+  transition: 0.5s;
+}
+
+@media (min-width: 1100px) {
+  img:not(:hover) {
+    filter: grayscale(100);
+  }
+  .logo-slider:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes slider {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-70%); }
+}
+
+
+@media (max-width: 1100px) {
+  .logo-slider img {
+    height: 60px;
+  }
+  .logo-slider {
+    animation: slider 10s linear infinite; /* más rápido */
+    gap: 1.5rem;
+  }
+  @keyframes slider {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-120%); }
+}
+}
+
+@media (max-width: 480px) {
+  .logo-slider img {
+    height: 50px;
+  }
+  .logo-slider {
+    animation: slider 10s linear infinite; /* aún más rápido en móviles */
+    gap: 1.5rem;
+  }
+  @keyframes slider {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-200%); }
+}
+}
+</style>
