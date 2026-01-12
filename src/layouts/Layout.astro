@@ -18,12 +18,15 @@ import LogoSliderSection from "../sections/LogoSliderSection.astro";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" href="/favicon.ico">
+		<!--
 		<link
 			rel="icon"
-			type="image/svg+xml"
-			sizes="32x32"
-			href="/assets/logos/logo_jesus_web.webp"
+			type="image/png"
+			sizes="64x64"
+			href="/assets/logos/logo_jesus_web.png"
 		/>
+		-->
 
 		<title>Instalaciones Eléctricas Jesús Gómez</title>
 
@@ -81,49 +84,11 @@ import LogoSliderSection from "../sections/LogoSliderSection.astro";
 		<div class="min-h-full">
 			<HeaderSecondary />
 			<Header />
-			<main>
-				<Hero />
-				<AboutUs />
-				<LogoSliderSection />
-				<Solution />
-				<Services />
-				<OurJobs />
-				<Opinions />
-				<Contact />
-			</main>
+			<slot />
 			<Footer />
 		</div>
-			<script>
-			import { initFlowbite } from "flowbite";
-				initFlowbite
-			</script>
 	</body>
 </html>
-
-<script>
-	const observer = new IntersectionObserver((entries) => {
-		entries.forEach((entry) => {
-			if (entry.isIntersecting) {
-				entry.target.classList.add("opacity-100", "translate-y-0");
-				entry.target.classList.remove("opacity-0", "translate-y-10");
-			}
-		});
-	});
-
-	const observer2 = new IntersectionObserver((entries) => {
-		entries.forEach((entry) => {
-			if (entry.isIntersecting) {
-				entry.target.classList.add("opacity-100", "translate-x-0");
-				entry.target.classList.remove("opacity-0", "translate-x-20");
-			}
-		});
-	});
-
-	document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-	document
-		.querySelectorAll(".reveal-2")
-		.forEach((el) => observer2.observe(el));
-</script>
 
 <style is:global>
 	@import "../styles/global.css";
