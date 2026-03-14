@@ -41,13 +41,17 @@ const SERVICES = [
             "Mantenimiento preventivo en comunidades, revisión de seguridad y puesta a tierra.",
     },
 ];
+
+import { getServicios } from "../lib/api";
+const servicios = await getServicios();
+const serviciosData = servicios?.items ? servicios.items : SERVICES;
 ---
 
 <section id="servicios" class="p-5 md:p-10 pb-15 pt-15 md:py-25 scroll-m-25 background-fade">
     <div class="container mx-auto">
         <div class="flex flex-col gap-y-10">
             <div class="flex justify-center">
-                <h1 class="background-h1">Servicios</h1>
+                <h1 class="background-h1">{servicios.title}</h1>
             </div>
             <div class="flex justify-center">
                 <p class="font-medium text-center">
@@ -57,7 +61,7 @@ const SERVICES = [
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-10 pt-10">
-            {SERVICES.map(service => (
+            {serviciosData.map(service => (
                 <ServiceCard {...service} />
             ))}
         </div>

@@ -1,6 +1,10 @@
 ---
 import type { ACTION_ERROR_CODES } from "astro:actions";
 
+import { getEmpresas } from "../lib/api";
+
+const empresas = await getEmpresas();
+
 const IMGS = [
     {
         img: "/assets/logos-collaborators/eurosevilla.webp",
@@ -28,20 +32,21 @@ const IMGS = [
     },
 ];
 
-const DUPLICATED = [...IMGS, ...IMGS];
+const logosSource = empresas.logos ? empresas.logos : IMGS;
+const DUPLICATED = [...logosSource, ...logosSource];
 ---
 
 <section class="background-fade p-5 md:p-10 py-15 md:py-15">
     <article class="space-y-15 md:space-y-20 mask-fade container mx-auto">
         <div class="flex justify-center">
-            <h1 class="background-h1-blue">Empresas que confían en nuestros servicios</h1>
+            <h1 class="background-h1-blue">{empresas.title}</h1>
         </div>
         <div class="mask">
             <div class="flex gap-8 md:gap-15 logo-slider">
                 <!-- Originales y duplicadas -->
                 {
                     DUPLICATED.map(imgs => (
-                        <img src={imgs.img} alt={imgs.alt} loading="lazy" />
+                        <img src={imgs.url} alt={imgs.alt} loading="lazy" />
                     ))
                 }
             </div>
