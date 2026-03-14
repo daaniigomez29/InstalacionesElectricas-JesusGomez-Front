@@ -14,14 +14,5 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
-  },
-  structure: (S:any) =>
-    S.list()
-      .title("Content")
-      .items([
-        S.document()
-          .schemaType("hero")
-          .documentId("hero") // siempre el mismo ID
-          .title("Hero"),
-      ]),
+  }
 })
