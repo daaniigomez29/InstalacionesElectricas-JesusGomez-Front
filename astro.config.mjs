@@ -18,7 +18,7 @@ export default defineConfig({
     sanity({
       projectId: "67gi8gp6",
       dataset: "production",
-      useCdn: false, // for static builds
+      useCdn: true, // for static builds
     })
   ]
 });
