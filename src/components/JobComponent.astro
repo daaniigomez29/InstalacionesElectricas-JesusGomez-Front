@@ -7,6 +7,8 @@ export interface Props {
 }
 
 const { img, text } = Astro.props;
+
+const textAlt = "Profesional realizando trabajos de instalación eléctrica con precisión y seguridad en proyectos de construcción o reforma. Compromiso con la calidad y el buen funcionamiento de cada instalación para ofrecer soluciones eléctricas fiables y duraderas."
 ---
 
 <article class="embla__slide">
@@ -15,7 +17,7 @@ const { img, text } = Astro.props;
   >
     <img
       src={img}
-      alt={text}
+      alt={text ? text : textAlt}
       class=`w-full md:w-1/3 h-112 object-cover rounded-lg shadow-md`
     />
 

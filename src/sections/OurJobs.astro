@@ -35,6 +35,10 @@ const JOBS = [
     text: "Realizamos instalaciones eléctricas completas en locales comerciales: acometidas entubadas, cableado estructurado, iluminación eficiente y montaje de cuadros.",
   },
 ];
+
+import { getTrabajos } from "../lib/api";
+const trabajos = await getTrabajos();
+const trabajosData = trabajos?.items ? trabajos.items : JOBS;
 ---
 
 <section
@@ -47,7 +51,7 @@ const JOBS = [
     class="absolute inset-0 flex transition-transform duration-500 filter blur-sm w-[110%] h-[110%] -top-5 -left-5"
   >
     {
-      JOBS.map((job) => (
+      trabajosData.map((job) => (
         <div
           class="w-full h-full shrink-0 bg-center bg-cover bg-black/50 bg-blend-darken"
           style={`background-image: url(${job.img});`}
@@ -65,7 +69,7 @@ const JOBS = [
       <article class="embla">
         <div class="embla__viewport">
           <div class="embla__container">
-            {JOBS.map((job) => <JobComponent {...job} />)}
+            {trabajosData.map((job) => <JobComponent {...job} />)}
           </div>
         </div>
 

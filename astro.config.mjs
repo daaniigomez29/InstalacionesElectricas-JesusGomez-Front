@@ -4,11 +4,21 @@ import vercelAdapter from '@astrojs/vercel';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import sanity from '@sanity/astro';
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
+
   output: 'static',
-  adapter: vercelAdapter()
+  adapter: vercelAdapter(),
+  integrations: [
+    sanity({
+      projectId: "67gi8gp6",
+      dataset: "production",
+      useCdn: true, // for static builds
+    })
+  ]
 });
