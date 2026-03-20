@@ -14,7 +14,7 @@
       --breakpoint-lg: 70rem;   /* 1120px = 70rem aproximadamente */
 }
 
-.background-h1 {
+.background-font {
   background-color: #F39615;
   color: white;
   padding-inline: 1.25rem;
@@ -23,7 +23,7 @@
   text-align: center;
 }
 
-.background-h1-blue {
+.background-font-blue {
   background-color: #1e3b8a;
   color: white;
   padding-inline: 1.25rem;
