@@ -71,8 +71,10 @@ import LogoSliderSection from "../sections/LogoSliderSection.astro";
 			target="_blank"
 			class="group hover:scale-110 transition duration-300 rounded-full fixed bottom-0 end-0 m-4 whatsapp-icon flex justify-center items-center"
 			style="z-index: 1001;"
+			aria-label="Enviar mensaje por WhatsApp"
+			rel="noopener noreferrer"
 		>
-			<WhatsappIcon class="" fill="#FFFF" width="30" height="30" />
+			<WhatsappIcon class="" fill="#FFFF" width="30" height="30" aria-hidden="true"/>
 		</a>
 
 		<div class="min-h-full">
