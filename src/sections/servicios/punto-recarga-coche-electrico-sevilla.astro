@@ -1,0 +1,237 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceHero from "../../components/services/ServiceHero.astro";
+import ServiceIntro from "../../components/services/ServiceIntro.astro";
+import ServiceIncludes from "../../components/services/ServiceIncludes.astro";
+import ServiceProblems from "../../components/services/ServiceProblems.astro";
+import ServiceBenefits from "../../components/services/ServiceBenefits.astro";
+import ServiceProcess from "../../components/services/ServiceProcess.astro";
+import ServiceFAQ from "../../components/services/ServiceFAQ.astro";
+import ServiceRelated from "../../components/services/ServiceRelated.astro";
+import ServiceCTA from "../../components/services/ServiceCTA.astro";
+
+const title = "Punto de Recarga Coche Eléctrico en Sevilla | Wallbox e Instalación";
+const description = "Instalación de cargadores wallbox para coche eléctrico en Sevilla. Viviendas, garajes y negocios. Tramitación, protecciones y legalización incluidas.";
+---
+
+<Layout title={title} description={description}>
+    <ServiceHero
+        h1="Punto de Recarga para Coche Eléctrico en Sevilla"
+        subtitle="Instalación profesional de wallbox para vehículos eléctricos en vivienda, plaza de garaje, comunidad y negocio. Llave en mano, con todas las protecciones y legalización."
+        bgImage="/assets/worksSection/instalaciones-electricas.webp"
+    />
+
+    <ServiceIntro
+        title="Tu coche eléctrico cargado en casa, sin sobresaltos"
+        paragraphs={[
+            "Cargar un coche eléctrico en un enchufe normal es lento, ineficiente y, sobre todo, peligroso. Una instalación dedicada con un <b>wallbox bien dimensionado y protegido</b> es la única forma segura de aprovechar de verdad tu vehículo.",
+            "En <b>Instalaciones Eléctricas Jesús Gómez</b> instalamos puntos de recarga para coche eléctrico en Sevilla, tanto en viviendas unifamiliares como en plazas de garaje de comunidades, parkings privados y negocios.",
+            "Nos ocupamos de todo el proceso: estudio de la instalación, elección del cargador adecuado, tramitación con la comunidad si es necesario, montaje, protecciones específicas y legalización.",
+        ]}
+        image="/assets/worksSection/instalaciones-electricas.webp"
+        imageAlt="Instalación de punto de recarga wallbox para coche eléctrico en Sevilla"
+    />
+
+    <ServiceIncludes
+        title="Qué incluye nuestra instalación"
+        items={[
+            {
+                title: "Instalación en vivienda unifamiliar",
+                description:
+                    "Montaje del wallbox en garaje propio, con derivación desde el cuadro de la vivienda y protecciones específicas.",
+            },
+            {
+                title: "Instalación en plaza de garaje comunitaria",
+                description:
+                    "Acometida desde tu contador hasta tu plaza, cumpliendo la normativa de comunidades y la Ley de Propiedad Horizontal.",
+            },
+            {
+                title: "Instalación en negocio o parking privado",
+                description:
+                    "Puntos de recarga para clientes, empleados o flota empresarial, con sistemas de gestión y control de carga.",
+            },
+            {
+                title: "Protecciones específicas",
+                description:
+                    "Diferencial tipo A o B según wallbox, magnetotérmico dedicado y protector frente a fugas DC.",
+            },
+            {
+                title: "Asesoramiento sobre el wallbox",
+                description:
+                    "Te ayudamos a elegir cargador (potencia, conectividad, gestión dinámica) según tu coche y tu instalación.",
+            },
+            {
+                title: "Legalización y aumento de potencia",
+                description:
+                    "Si hace falta más potencia contratada, tramitamos el aumento y emitimos el certificado correspondiente.",
+            },
+        ]}
+    />
+
+    <ServiceProblems
+        title="Dudas y situaciones habituales"
+        problems={[
+            {
+                title: "Vives en piso y no sabes cómo instalar el cargador",
+                description:
+                    "Existe procedimiento legal para instalarlo en tu plaza notificándolo a la comunidad. Lo gestionamos por ti.",
+            },
+            {
+                title: "Tu cuadro actual no tiene espacio",
+                description:
+                    "Adaptamos o ampliamos el cuadro para alojar las nuevas protecciones del punto de recarga.",
+            },
+            {
+                title: "No estás seguro de la potencia que necesitas",
+                description:
+                    "Te asesoramos en función de tu coche, tus hábitos y la potencia contratada para evitar cortes y disparos.",
+            },
+            {
+                title: "Te preocupa la seguridad eléctrica del cargador",
+                description:
+                    "Instalamos protecciones obligatorias por REBT y comprobamos toma de tierra antes de poner el wallbox en servicio.",
+            },
+            {
+                title: "Tu negocio quiere ofrecer recarga a clientes",
+                description:
+                    "Diseñamos la instalación pensando en escalabilidad, gestión y, si procede, integración con sistemas de pago.",
+            },
+            {
+                title: "Quieres aprovechar las ayudas públicas",
+                description:
+                    "Te orientamos sobre la documentación técnica necesaria para subvenciones como Moves III.",
+            },
+        ]}
+    />
+
+    <ServiceBenefits
+        title="Por qué instalarlo con un profesional"
+        benefits={[
+            {
+                icon: "🔌",
+                title: "Carga rápida y segura",
+                description:
+                    "Tu coche cargado en horas en lugar de toda la noche, sin riesgo de recalentamiento de enchufes.",
+            },
+            {
+                icon: "💶",
+                title: "Ahorro frente a redes públicas",
+                description:
+                    "Recargar en casa con tarifa nocturna es notablemente más barato que en cargadores públicos.",
+            },
+            {
+                icon: "📜",
+                title: "Cumplimiento normativo",
+                description:
+                    "Instalación conforme a ITC-BT-52 y resto del REBT, con boletín emitido.",
+            },
+            {
+                icon: "🏠",
+                title: "Sin afectar al resto de la instalación",
+                description:
+                    "Diseñamos el circuito como independiente y gestionamos cargas si la potencia es limitada.",
+            },
+            {
+                icon: "🛠️",
+                title: "Instalación llave en mano",
+                description:
+                    "Desde el estudio inicial hasta la puesta en marcha y la formación de uso, nos ocupamos de todo.",
+            },
+            {
+                icon: "🌱",
+                title: "Compatible con autoconsumo",
+                description:
+                    "Si tienes o tendrás placas solares, dejamos la instalación preparada para integrarla.",
+            },
+        ]}
+    />
+
+    <ServiceProcess
+        title="Proceso de instalación del wallbox"
+        steps={[
+            {
+                title: "Estudio técnico previo",
+                description:
+                    "Revisamos tu instalación, potencia contratada, distancia desde el cuadro y tipo de vehículo.",
+            },
+            {
+                title: "Propuesta y presupuesto",
+                description:
+                    "Te recomendamos modelo de wallbox, tipo de instalación y te entregamos presupuesto cerrado.",
+            },
+            {
+                title: "Gestión con comunidad o compañía",
+                description:
+                    "Si vives en comunidad, preparamos la notificación. Si necesitas más potencia, lo tramitamos con la distribuidora.",
+            },
+            {
+                title: "Montaje y protecciones",
+                description:
+                    "Tendido del cable, instalación del wallbox y protecciones específicas conforme a ITC-BT-52.",
+            },
+            {
+                title: "Puesta en marcha y boletín",
+                description:
+                    "Probamos la carga real con tu coche, configuramos el wallbox y emitimos el certificado eléctrico.",
+            },
+        ]}
+    />
+
+    <ServiceFAQ
+        title="Preguntas frecuentes sobre puntos de recarga"
+        faqs={[
+            {
+                question: "¿Puedo instalar un wallbox si vivo en piso?",
+                answer: "Sí. La Ley de Propiedad Horizontal te permite hacerlo en tu plaza de garaje notificándolo a la comunidad. No necesitas su autorización, solo informar. Nosotros te ayudamos con el procedimiento.",
+            },
+            {
+                question: "¿Necesito ampliar la potencia contratada?",
+                answer: "Depende de tu instalación actual y del wallbox elegido. En muchos casos, con un sistema de gestión dinámica de carga no es necesario subir potencia.",
+            },
+            {
+                question: "¿Cuánto tarda en cargarse el coche con un wallbox de 7,4 kW?",
+                answer: "Un coche eléctrico medio se carga del 20% al 80% en unas 4-6 horas. Suficiente para tener el coche listo cada mañana sin tarifas caras.",
+            },
+            {
+                question: "¿Cuánto cuesta instalar un punto de recarga en Sevilla?",
+                answer: "El precio depende de la distancia desde el cuadro, las protecciones necesarias y el modelo de wallbox. Te lo damos cerrado tras la visita técnica.",
+            },
+            {
+                question: "¿Puedo solicitar ayudas Moves III?",
+                answer: "Sí. Te entregamos la documentación técnica necesaria para tramitar las ayudas y subvenciones vigentes.",
+            },
+            {
+                question: "¿Qué marca de wallbox recomendáis?",
+                answer: "Trabajamos con marcas reconocidas y homologadas. Te recomendamos la que mejor se adapte a tu coche, instalación y presupuesto, sin atarte a una marca concreta.",
+            },
+        ]}
+    />
+
+    <ServiceRelated
+        related={[
+            {
+                title: "Cuadros eléctricos",
+                href: "/servicios/cuadros-electricos-sevilla",
+                description:
+                    "Adaptación o ampliación del cuadro para alojar las protecciones del wallbox.",
+            },
+            {
+                title: "Boletines y legalizaciones",
+                href: "/servicios/boletines-electricos-sevilla",
+                description:
+                    "Tramitación del aumento de potencia y certificado eléctrico del punto de recarga.",
+            },
+            {
+                title: "Instalaciones eléctricas",
+                href: "/servicios/instalaciones-electricas-sevilla",
+                description:
+                    "Adecuación general de la instalación cuando va asociada al wallbox.",
+            },
+        ]}
+    />
+
+    <ServiceCTA
+        title="¿Te has comprado un coche eléctrico?"
+        text="Te ayudamos a tener tu wallbox funcionando en pocos días. Estudio sin compromiso y presupuesto claro."
+    />
+</Layout>

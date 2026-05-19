@@ -1,0 +1,237 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceHero from "../../components/services/ServiceHero.astro";
+import ServiceIntro from "../../components/services/ServiceIntro.astro";
+import ServiceIncludes from "../../components/services/ServiceIncludes.astro";
+import ServiceProblems from "../../components/services/ServiceProblems.astro";
+import ServiceBenefits from "../../components/services/ServiceBenefits.astro";
+import ServiceProcess from "../../components/services/ServiceProcess.astro";
+import ServiceFAQ from "../../components/services/ServiceFAQ.astro";
+import ServiceRelated from "../../components/services/ServiceRelated.astro";
+import ServiceCTA from "../../components/services/ServiceCTA.astro";
+
+const title = "Iluminación LED en Sevilla | Ahorro Energético y Proyectos a Medida";
+const description = "Instalación de iluminación LED en Sevilla para viviendas, negocios y comunidades. Sustitución LED, proyectos decorativos y eficiencia energética.";
+---
+
+<Layout title={title} description={description}>
+    <ServiceHero
+        h1="Iluminación LED en Sevilla"
+        subtitle="Proyectos de iluminación LED para viviendas, negocios y comunidades. Sustitución de luminarias, iluminación decorativa y ahorro energético garantizado."
+        bgImage="/assets/worksSection/iluminacion.webp"
+    />
+
+    <ServiceIntro
+        title="La luz adecuada cambia los espacios"
+        paragraphs={[
+            "La tecnología LED ha cambiado por completo cómo iluminamos viviendas y negocios. Consume hasta un <b>80% menos</b> que las luminarias tradicionales, dura años sin mantenimiento y permite jugar con tonos, intensidades y diseño como nunca antes.",
+            "En <b>Instalaciones Eléctricas Jesús Gómez</b> diseñamos e instalamos proyectos de <b>iluminación LED en Sevilla</b>, desde la sustitución sencilla de luminarias hasta proyectos integrales para tiendas, oficinas, restaurantes y comunidades.",
+            "Nos preocupamos por algo más que el ahorro: estudiamos temperatura de color, ángulos de apertura y puntos de luz para que el resultado sea acogedor, funcional y eficiente.",
+        ]}
+        image="/assets/worksSection/iluminacion.webp"
+        imageAlt="Proyecto de iluminación LED en Sevilla"
+    />
+
+    <ServiceIncludes
+        title="Tipos de trabajos LED que realizamos"
+        items={[
+            {
+                title: "Sustitución a tecnología LED",
+                description:
+                    "Cambio de halógenos, fluorescentes y bombillas tradicionales por LED equivalente o superior.",
+            },
+            {
+                title: "Iluminación decorativa",
+                description:
+                    "Tiras LED, focos empotrables, perfiles indirectos y luminarias de diseño para crear ambiente.",
+            },
+            {
+                title: "Proyectos integrales de iluminación",
+                description:
+                    "Estudio luminotécnico, plano de puntos, elección de luminarias y montaje completo.",
+            },
+            {
+                title: "Negocios y locales comerciales",
+                description:
+                    "Iluminación adecuada para escaparates, lineales, salas de espera, restauración y oficinas.",
+            },
+            {
+                title: "Comunidades de vecinos",
+                description:
+                    "Sustitución de alumbrado en escaleras, garajes y patios con detectores de presencia y temporizadores.",
+            },
+            {
+                title: "Eficiencia energética",
+                description:
+                    "Cálculos de ahorro, regulación con dimmer, sensores y sistemas de control para reducir consumo.",
+            },
+        ]}
+    />
+
+    <ServiceProblems
+        title="Situaciones en las que entramos a iluminar"
+        problems={[
+            {
+                title: "Tu factura de luz se dispara por iluminación",
+                description:
+                    "En comunidades, tiendas y oficinas con luz encendida muchas horas, el cambio a LED se amortiza rápido.",
+            },
+            {
+                title: "Las bombillas se funden constantemente",
+                description:
+                    "Suele ser síntoma de luminarias antiguas mal ventiladas o cableado deteriorado.",
+            },
+            {
+                title: "El local no luce bien",
+                description:
+                    "Iluminación mal repartida, sombras o tonos fríos arruinan productos, comidas o espacios. Lo rediseñamos.",
+            },
+            {
+                title: "La luz parpadea o tiene zumbido",
+                description:
+                    "A menudo son drivers de mala calidad o regulación incompatible. Sustituimos por componentes adecuados.",
+            },
+            {
+                title: "Quieres más confort en casa",
+                description:
+                    "Tiras LED indirectas, luz cálida regulable y ambientes diferenciados marcan la diferencia.",
+            },
+            {
+                title: "Las escaleras de la comunidad gastan demasiado",
+                description:
+                    "Sustituimos por LED con detector de presencia y temporizador adaptado a la normativa.",
+            },
+        ]}
+    />
+
+    <ServiceBenefits
+        title="Ventajas del LED bien instalado"
+        benefits={[
+            {
+                icon: "💡",
+                title: "Hasta 80% menos consumo",
+                description:
+                    "La tecnología LED reduce drásticamente la factura frente a halógeno y fluorescente.",
+            },
+            {
+                icon: "🕒",
+                title: "Larga vida útil",
+                description:
+                    "Hasta 30.000-50.000 horas según luminaria. Olvídate de cambiar bombillas.",
+            },
+            {
+                icon: "🌡️",
+                title: "Tonalidades a tu medida",
+                description:
+                    "Luz cálida, neutra o fría según el uso y el ambiente que quieras crear.",
+            },
+            {
+                icon: "🎛️",
+                title: "Regulación y escenas",
+                description:
+                    "Compatible con regulación, temporizadores, sensores y sistemas de domótica.",
+            },
+            {
+                icon: "🌍",
+                title: "Menos huella de carbono",
+                description:
+                    "Reduces consumo y emisiones, alineado con la eficiencia energética del edificio.",
+            },
+            {
+                icon: "🛠️",
+                title: "Instalación profesional",
+                description:
+                    "Drivers de calidad, dimensionado correcto y cableado adecuado para evitar fallos prematuros.",
+            },
+        ]}
+    />
+
+    <ServiceProcess
+        title="Cómo trabajamos un proyecto de iluminación"
+        steps={[
+            {
+                title: "Estudio del espacio",
+                description:
+                    "Visitamos el inmueble, medimos zonas y entendemos qué quieres conseguir con la luz.",
+            },
+            {
+                title: "Propuesta de iluminación",
+                description:
+                    "Te enseñamos opciones de luminarias, tonos y distribución con su correspondiente cálculo de ahorro.",
+            },
+            {
+                title: "Presupuesto cerrado",
+                description:
+                    "Detalle de luminarias, mano de obra y posibles trabajos eléctricos asociados.",
+            },
+            {
+                title: "Montaje y conexionado",
+                description:
+                    "Instalamos las luminarias, drivers y controles, dejando todo probado y ajustado.",
+            },
+            {
+                title: "Ajuste final",
+                description:
+                    "Regulamos intensidades, configuramos escenas si las hay y te explicamos el uso.",
+            },
+        ]}
+    />
+
+    <ServiceFAQ
+        title="Preguntas frecuentes sobre iluminación LED"
+        faqs={[
+            {
+                question: "¿Cuánto se ahorra cambiando a LED?",
+                answer: "Depende del tipo de luminaria sustituida y de las horas de uso, pero el ahorro típico está entre el 60% y el 85% del consumo en iluminación. En negocios y comunidades, la inversión suele recuperarse en 1-2 años.",
+            },
+            {
+                question: "¿Puedo regular cualquier LED?",
+                answer: "No todos los LED son regulables. Hay que combinar luminaria, driver y regulador compatibles. Nosotros nos encargamos de elegir el conjunto correcto.",
+            },
+            {
+                question: "¿Qué temperatura de color recomendáis?",
+                answer: "Para salones y dormitorios, luz cálida (2700-3000K). Para cocinas y baños, neutra (3500-4000K). Para oficinas y comercios, neutra o ligeramente fría. Lo ajustamos a cada espacio.",
+            },
+            {
+                question: "¿Trabajáis en comunidades de vecinos?",
+                answer: "Sí. Cambiamos alumbrado de escalera, garaje y patio por LED con detectores de presencia. Reducimos consumo y mejoramos la luz.",
+            },
+            {
+                question: "¿La luz LED hace daño a la vista?",
+                answer: "Una luz LED de calidad, sin parpadeo y con temperatura adecuada es perfectamente confortable. Los problemas suelen venir de luminarias muy baratas con driver deficiente.",
+            },
+            {
+                question: "¿Puedo añadir tiras LED en mi casa actual?",
+                answer: "Sí. Las tiras LED se integran en falsos techos, perfiles, muebles o cabeceros, con alimentación discreta y, si quieres, control desde el móvil.",
+            },
+        ]}
+    />
+
+    <ServiceRelated
+        related={[
+            {
+                title: "Instalaciones eléctricas",
+                href: "/servicios/instalaciones-electricas-sevilla",
+                description:
+                    "Cuando la iluminación forma parte de una reforma o instalación completa.",
+            },
+            {
+                title: "Instalaciones para negocios",
+                href: "/servicios/instalaciones-electricas-negocios-sevilla",
+                description:
+                    "Iluminación comercial diseñada para vender y trabajar mejor.",
+            },
+            {
+                title: "Mantenimiento eléctrico",
+                href: "/servicios/mantenimiento-electrico-sevilla",
+                description:
+                    "Mantenimiento periódico de luminarias y alumbrado en comunidades y empresas.",
+            },
+        ]}
+    />
+
+    <ServiceCTA
+        title="¿Quieres ahorrar en iluminación y mejorar tu espacio?"
+        text="Te visitamos, calculamos cuánto puedes ahorrar y te proponemos un proyecto LED a tu medida."
+    />
+</Layout>

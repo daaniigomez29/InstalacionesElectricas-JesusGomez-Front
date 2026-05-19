@@ -1,44 +1,67 @@
 ---
-import type { ACTION_ERROR_CODES, ACTION_QUERY_PARAMS, ActionError } from "astro:actions";
+import type {
+    ACTION_ERROR_CODES,
+    ACTION_QUERY_PARAMS,
+    ActionError,
+} from "astro:actions";
 import ServiceCard from "../components/ServiceCard.astro";
-
 
 const SERVICES = [
     {
-        img: "/assets/worksSection/instalaciones-electricas.webp",
-        title: "Instalaciones eléctricas",
-        content:
-            "Diseño e instalación completa de sistemas eléctricos en viviendas, locales y oficinas, incluyendo reformas y obras nuevas.",
-    },
-    {
-        img: "/assets/worksSection/iluminacion.webp",
-        title: "Iluminación",
-        content:
-            "Montaje y sustitución de luminarias, instalación de iluminación LED y proyectos de iluminación decorativa o funcional.",
-    },
-    {
-        img: "/assets/worksSection/tomas.webp",
-        title: "Tomas, Interruptores y Mecanismos",
-        content:
-            "Instalación, redistribución y reparación de enchufes, interruptores y otros mecanismos eléctricos.",
-    },
-    {
         img: "/assets/worksSection/reparaciones.webp",
-        title: "Reparaciones y Averías Eléctricas",
+        title: "Averías Eléctricas",
         content:
-            "Diagnóstico y solución de fallos eléctricos, sustitución de fusibles, diferenciales, magnetotérmicos y cableado antiguo.",
+            "Diagnóstico y reparación de cortocircuitos, fallos de corriente, magnetotérmicos y diferenciales en Sevilla.",
+        href: "/servicios/averias-electricas-sevilla",
     },
     {
         img: "/assets/worksSection/certificaciones.webp",
-        title: "Certificaciones y Cuadros Eléctricos",
+        title: "Boletines y Legalizaciones",
         content:
-            "Montaje y actualización de cuadros eléctricos, centralizaciones, boletines eléctricos y certificados oficiales.",
+            "Certificados CIE, aumentos de potencia y legalización de instalaciones antiguas con instalador autorizado.",
+        href: "/servicios/boletines-electricos-sevilla",
+    },
+    {
+        img: "/assets/worksSection/tomas.webp",
+        title: "Cuadros Eléctricos",
+        content:
+            "Cambio y reforma de cuadros eléctricos con magnetotérmicos, diferenciales y protección contra sobretensiones.",
+        href: "/servicios/cuadros-electricos-sevilla",
+    },
+    {
+        img: "/assets/worksSection/instalaciones-electricas.webp",
+        title: "Punto de Recarga Coche Eléctrico",
+        content:
+            "Instalación de wallbox en vivienda, plaza de garaje y negocio. Llave en mano y con boletín.",
+        href: "/servicios/punto-recarga-coche-electrico-sevilla",
+    },
+    {
+        img: "/assets/worksSection/instalaciones-electricas.webp",
+        title: "Instalaciones Eléctricas",
+        content:
+            "Instalaciones completas en viviendas, locales y oficinas. Canalizaciones, derivación individual y mecanismos.",
+        href: "/servicios/instalaciones-electricas-sevilla",
+    },
+    {
+        img: "/assets/worksSection/iluminacion.webp",
+        title: "Iluminación LED",
+        content:
+            "Sustitución LED, iluminación decorativa y proyectos completos para viviendas, negocios y comunidades.",
+        href: "/servicios/iluminacion-led-sevilla",
     },
     {
         img: "/assets/worksSection/mantenimiento.webp",
-        title: "Mantenimiento y Energía Moderna",
+        title: "Mantenimiento Eléctrico",
         content:
-            "Mantenimiento preventivo en comunidades, revisión de seguridad y puesta a tierra.",
+            "Planes preventivos para comunidades, oficinas y empresas. Cumplimiento normativo y atención prioritaria.",
+        href: "/servicios/mantenimiento-electrico-sevilla",
+    },
+    {
+        img: "/assets/ourJobs/trabajo-luz.webp",
+        title: "Instalaciones para Negocios",
+        content:
+            "Locales, oficinas y naves industriales. Trifásica, iluminación comercial y eficiencia energética.",
+        href: "/servicios/instalaciones-electricas-negocios-sevilla",
     },
 ];
 
@@ -47,7 +70,10 @@ const servicios = await getServicios();
 const serviciosData = servicios?.items ? servicios.items : SERVICES;
 ---
 
-<section id="servicios" class="p-5 md:p-10 pb-15 pt-15 md:py-25 scroll-m-25 background-fade">
+<section
+    id="servicios"
+    class="p-5 md:p-10 pb-15 pt-15 md:py-25 scroll-m-25 background-fade"
+>
     <div class="container mx-auto">
         <div class="flex flex-col gap-y-10">
             <div class="flex justify-center">
@@ -60,10 +86,10 @@ const serviciosData = servicios?.items ? servicios.items : SERVICES;
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-10 pt-10">
-            {serviciosData.map(service => (
-                <ServiceCard {...service} />
-            ))}
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-10 pt-10"
+        >
+            {serviciosData.map((service) => <ServiceCard {...service} />)}
         </div>
     </div>
 </section>

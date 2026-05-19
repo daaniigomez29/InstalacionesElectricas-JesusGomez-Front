@@ -1,0 +1,201 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServiciosHero from "../sections/servicios/ServiciosHero.astro";
+import ForWho from "../sections/servicios/ForWho.astro";
+import CatalogByCategory from "../sections/servicios/CatalogByCategory.astro";
+import ServiceFinder from "../sections/servicios/ServiceFinder.astro";
+import ServiceProcess from "../components/services/ServiceProcess.astro";
+import ServiceAreas from "../sections/servicios/ServiceAreas.astro";
+import WhyUs from "../sections/servicios/WhyUs.astro";
+import FeaturedCases from "../sections/servicios/FeaturedCases.astro";
+import ServiceFAQ from "../components/services/ServiceFAQ.astro";
+import ServiceCTA from "../components/services/ServiceCTA.astro";
+
+const title =
+    "Servicios de Electricista en Sevilla | Instalaciones, Averías y Mantenimiento";
+const description =
+    "Catálogo completo de servicios eléctricos en Sevilla: averías 24h, instalaciones, cuadros, boletines CIE, puntos de recarga, iluminación LED y mantenimiento.";
+
+const canonical = "https://www.instalacioneselectricasjesusgomez.es/servicios";
+
+const services = [
+    {
+        name: "Averías Eléctricas",
+        url: "https://www.instalacioneselectricasjesusgomez.es/servicios/averias-electricas-sevilla",
+        description:
+            "Diagnóstico y reparación de cortocircuitos, fallos de corriente, magnetotérmicos y diferenciales.",
+    },
+    {
+        name: "Boletines y Legalizaciones",
+        url: "https://www.instalacioneselectricasjesusgomez.es/servicios/boletines-electricos-sevilla",
+        description:
+            "Certificados CIE, aumentos de potencia y legalización de instalaciones antiguas.",
+    },
+    {
+        name: "Cuadros Eléctricos",
+        url: "https://www.instalacioneselectricasjesusgomez.es/servicios/cuadros-electricos-sevilla",
+        description:
+            "Cambio y reforma de cuadros eléctricos con protecciones modernas.",
+    },
+    {
+        name: "Punto de Recarga Coche Eléctrico",
+        url: "https://www.instalacioneselectricasjesusgomez.es/servicios/punto-recarga-coche-electrico-sevilla",
+        description:
+            "Instalación de wallbox en vivienda, plaza de garaje y negocio.",
+    },
+    {
+        name: "Instalaciones Eléctricas",
+        url: "https://www.instalacioneselectricasjesusgomez.es/servicios/instalaciones-electricas-sevilla",
+        description:
+            "Instalaciones completas en viviendas, locales y oficinas.",
+    },
+    {
+        name: "Iluminación LED",
+        url: "https://www.instalacioneselectricasjesusgomez.es/servicios/iluminacion-led-sevilla",
+        description:
+            "Sustitución LED, iluminación decorativa y proyectos completos.",
+    },
+    {
+        name: "Mantenimiento Eléctrico",
+        url: "https://www.instalacioneselectricasjesusgomez.es/servicios/mantenimiento-electrico-sevilla",
+        description:
+            "Planes preventivos para comunidades, oficinas y empresas.",
+    },
+    {
+        name: "Instalaciones para Negocios",
+        url: "https://www.instalacioneselectricasjesusgomez.es/servicios/instalaciones-electricas-negocios-sevilla",
+        description:
+            "Locales, oficinas y naves industriales con trifásica e iluminación comercial.",
+    },
+];
+
+const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Servicios de Electricista en Sevilla",
+    itemListElement: services.map((s, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: s.url,
+        name: s.name,
+    })),
+};
+
+const servicesSchema = services.map((s) => ({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: s.name,
+    description: s.description,
+    url: s.url,
+    areaServed: {
+        "@type": "City",
+        name: "Sevilla",
+    },
+    provider: {
+        "@type": "Electrician",
+        name: "Instalaciones Eléctricas Jesús Gómez",
+        url: "https://www.instalacioneselectricasjesusgomez.es",
+        telephone: "+34691886370",
+    },
+}));
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+    <ServiciosHero />
+
+    <ForWho />
+
+    <CatalogByCategory />
+
+    <ServiceFinder />
+
+    <ServiceProcess
+        title="Cómo trabajamos"
+        steps={[
+            {
+                title: "Llamada y primera valoración",
+                description:
+                    "Nos cuentas qué necesitas y te orientamos por teléfono o WhatsApp sobre el alcance y la urgencia del trabajo.",
+            },
+            {
+                title: "Visita técnica sin compromiso",
+                description:
+                    "Si el trabajo lo requiere, nos desplazamos para revisar la instalación y entender el alcance real.",
+            },
+            {
+                title: "Presupuesto cerrado por escrito",
+                description:
+                    "Te detallamos materiales, mano de obra y plazos. Sin sorpresas ni extras inesperados en la factura.",
+            },
+            {
+                title: "Ejecución profesional",
+                description:
+                    "Realizamos la instalación o reparación con materiales homologados, cumpliendo el REBT y dejando todo recogido.",
+            },
+            {
+                title: "Comprobaciones y boletín si procede",
+                description:
+                    "Verificamos protecciones, entregamos el trabajo con garantía y tramitamos el boletín CIE cuando es necesario.",
+            },
+        ]}
+    />
+
+    <WhyUs />
+
+    <FeaturedCases />
+
+    <ServiceAreas />
+
+    <ServiceFAQ
+        title="Antes de contratarnos"
+        faqs={[
+            {
+                question: "¿Cuánto cuesta una visita técnica?",
+                answer: "Para presupuestos de instalaciones, reformas o trabajos planificados la visita y el presupuesto son gratuitos y sin compromiso en Sevilla y alrededores. En el caso de averías, te informamos por teléfono del coste de desplazamiento antes de ir.",
+            },
+            {
+                question: "¿Vais sin compromiso?",
+                answer: "Sí. Hacemos la visita, te explicamos qué tiene tu instalación y te entregamos un presupuesto cerrado. Si decides no seguir adelante, no tienes ninguna obligación.",
+            },
+            {
+                question: "¿En cuánto tiempo soléis dar presupuesto?",
+                answer: "Para trabajos sencillos te lo damos en el momento o en menos de 24h. En obras o instalaciones más grandes solemos entregarlo en 2-3 días laborables tras la visita técnica.",
+            },
+            {
+                question: "¿Trabajáis los fines de semana?",
+                answer: "Las urgencias se atienden también fines de semana siempre que es posible. Los trabajos planificados se realizan habitualmente de lunes a viernes, salvo coordinación previa.",
+            },
+            {
+                question: "¿Qué formas de pago aceptáis?",
+                answer: "Aceptamos efectivo, transferencia bancaria y Bizum. Para obras de cierta entidad podemos acordar pago fraccionado: una parte al inicio y el resto a la finalización del trabajo.",
+            },
+            {
+                question: "¿Dais factura siempre?",
+                answer: "Sí. Todos nuestros trabajos se entregan con factura legal, detallando materiales, mano de obra e IVA correspondiente.",
+            },
+            {
+                question: "¿Sois instaladores autorizados?",
+                answer: "Sí. Estamos registrados como empresa instaladora autorizada, lo que nos habilita para emitir boletines CIE y legalizar instalaciones eléctricas ante la Junta de Andalucía.",
+            },
+            {
+                question: "¿Cubrís toda la provincia de Sevilla?",
+                answer: "Trabajamos en Sevilla capital, Aljarafe, Dos Hermanas, Alcalá de Guadaíra, Mairena y el resto del área metropolitana. Consúltanos para localidades más lejanas, también nos desplazamos en muchos casos.",
+            },
+        ]}
+    />
+
+    <ServiceCTA
+        title="¿No sabes qué servicio necesitas?"
+        text="Llámanos o escríbenos por WhatsApp y te orientamos sin compromiso. Te indicamos qué hace falta, cuánto cuesta y cuándo podemos hacerlo."
+    />
+
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(itemListSchema)}
+    />
+    {
+        servicesSchema.map((s) => (
+            <script type="application/ld+json" set:html={JSON.stringify(s)} />
+        ))
+    }
+</Layout>

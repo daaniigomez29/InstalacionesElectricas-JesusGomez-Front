@@ -1,0 +1,53 @@
+---
+import LocationIcon from "../../icons/LocationIcon.astro";
+
+const areas = [
+    "Sevilla capital",
+    "Dos Hermanas",
+    "Alcalá de Guadaíra",
+    "Mairena del Aljarafe",
+    "Tomares",
+    "Bormujos",
+    "Castilleja de la Cuesta",
+    "Camas",
+    "San Juan de Aznalfarache",
+    "Coria del Río",
+    "La Rinconada",
+    "Utrera",
+    "Los Palacios y Villafranca",
+    "Bollullos de la Mitación",
+    "Espartinas",
+    "Gines",
+];
+---
+
+<section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 bg-[#F5F7FA]">
+    <div class="container mx-auto max-w-5xl">
+        <div class="flex justify-center mb-4">
+            <h2 class="background-font">Zonas en las que trabajamos</h2>
+        </div>
+        <p class="text-center max-w-2xl mx-auto mb-10 text-gray-700">
+            Cubrimos Sevilla capital y los municipios principales del
+            Aljarafe y el área metropolitana. Si tu localidad no aparece,
+            consúltanos: probablemente también te atendemos.
+        </p>
+
+        <ul
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+            aria-label="Localidades cubiertas"
+        >
+            {
+                areas.map((a) => (
+                    <li class="flex items-center gap-2 bg-white rounded-lg px-4 py-3 shadow-sm">
+                        <span class="text-primary-orange shrink-0">
+                            <LocationIcon />
+                        </span>
+                        <span class="text-gray-800 text-sm font-medium">
+                            {a}
+                        </span>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</section>

@@ -1,0 +1,44 @@
+---
+export interface Props {
+    title: string;
+    paragraphs: string[];
+    image?: string;
+    imageAlt?: string;
+}
+
+const { title, paragraphs, image, imageAlt = "" } = Astro.props;
+---
+
+<section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 background-fade">
+    <div class="container mx-auto">
+        <div class="flex justify-center mb-10">
+            <h2 class="background-font">{title}</h2>
+        </div>
+
+        {
+            image ? (
+                <div class="grid lg:grid-cols-2 gap-10 items-center">
+                    <div class="flex flex-col gap-4">
+                        {paragraphs.map((p) => (
+                            <p set:html={p} />
+                        ))}
+                    </div>
+                    <div class="flex justify-center overflow-hidden">
+                        <img
+                            src={image}
+                            alt={imageAlt}
+                            loading="lazy"
+                            class="w-full max-w-md rounded-2xl reveal-2 opacity-0 translate-x-20 transition-all duration-1000"
+                        />
+                    </div>
+                </div>
+            ) : (
+                <div class="flex flex-col gap-4 max-w-4xl mx-auto">
+                    {paragraphs.map((p) => (
+                        <p set:html={p} />
+                    ))}
+                </div>
+            )
+        }
+    </div>
+</section>

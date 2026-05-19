@@ -1,0 +1,74 @@
+---
+import WarrantyIcon from "../../icons/WarrantyIcon.astro";
+import CertificateIcon from "../../icons/CertificateIcon.astro";
+import QualityIcon from "../../icons/QualityIcon.astro";
+import HandshakeIcon from "../../icons/HandshakeIcon.astro";
+import ToolsIcon2 from "../../icons/ToolsIcon2.astro";
+import HeartIcon from "../../icons/HeartIcon.astro";
+
+const reasons = [
+    {
+        icon: "warranty",
+        title: "Garantía por escrito",
+        text: "Entregamos albarán detallado con los trabajos realizados y la garantía de cada reparación o instalación.",
+    },
+    {
+        icon: "certificate",
+        title: "Instalador autorizado",
+        text: "Empresa registrada y habilitada para emitir boletines CIE y legalizar instalaciones eléctricas ante la administración.",
+    },
+    {
+        icon: "quality",
+        title: "Materiales homologados",
+        text: "Trabajamos con marcas certificadas y cumplimos siempre el Reglamento Electrotécnico de Baja Tensión (REBT).",
+    },
+    {
+        icon: "handshake",
+        title: "Presupuesto cerrado",
+        text: "Antes de empezar te explicamos el alcance y el coste. Sin sorpresas, sin extras inesperados en la factura.",
+    },
+    {
+        icon: "tools",
+        title: "+25 años de experiencia",
+        text: "Más de dos décadas resolviendo instalaciones en viviendas, comunidades, locales y naves en toda la provincia.",
+    },
+    {
+        icon: "heart",
+        title: "Trato cercano",
+        text: "Te explicamos lo que hacemos y por qué. Sin tecnicismos innecesarios y con disponibilidad para resolver dudas.",
+    },
+];
+---
+
+<section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 background-fade">
+    <div class="container mx-auto">
+        <div class="flex justify-center mb-4">
+            <h2 class="background-font-blue">Por qué elegirnos</h2>
+        </div>
+        <p class="text-center max-w-2xl mx-auto mb-12 text-gray-700">
+            No solo hacemos el trabajo: lo hacemos de forma que puedas
+            olvidarte de la instalación durante años.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {
+                reasons.map((r) => (
+                    <article class="bg-white rounded-xl shadow-md p-6 flex flex-col gap-3">
+                        <span class="w-12 h-12 flex items-center justify-center rounded-full bg-primary-orange/15 text-primary-orange">
+                            {r.icon === "warranty" && <WarrantyIcon />}
+                            {r.icon === "certificate" && <CertificateIcon />}
+                            {r.icon === "quality" && <QualityIcon />}
+                            {r.icon === "handshake" && <HandshakeIcon />}
+                            {r.icon === "tools" && <ToolsIcon2 />}
+                            {r.icon === "heart" && <HeartIcon />}
+                        </span>
+                        <h3 class="font-bold text-primary-blue text-lg">
+                            {r.title}
+                        </h3>
+                        <p class="text-gray-700 text-sm">{r.text}</p>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>

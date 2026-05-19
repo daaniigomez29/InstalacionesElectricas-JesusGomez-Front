@@ -1,0 +1,117 @@
+---
+import ServiceCard from "../../components/ServiceCard.astro";
+
+const categories = [
+    {
+        emoji: "🛠️",
+        title: "Urgencias y reparaciones",
+        intro: "Cuando algo deja de funcionar y necesitas una solución rápida. Diagnóstico el mismo día y reparación con garantía.",
+        services: [
+            {
+                img: "/assets/worksSection/reparaciones.webp",
+                title: "Averías Eléctricas",
+                content:
+                    "Diagnóstico y reparación de cortocircuitos, fallos de corriente, magnetotérmicos y diferenciales en Sevilla.",
+                href: "/servicios/averias-electricas-sevilla",
+            },
+        ],
+    },
+    {
+        emoji: "🏗️",
+        title: "Instalación y obra",
+        intro: "Proyectos nuevos y reformas. Desde el cuadro hasta el último mecanismo, con materiales homologados y boletín al finalizar.",
+        services: [
+            {
+                img: "/assets/worksSection/instalaciones-electricas.webp",
+                title: "Instalaciones Eléctricas",
+                content:
+                    "Instalaciones completas en viviendas, locales y oficinas. Canalizaciones, derivación individual y mecanismos.",
+                href: "/servicios/instalaciones-electricas-sevilla",
+            },
+            {
+                img: "/assets/worksSection/tomas.webp",
+                title: "Cuadros Eléctricos",
+                content:
+                    "Cambio y reforma de cuadros eléctricos con magnetotérmicos, diferenciales y protección contra sobretensiones.",
+                href: "/servicios/cuadros-electricos-sevilla",
+            },
+            {
+                img: "/assets/worksSection/certificaciones.webp",
+                title: "Boletines y Legalizaciones",
+                content:
+                    "Certificados CIE, aumentos de potencia y legalización de instalaciones antiguas con instalador autorizado.",
+                href: "/servicios/boletines-electricos-sevilla",
+            },
+            {
+                img: "/assets/worksSection/instalaciones-electricas.webp",
+                title: "Punto de Recarga Coche Eléctrico",
+                content:
+                    "Instalación de wallbox en vivienda, plaza de garaje y negocio. Llave en mano y con boletín.",
+                href: "/servicios/punto-recarga-coche-electrico-sevilla",
+            },
+            {
+                img: "/assets/worksSection/iluminacion.webp",
+                title: "Iluminación LED",
+                content:
+                    "Sustitución LED, iluminación decorativa y proyectos completos para viviendas, negocios y comunidades.",
+                href: "/servicios/iluminacion-led-sevilla",
+            },
+        ],
+    },
+    {
+        emoji: "🔄",
+        title: "Servicios continuos",
+        intro: "Para empresas, locales y comunidades que necesitan estabilidad. Mantenimiento preventivo y atención prioritaria.",
+        services: [
+            {
+                img: "/assets/worksSection/mantenimiento.webp",
+                title: "Mantenimiento Eléctrico",
+                content:
+                    "Planes preventivos para comunidades, oficinas y empresas. Cumplimiento normativo y atención prioritaria.",
+                href: "/servicios/mantenimiento-electrico-sevilla",
+            },
+            {
+                img: "/assets/ourJobs/trabajo-luz.webp",
+                title: "Instalaciones para Negocios",
+                content:
+                    "Locales, oficinas y naves industriales. Trifásica, iluminación comercial y eficiencia energética.",
+                href: "/servicios/instalaciones-electricas-negocios-sevilla",
+            },
+        ],
+    },
+];
+---
+
+<section
+    id="catalogo"
+    class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 bg-[#F5F7FA]"
+>
+    <div class="container mx-auto">
+        <div class="flex justify-center mb-4">
+            <h2 class="background-font">Nuestro catálogo de servicios</h2>
+        </div>
+        <p class="text-center max-w-2xl mx-auto mb-12 text-gray-700">
+            Agrupados por tipo de intervención para que encuentres lo que
+            necesitas más rápido.
+        </p>
+
+        <div class="flex flex-col gap-14">
+            {
+                categories.map((cat) => (
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-primary-blue flex items-center gap-3 mb-2">
+                            <span aria-hidden="true">{cat.emoji}</span>
+                            {cat.title}
+                        </h3>
+                        <p class="text-gray-700 mb-6 max-w-3xl">{cat.intro}</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-8">
+                            {cat.services.map((s) => (
+                                <ServiceCard {...s} />
+                            ))}
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>

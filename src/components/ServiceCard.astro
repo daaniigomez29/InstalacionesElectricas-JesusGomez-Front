@@ -1,38 +1,45 @@
 ---
-import { string } from "astro:schema";
-
 export interface Props {
     img: string;
     title: string;
     content: string;
+    href?: string;
 }
 
-const { img, title, content } = Astro.props;
+const { img, title, content, href } = Astro.props;
+
+const Wrapper = href ? "a" : "div";
+const wrapperProps = href ? { href } : {};
 ---
 
-<div class="group w-full max-w-xl bg-white rounded-xl shadow-md hover:ring-2 hover:ring-accent-blue/40 transition duration-500 overflow-hidden flex flex-col lg:flex-row">
-
+<Wrapper
+    {...wrapperProps}
+    class="group w-full max-w-xl bg-white rounded-xl shadow-md hover:ring-2 hover:ring-accent-blue/40 transition duration-500 overflow-hidden flex flex-col lg:flex-row"
+>
     <div class="w-full h-40 lg:w-40 lg:h-full overflow-hidden shrink-0">
-        <img 
-            src={img} 
+        <img
+            src={img}
             alt={content}
             loading="lazy"
             class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-75"
         />
     </div>
 
-    <div class="p-5 flex flex-col justify-center space-y-2">
-        <h6 class="font-semibold text-gray-900 group-hover:text-accent-blue transition duration-500">
+    <div class="p-5 flex flex-col justify-center space-y-2 flex-1">
+        <h6
+            class="font-semibold text-gray-900 group-hover:text-accent-blue transition duration-500"
+        >
             {title}
         </h6>
         <p class="text-gray-600 text-sm">
             {content}
         </p>
+        {
+            href && (
+                <span class="text-accent-blue font-semibold text-sm pt-1">
+                    Ver más →
+                </span>
+            )
+        }
     </div>
-
-</div>
-
-
-
-
-<style></style>
+</Wrapper>
