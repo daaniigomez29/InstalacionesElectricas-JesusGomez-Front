@@ -1,0 +1,63 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import WorkHero from "../../components/works/WorkHero.astro";
+import ProjectStory from "../../components/works/ProjectStory.astro";
+import ProjectGallery from "../../components/works/ProjectGallery.astro";
+import ProjectInfo from "../../components/works/ProjectInfo.astro";
+import ProjectTestimonial from "../../components/works/ProjectTestimonial.astro";
+import CTASection from "../../components/works/CTASection.astro";
+import { projects, type Project } from "../../data/projects";
+
+export function getStaticPaths() {
+    return projects.map((project) => ({
+        params: { slug: project.slug },
+        props: { project },
+    }));
+}
+
+interface Props {
+    project: Project;
+}
+
+const { project } = Astro.props;
+
+const title =
+    project.seo?.title ?? `${project.title} | Nuestros Trabajos | Instalaciones Eléctricas Jesús Gómez`;
+const description = project.seo?.description ?? project.summary;
+const canonical = `https://www.instalacioneselectricasjesusgomez.es/nuestros-trabajos/${project.slug}`;
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+    <WorkHero
+        title={project.title}
+        subtitle={project.summary}
+        bgImage={project.coverImage.src}
+        tags={[project.type, project.location, project.duration]}
+        breadcrumbs={[
+            { label: "Inicio", href: "/" },
+            { label: "Nuestros trabajos", href: "/nuestros-trabajos" },
+            { label: project.title },
+        ]}
+    />
+
+    <ProjectStory
+        problem={project.problem}
+        solution={project.solution}
+        result={project.result}
+    />
+
+    <ProjectGallery images={project.gallery} />
+
+    <ProjectInfo project={project} />
+
+    {
+        project.testimonial && (
+            <ProjectTestimonial testimonial={project.testimonial} />
+        )
+    }
+
+    <CTASection
+        title="¿Necesitas un trabajo parecido?"
+        text="Si tu instalación da problemas o quieres modernizarla, te ayudamos. Pide presupuesto sin compromiso para tu vivienda o negocio en Sevilla."
+    />
+</Layout>

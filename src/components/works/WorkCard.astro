@@ -1,0 +1,60 @@
+---
+/** Tarjeta de trabajo para el grid de "/nuestros-trabajos". */
+import type { Project } from "../../data/projects";
+import LocationIcon from "../../icons/LocationIcon.astro";
+
+export interface Props {
+    project: Project;
+}
+
+const { project } = Astro.props;
+const href = `/nuestros-trabajos/${project.slug}`;
+console.log(project.coverImage.src)
+---
+
+<article
+    class="reveal opacity-0 translate-y-10 transition-all duration-700 h-full"
+>
+    <a
+        href={href}
+        class="group flex flex-col h-full bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300"
+        aria-label={`Ver proyecto: ${project.title}`}
+    >
+        <div class="relative overflow-hidden aspect-4/3">
+            <img
+                src={project.coverImage.src}
+                alt={project.coverImage.alt}
+                loading="lazy"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            />
+            <span
+                class="absolute top-3 left-3 bg-primary-orange text-white text-xs font-semibold px-3 py-1 rounded-full"
+            >
+                {project.type}
+            </span>
+        </div>
+
+        <div class="flex flex-col flex-1 gap-3 p-5 md:p-6">
+            <h3 class="font-bold text-primary-blue text-lg leading-snug">
+                {project.title}
+            </h3>
+
+            <p class="flex items-center gap-1.5 text-gray-500 text-sm">
+                <LocationIcon />
+                {project.location}
+            </p>
+
+            <p class="text-gray-700 text-sm flex-1">{project.summary}</p>
+
+            <span
+                class="inline-flex items-center gap-1 text-accent-blue font-semibold text-sm mt-1"
+            >
+                Ver proyecto
+                <span
+                    aria-hidden="true"
+                    class="group-hover:translate-x-1 transition">→</span
+                >
+            </span>
+        </div>
+    </a>
+</article>

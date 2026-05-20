@@ -1,0 +1,41 @@
+---
+import Layout from "../layouts/Layout.astro";
+import WorkHero from "../components/works/WorkHero.astro";
+import SectionTitle from "../components/works/SectionTitle.astro";
+import WorkCard from "../components/works/WorkCard.astro";
+import CTASection from "../components/works/CTASection.astro";
+import { projects } from "../data/projects";
+
+const title = "Nuestros Trabajos | Electricista en Sevilla | Jesús Gómez";
+const description =
+    "Trabajos eléctricos realizados en Sevilla por Instalaciones Eléctricas Jesús Gómez: cuadros eléctricos, instalaciones y reformas con resultados reales.";
+const canonical =
+    "https://www.instalacioneselectricasjesusgomez.es/nuestros-trabajos";
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+    <WorkHero
+        size="sm"
+        title="Nuestros trabajos"
+        subtitle="Proyectos eléctricos reales realizados en Sevilla. Cada trabajo refleja nuestra forma de trabajar: seguridad, cumplimiento de normativa y acabados limpios."
+        bgImage="/assets/worksSection/instalaciones-electricas.webp"
+    />
+
+    <section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 background-fade">
+        <div class="container mx-auto flex flex-col gap-10">
+            <SectionTitle
+                title="Trabajos que hablan por nosotros"
+                subtitle="Estos son algunos de los proyectos que hemos ejecutado para viviendas y negocios. Entra en cualquiera para ver el detalle completo: problema, solución y resultado."
+                variant="blue"
+            />
+
+            <div
+                class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto w-full"
+            >
+                {projects.map((project) => <WorkCard project={project} />)}
+            </div>
+        </div>
+    </section>
+
+    <CTASection />
+</Layout>

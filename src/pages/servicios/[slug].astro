@@ -1,0 +1,93 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceHero from "../../components/services/ServiceHero.astro";
+import ServiceIntro from "../../components/services/ServiceIntro.astro";
+import ServiceIncludes from "../../components/services/ServiceIncludes.astro";
+import ServiceProblems from "../../components/services/ServiceProblems.astro";
+import ServiceBenefits from "../../components/services/ServiceBenefits.astro";
+import ServiceProcess from "../../components/services/ServiceProcess.astro";
+import ServiceFAQ from "../../components/services/ServiceFAQ.astro";
+import ServiceRelated from "../../components/services/ServiceRelated.astro";
+import ServiceCTA from "../../components/services/ServiceCTA.astro";
+import { services, type Service } from "../../data/servicios";
+
+export function getStaticPaths() {
+    return services.map((service) => ({
+        params: { slug: service.slug },
+        props: { service },
+    }));
+}
+
+interface Props {
+    service: Service;
+}
+
+const { service } = Astro.props;
+
+const canonical = `https://www.instalacioneselectricasjesusgomez.es/servicios/${service.slug}`;
+
+// Resuelve cada referencia de "servicios relacionados" a la forma que espera
+// el componente ServiceRelated: el título se toma del servicio referenciado
+// y la URL se construye a partir de su slug.
+const relatedServices = service.related.map((ref) => {
+    const target = services.find((s) => s.slug === ref.slug);
+    return {
+        title: target?.name ?? ref.slug,
+        href: `/servicios/${ref.slug}`,
+        description: ref.description,
+    };
+});
+---
+
+<Layout
+    title={service.seo.title}
+    description={service.seo.description}
+    canonical={canonical}
+>
+    <ServiceHero
+        h1={service.hero.h1}
+        subtitle={service.hero.subtitle}
+        bgImage={service.hero.bgImage}
+        breadcrumbs={[
+            {label: "Inicio", href: "/"},
+            {label: "Servicios", href: "/servicios"},
+            {label: service.name},
+
+        ]}
+    />
+
+    <ServiceIntro
+        title={service.intro.title}
+        paragraphs={service.intro.paragraphs}
+        image={service.intro.image}
+        imageAlt={service.intro.imageAlt}
+    />
+
+    <ServiceIncludes
+        title={service.includes.title}
+        intro={service.includes.intro}
+        items={service.includes.items}
+    />
+
+    <ServiceProblems
+        title={service.problems.title}
+        intro={service.problems.intro}
+        problems={service.problems.items}
+    />
+
+    <ServiceBenefits
+        title={service.benefits.title}
+        benefits={service.benefits.items}
+    />
+
+    <ServiceProcess
+        title={service.process.title}
+        steps={service.process.steps}
+    />
+
+    <ServiceFAQ title={service.faq.title} faqs={service.faq.items} />
+
+    <ServiceRelated related={relatedServices} />
+
+    <ServiceCTA title={service.cta.title} text={service.cta.text} />
+</Layout>
