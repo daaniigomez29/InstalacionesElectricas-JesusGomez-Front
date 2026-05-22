@@ -1,0 +1,74 @@
+---
+import HandshakeIcon from "../../icons/HandshakeIcon.astro";
+import WarrantyIcon from "../../icons/WarrantyIcon.astro";
+import CheckIcon from "../../icons/CheckIcon.astro";
+import HeartIcon from "../../icons/HeartIcon.astro";
+
+const values = [
+    {
+        icon: "handshake",
+        title: "Trato cercano y honesto",
+        text: "Te explicamos qué tiene tu instalación y qué opciones tienes, sin tecnicismos. Si algo no hace falta, te lo decimos.",
+    },
+    {
+        icon: "warranty",
+        title: "Trabajo seguro y normativo",
+        text: "Cumplimos siempre el REBT, usamos materiales homologados y, como instaladores autorizados, emitimos boletines CIE.",
+    },
+    {
+        icon: "check",
+        title: "Presupuestos transparentes",
+        text: "Precio cerrado por escrito antes de empezar, con materiales y mano de obra detallados. Sin extras inesperados.",
+    },
+    {
+        icon: "heart",
+        title: "Compromiso a largo plazo",
+        text: "Entregamos cada trabajo con garantía y seguimos disponibles después. Buscamos clientes para años, no para un día.",
+    },
+];
+---
+
+<section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 bg-white">
+    <div class="container mx-auto max-w-6xl">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
+            <div class="flex flex-col">
+                <h2 class="background-font-blue self-start mb-4">
+                    Cómo entendemos nuestro trabajo
+                </h2>
+                <p class="text-gray-700 mb-8 max-w-xl">
+                    Entendemos que un buen trabajo eléctrico se sostiene sobre
+                    cuatro pilares, y los aplicamos en cada proyecto que
+                    asumimos.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    {
+                        values.map((v) => (
+                            <article class="bg-[#F5F7FA] rounded-xl shadow-md p-6 flex flex-col gap-3">
+                                <span class="w-12 h-12 flex items-center justify-center rounded-full bg-primary-orange/15 text-primary-orange">
+                                    {v.icon === "handshake" && <HandshakeIcon />}
+                                    {v.icon === "warranty" && <WarrantyIcon />}
+                                    {v.icon === "check" && <CheckIcon />}
+                                    {v.icon === "heart" && <HeartIcon />}
+                                </span>
+                                <h3 class="font-bold text-primary-blue text-lg">
+                                    {v.title}
+                                </h3>
+                                <p class="text-gray-700 text-sm">{v.text}</p>
+                            </article>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <div class="w-full">
+                <img
+                    src="/assets/team/trabajando.webp"
+                    alt="Electricista de Instalaciones Eléctricas Jesús Gómez trabajando en una instalación en Sevilla"
+                    loading="lazy"
+                    class="w-full h-64 sm:h-96 lg:h-full object-cover rounded-2xl shadow-md"
+                />
+            </div>
+        </div>
+    </div>
+</section>

@@ -64,15 +64,15 @@ export const projects: Project[] = [
             "La instalación quedó adaptada a normativa y preparada para soportar maquinaria y climatización sin sobrecargas.",
         gallery: [
             {
-                src: "/assets/works/cuadro-electrico-cafeteria-sevilla/galeria-1.webp",
+                src: "/assets/ourJobs/president-2.webp",
                 alt: "Estado inicial del cuadro eléctrico antiguo de la cafetería",
             },
             {
-                src: "/assets/works/cuadro-electrico-cafeteria-sevilla/galeria-2.webp",
+                src: "/assets/ourJobs/president-3.webp",
                 alt: "Montaje de los nuevos magnetotérmicos y diferenciales",
             },
             {
-                src: "/assets/works/cuadro-electrico-cafeteria-sevilla/galeria-3.webp",
+                src: "/assets/ourJobs/prueba.jpeg",
                 alt: "Cuadro eléctrico terminado con los circuitos etiquetados",
             },
         ],

@@ -4,9 +4,7 @@ import ToolsIcon from "../icons/ToolsIcon.astro";
 import ToolsIcon2 from "../icons/ToolsIcon2.astro";
 import QualityIcon from "../icons/QualityIcon.astro";
 import HeartIcon from "../icons/HeartIcon.astro";
-import StarIcon from "../icons/StarIcon.astro";
 import BoltIcon from "../icons/BoltIcon.astro";
-import WarrantyIcon from "../icons/WarrantyIcon.astro";
 import CheckIcon from "../icons/CheckIcon.astro";
 import CustomerServiceIcon from "../icons/CustomerServiceIcon.astro";
 ---
@@ -22,22 +20,20 @@ import CustomerServiceIcon from "../icons/CustomerServiceIcon.astro";
             <h2 class="background-font">Tu energía, en buenas manos</h2>
         </div>
 
-        <div class="flex flex-col gap-5 pb-5">
-            <p class="font-semibold">
-                Especialistas en obras eléctricas completas en viviendas,
-                locales y negocios
-            </p>
-            <p>
-                En <b>Instalaciones Eléctricas Jesús Gómez</b> somos electricistas
-                profesionales especializados en obras eléctricas integrales, tanto
-                en reformas como en proyectos nuevos. Realizamos la instalación eléctrica
-                completa de viviendas, locales comerciales, oficinas, naves y comunidades,
-                cuidando cada detalle para garantizar seguridad, eficiencia y cumplimiento
-                normativo.
-            </p>
-        </div>
         <div
-            class="md:grid grid-cols-2 flex flex-col items-center gap-10 font-semibold"
+            class="flex flex-col md:flex-row items-start gap-8 md:gap-15 pb-5"
+        >
+            <div class="flex flex-col gap-10 md:flex-1">
+                <p class="font-semibold">
+                    Especialistas en obras eléctricas completas en viviendas,
+                    locales y negocios
+                </p>
+                <p>
+                    En <b>Instalaciones Eléctricas Jesús Gómez</b> somos electricistas profesionales especializados en obras eléctricas integrales, tanto en reformas como en proyectos nuevos. Realizamos la instalación eléctrica completa de viviendas, locales comerciales, oficinas, naves y comunidades, cuidando cada detalle para garantizar seguridad, eficiencia y cumplimiento normativo.
+</p>
+
+<div
+            class="flex flex-col items-start gap-10 font-semibold"
         >
             <div
                 class="flex gap-2 items-center reveal opacity-0 translate-y-10 duration-1000"
@@ -46,20 +42,16 @@ import CustomerServiceIcon from "../icons/CustomerServiceIcon.astro";
                 <p>Presencia en toda Andalucía, operando desde Sevilla.</p>
             </div>
             <div
-                class="flex gap-2 items-center reveal opacity-0 translate-y-10 duration-1000 delay-200 md:delay-400"
-            >
+                class="flex gap-2 items-center reveal opacity-0 translate-y-10 duration-1000 delay-200"
+            > 
                 <QualityIcon />
                 <p>
-                    Nos compromentemos con los más altos estándares de calidad y
+                    Nos comprometemos con los más altos estándares de calidad y
                     seguridad, cumpliendo con todas las normativas vigentes.
                 </p>
             </div>
-        </div>
-        <div
-            class="md:grid grid-cols-2 items-center flex flex-col gap-10 font-semibold"
-        >
             <div
-                class="flex gap-2 items-center reveal opacity-0 translate-y-10 duration-1000 delay-300 md:delay-200"
+                class="flex gap-2 items-center reveal opacity-0 translate-y-10 duration-1000 delay-300"
             >
                 <ToolsIcon2 />
                 <p>
@@ -68,7 +60,7 @@ import CustomerServiceIcon from "../icons/CustomerServiceIcon.astro";
                 </p>
             </div>
             <div
-                class="flex gap-2 items-center reveal opacity-0 translate-y-10 duration-1000 delay-400 md:delay-600"
+                class="flex gap-2 items-center reveal opacity-0 translate-y-10 duration-1000 delay-400"
             >
                 <ToolsIcon />
                 <p>
@@ -77,6 +69,19 @@ import CustomerServiceIcon from "../icons/CustomerServiceIcon.astro";
                 </p>
             </div>
         </div>
+            </div>
+            <div class="w-full md:flex-1 flex justify-center">
+                <img
+                    src="/assets/team/furgoneta.webp"
+                    alt="Furgoneta de Instalaciones Eléctricas Jesús Gómez, electricistas en Sevilla"
+                    width="3840"
+                    height="5120"
+                    loading="lazy"
+                    class="w-full max-w-[330px] md:max-w-[360px] h-auto rounded-2xl border border-[#D4AF37]/20 shadow-lg object-cover reveal opacity-0 translate-y-10 duration-1000"
+                />
+            </div>
+        </div>
+        <!--
         <div
             class="flex flex-col sm:flex-row items-stretch gap-0 bg-[#1A1A1A]/95 backdrop-blur-sm rounded-2xl overflow-hidden border border-[#D4AF37]/20 py-5 mt-5"
         >
@@ -149,6 +154,15 @@ import CustomerServiceIcon from "../icons/CustomerServiceIcon.astro";
                     </div>
                 </div>
             </div>
+        </div>
+-->
+        <div class="flex justify-center">
+            <a
+                href="/sobre-nosotros"
+                class="bg-primary-orange hover:bg-orange-600 transition rounded p-3 lg:p-4 text-white font-semibold text-center reveal reveal opacity-0 translate-y-10 duration-1000 hover:duration-300 hover:scale-110"
+            >
+                Conócenos más
+            </a>
         </div>
     </div>
 </section>

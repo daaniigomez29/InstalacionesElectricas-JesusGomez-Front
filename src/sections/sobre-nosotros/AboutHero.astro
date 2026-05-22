@@ -1,46 +1,52 @@
 ---
-import CheckIcon from "../../icons/CheckIcon.astro";
-import HandshakeIcon from "../../icons/HandshakeIcon.astro";
 import WarrantyIcon from "../../icons/WarrantyIcon.astro";
+import CheckIcon from "../../icons/CheckIcon.astro";
 import ClockIcon from "../../icons/ClockIcon.astro";
+import HandshakeIcon from "../../icons/HandshakeIcon.astro";
 
 const trustItems = [
-    { icon: "handshake", label: "Presupuesto sin compromiso" },
     { icon: "warranty", label: "Instalador autorizado" },
     { icon: "check", label: "Boletín CIE incluido" },
     { icon: "clock", label: "Atención el mismo día" },
+    { icon: "handshake", label: "Trato cercano y directo" },
 ];
 ---
 
 <section
     class="relative overflow-hidden scroll-m-25"
-    style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(/assets/backgrounds/aboutus-bg-black.webp); background-size: cover; background-position: center;"
+    style="background-image: url(/assets/backgrounds/aboutus-bg-black.webp); background-size: cover; background-position: center;"
 >
     <div
         class="container mx-auto px-5 md:px-10 py-20 md:py-28 flex flex-col gap-6 text-white"
     >
+        <p
+            class="text-primary-orange font-semibold uppercase tracking-wide text-sm"
+        >
+            Sobre nosotros
+        </p>
         <h1 class="font-bold leading-tight max-w-4xl">
-            Servicios de Electricista en Sevilla
+            Electricistas en Sevilla comprometidos con un trabajo seguro y bien
+            hecho
         </h1>
         <p class="max-w-3xl text-base md:text-lg">
-            Desde una avería puntual hasta la instalación eléctrica completa
-            de un local: atendemos a particulares, comunidades y empresas en
-            Sevilla y provincia, con boletín, garantía y atención el mismo
-            día.
+            En <b>Instalaciones Eléctricas Jesús Gómez</b> nos dedicamos a las instalaciones,
+            averías y reformas eléctricas en Sevilla y toda Andalucía. Un equipo
+            profesional, cercano y autorizado, centrado en hacer cada trabajo bien
+            desde el primer día.
         </p>
 
         <ul
             class="flex flex-wrap gap-3 md:gap-4 pt-2"
-            aria-label="Garantías del servicio"
+            aria-label="Por qué confiar en nosotros"
         >
             {
                 trustItems.map((t) => (
                     <li class="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-2 text-xs md:text-sm font-semibold">
                         <span class="w-5 h-5 shrink-0 flex items-center justify-center text-primary-orange">
-                            {t.icon === "handshake" && <HandshakeIcon />}
                             {t.icon === "warranty" && <WarrantyIcon />}
                             {t.icon === "check" && <CheckIcon />}
                             {t.icon === "clock" && <ClockIcon />}
+                            {t.icon === "handshake" && <HandshakeIcon />}
                         </span>
                         {t.label}
                     </li>

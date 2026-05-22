@@ -12,16 +12,18 @@ const { title, steps } = Astro.props;
         <div class="flex justify-center mb-12">
             <h2 class="background-font">{title}</h2>
         </div>
-        <ol class="relative max-w-4xl mx-auto">
+        <ol
+            class="flex flex-col md:flex-row md:items-stretch gap-8 md:gap-5 max-w-4xl md:max-w-none mx-auto"
+        >
             {
                 steps.map((step, i) => (
-                    <li class="flex gap-5 mb-8 reveal opacity-0 translate-y-10 duration-700">
-                        <div class="shrink-0 flex items-start">
+                    <li class="flex md:flex-col md:flex-1 gap-5 md:gap-4 reveal opacity-0 translate-y-10 duration-700">
+                        <div class="shrink-0 flex items-start md:items-center md:justify-center">
                             <span class="flex items-center justify-center w-12 h-12 rounded-full bg-primary-orange text-white font-bold text-lg shadow-md">
                                 {i + 1}
                             </span>
                         </div>
-                        <div class="bg-white rounded-xl shadow-md p-5 flex-1">
+                        <div class="bg-white rounded-xl shadow-md p-5 flex-1 md:text-center">
                             <h3 class="font-bold text-primary-blue text-lg mb-1">
                                 {step.title}
                             </h3>

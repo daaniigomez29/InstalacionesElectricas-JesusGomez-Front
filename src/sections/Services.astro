@@ -67,7 +67,7 @@ const SERVICES = [
 
 import { getServicios } from "../lib/api";
 const servicios = await getServicios();
-const serviciosData = servicios?.items ? servicios.items : SERVICES;
+const serviciosData = servicios?.items ? SERVICES : servicios?.items;
 ---
 
 <section
