@@ -1,5 +1,6 @@
 ---
 import ServiceCTA from "../components/services/ServiceCTA.astro";
+import ServiceFAQ from "../components/services/ServiceFAQ.astro";
 import Layout from "../layouts/Layout.astro";
 import AboutUs from "../sections/AboutUs.astro";
 import Hero from "../sections/Hero.astro";
@@ -19,6 +20,39 @@ import Solution from "../sections/Solution.astro";
         <Services />
         <OurJobs />
         <Opinions />
+        <ServiceFAQ
+        title="Preguntas frecuentes sobre nosotros"
+        faqs={[
+            {
+                question: "¿Quién es Instalaciones Eléctricas Jesús Gómez?",
+                answer: "Somos una empresa de electricistas con sede en Sevilla, fundada por Jesús Gómez. Realizamos instalaciones, averías, reformas y mantenimiento eléctrico para viviendas, comunidades y negocios en Sevilla y toda Andalucía.",
+            },
+            {
+                question: "¿Qué tipo de trabajos eléctricos realizáis?",
+                answer: "Realizamos instalaciones eléctricas completas, reformas, reparación de averías, cambio de cuadros eléctricos, boletines y legalizaciones, iluminación LED, puntos de recarga para coche eléctrico y mantenimiento, tanto en viviendas como en locales y negocios.",
+            },
+            {
+                question: "¿Sois instaladores eléctricos autorizados?",
+                answer: "Sí. Estamos registrados como empresa instaladora autorizada, lo que nos habilita para emitir boletines eléctricos (CIE) y legalizar instalaciones ante la Junta de Andalucía.",
+            },
+            {
+                question: "¿Trabajáis tanto para particulares como para empresas?",
+                answer: "Sí. Atendemos a particulares, comunidades de propietarios y empresas. Adaptamos cada proyecto a las necesidades de viviendas, locales, oficinas y naves industriales.",
+            },
+            {
+                question: "¿En qué zonas de Sevilla trabajáis?",
+                answer: "Cubrimos Sevilla capital y los principales municipios del Aljarafe y el área metropolitana, como Dos Hermanas, Alcalá de Guadaíra o Mairena del Aljarafe. Si tu localidad no aparece en el listado, consúltanos: probablemente también te atendemos.",
+            },
+            {
+                question: "¿Ofrecéis garantía en los trabajos?",
+                answer: "Sí. Todos nuestros trabajos se entregan con factura y garantía por escrito. Usamos materiales homologados y cumplimos el Reglamento Electrotécnico de Baja Tensión (REBT).",
+            },
+            {
+                question: "¿Cómo puedo pedir un presupuesto?",
+                answer: "Puedes llamarnos al 691 88 63 70, escribirnos por WhatsApp o rellenar el formulario de la página de contacto. Te orientamos sin compromiso y te preparamos un presupuesto cerrado.",
+            },
+        ]}
+    />
         <ServiceCTA
         title="¿Hablamos de tu proyecto?"
         text="Cuéntanos qué necesitas y te asesoramos sin compromiso. Trabajo eléctrico profesional, autorizado y con garantía en Sevilla y Andalucía."
