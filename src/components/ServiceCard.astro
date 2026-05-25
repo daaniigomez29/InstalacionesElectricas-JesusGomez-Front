@@ -4,12 +4,14 @@ export interface Props {
     title: string;
     content: string;
     href?: string;
+    headingLevel?: 2 | 3 | 4 | 5;
 }
 
-const { img, title, content, href } = Astro.props;
+const { img, title, content, href, headingLevel } = Astro.props;
 
 const Wrapper = href ? "a" : "div";
 const wrapperProps = href ? { href } : {};
+const Heading = `h${headingLevel}` as const;
 ---
 
 <Wrapper
@@ -26,11 +28,11 @@ const wrapperProps = href ? { href } : {};
     </div>
 
     <div class="p-5 flex flex-col justify-center space-y-2 flex-1">
-        <h6
-            class="font-semibold text-gray-900 group-hover:text-accent-blue transition duration-500"
+        <Heading
+            class="font-bold text-gray-900 group-hover:text-accent-blue transition duration-500"
         >
             {title}
-        </h6>
+        </Heading>
         <p class="text-gray-600 text-sm">
             {content}
         </p>

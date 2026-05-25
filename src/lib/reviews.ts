@@ -38,7 +38,7 @@ export interface PlacesResponse {
 }
 
 export async function obtainReviews(): Promise<PlacesResponse | null> {
-    const apiKey = process.env.GOOGLE_PLACES_API_KEY;
+    const apiKey = import.meta.env.GOOGLE_PLACES_API_KEY;
 
     if (!apiKey) {
         console.warn(
