@@ -5,13 +5,22 @@ import Layout from "../layouts/Layout.astro";
 import AboutUs from "../sections/AboutUs.astro";
 import Hero from "../sections/Hero.astro";
 import LogoSliderSection from "../sections/LogoSliderSection.astro";
-import Opinions from "../sections/Opinions.astro";
+import GoogleReviews from "../sections/GoogleReviews.astro";
 import OurJobs from "../sections/OurJobs.astro";
 import Services from "../sections/Services.astro";
 import Solution from "../sections/Solution.astro";
+import { organizationSchema, websiteSchema } from "../lib/seo";
 ---
 
 <Layout>
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(organizationSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(websiteSchema)}
+    />
     <main>
         <Hero />
         <AboutUs />
@@ -19,7 +28,7 @@ import Solution from "../sections/Solution.astro";
         <Solution />
         <Services />
         <OurJobs />
-        <Opinions />
+        <GoogleReviews />
         <ServiceFAQ
         title="Preguntas frecuentes sobre nosotros"
         faqs={[

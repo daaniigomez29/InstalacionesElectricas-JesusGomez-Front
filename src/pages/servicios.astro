@@ -10,6 +10,12 @@ import WhyUs from "../sections/servicios/WhyUs.astro";
 import FeaturedCases from "../sections/servicios/FeaturedCases.astro";
 import ServiceFAQ from "../components/services/ServiceFAQ.astro";
 import ServiceCTA from "../components/services/ServiceCTA.astro";
+import {
+    buildBreadcrumb,
+    buildCollectionPage,
+    buildHowTo,
+    buildService,
+} from "../lib/seo";
 
 const title =
     "Servicios de Electricista en Sevilla | Instalaciones, Averías y Mantenimiento";
@@ -17,6 +23,34 @@ const description =
     "Catálogo completo de servicios eléctricos en Sevilla: averías 24h, instalaciones, cuadros, boletines CIE, puntos de recarga, iluminación LED y mantenimiento.";
 
 const canonical = "https://www.instalacioneselectricasjesusgomez.es/servicios";
+
+const processSteps = [
+    {
+        title: "Llamada y primera valoración",
+        description:
+            "Nos cuentas qué necesitas y te orientamos por teléfono o WhatsApp sobre el alcance y la urgencia del trabajo.",
+    },
+    {
+        title: "Visita técnica sin compromiso",
+        description:
+            "Si el trabajo lo requiere, nos desplazamos para revisar la instalación y entender el alcance real.",
+    },
+    {
+        title: "Presupuesto cerrado por escrito",
+        description:
+            "Te detallamos materiales, mano de obra y plazos. Sin sorpresas ni extras inesperados en la factura.",
+    },
+    {
+        title: "Ejecución profesional",
+        description:
+            "Realizamos la instalación o reparación con materiales homologados, cumpliendo el REBT y dejando todo recogido.",
+    },
+    {
+        title: "Comprobaciones y boletín si procede",
+        description:
+            "Verificamos protecciones, entregamos el trabajo con garantía y tramitamos el boletín CIE cuando es necesario.",
+    },
+];
 
 const services = [
     {
@@ -69,9 +103,12 @@ const services = [
     },
 ];
 
+const itemListId = `${canonical}#services-list`;
+
 const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
+    "@id": itemListId,
     name: "Servicios de Electricista en Sevilla",
     itemListElement: services.map((s, i) => ({
         "@type": "ListItem",
@@ -81,23 +118,31 @@ const itemListSchema = {
     })),
 };
 
-const servicesSchema = services.map((s) => ({
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: s.name,
-    description: s.description,
-    url: s.url,
-    areaServed: {
-        "@type": "City",
-        name: "Sevilla",
-    },
-    provider: {
-        "@type": "Electrician",
-        name: "Instalaciones Eléctricas Jesús Gómez",
-        url: "https://www.instalacioneselectricasjesusgomez.es",
-        telephone: "+34691886370",
-    },
-}));
+const servicesSchema = services.map((s) =>
+    buildService({
+        name: s.name,
+        description: s.description,
+        url: s.url,
+    }),
+);
+
+const breadcrumbSchema = buildBreadcrumb([
+    { name: "Inicio", item: "/" },
+    { name: "Servicios", item: "/servicios" },
+]);
+
+const collectionPageSchema = buildCollectionPage({
+    name: title,
+    url: canonical,
+    description,
+    mainEntityId: itemListId,
+});
+
+const howToSchema = buildHowTo(
+    "Cómo trabajamos en una instalación eléctrica",
+    processSteps,
+    "Proceso paso a paso que seguimos en cualquier instalación o reparación eléctrica en Sevilla.",
+);
 ---
 
 <Layout title={title} description={description} canonical={canonical}>
@@ -109,36 +154,7 @@ const servicesSchema = services.map((s) => ({
 
     <ServiceFinder />
 
-    <ServiceProcess
-        title="Cómo trabajamos"
-        steps={[
-            {
-                title: "Llamada y primera valoración",
-                description:
-                    "Nos cuentas qué necesitas y te orientamos por teléfono o WhatsApp sobre el alcance y la urgencia del trabajo.",
-            },
-            {
-                title: "Visita técnica sin compromiso",
-                description:
-                    "Si el trabajo lo requiere, nos desplazamos para revisar la instalación y entender el alcance real.",
-            },
-            {
-                title: "Presupuesto cerrado por escrito",
-                description:
-                    "Te detallamos materiales, mano de obra y plazos. Sin sorpresas ni extras inesperados en la factura.",
-            },
-            {
-                title: "Ejecución profesional",
-                description:
-                    "Realizamos la instalación o reparación con materiales homologados, cumpliendo el REBT y dejando todo recogido.",
-            },
-            {
-                title: "Comprobaciones y boletín si procede",
-                description:
-                    "Verificamos protecciones, entregamos el trabajo con garantía y tramitamos el boletín CIE cuando es necesario.",
-            },
-        ]}
-    />
+    <ServiceProcess title="Cómo trabajamos" steps={processSteps} />
 
     <WhyUs />
 
@@ -191,7 +207,19 @@ const servicesSchema = services.map((s) => ({
 
     <script
         type="application/ld+json"
+        set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(collectionPageSchema)}
+    />
+    <script
+        type="application/ld+json"
         set:html={JSON.stringify(itemListSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(howToSchema)}
     />
     {
         servicesSchema.map((s) => (

@@ -3,6 +3,7 @@ import Header from "../sections/Header.astro";
 import HeaderSecondary from "../sections/HeaderSecondary.astro";
 import Footer from "../sections/Footer.astro";
 import WhatsappIcon from "../icons/WhatsappIcon.astro";
+import { localBusinessSchema } from "../lib/seo";
 
 export interface Props {
 	title?: string;
@@ -61,20 +62,10 @@ const {
 
 		<meta property="og:type" content="website" />
 
-		<script type="application/ld+json">
-			{
-				"@context": "https://schema.org",
-				"@type": "Electrician",
-				"name": "Electricista en Sevilla | Instalaciones Eléctricas Jesús Gómez",
-				"url": "https://www.instalacioneselectricasjesusgomez.es",
-				"logo": "https://www.instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_web_512.png",
-				"sameAs": [
-					"https://www.facebook.com/jesus.gomez.94214508/",
-					"https://www.instagram.com/instalaciones_electricas_jesus/"
-				],
-				"description": "Electricista en Sevilla especializado en instalaciones, reparaciones y mantenimiento eléctrico. Servicio rápido, profesional y con garantía."
-			}
-		</script>
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify(localBusinessSchema)}
+		/>
 	</head>
 	<body>
 		<!--Whatsapp button-->

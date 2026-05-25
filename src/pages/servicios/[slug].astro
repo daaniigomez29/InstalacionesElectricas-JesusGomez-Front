@@ -10,6 +10,12 @@ import ServiceFAQ from "../../components/services/ServiceFAQ.astro";
 import ServiceRelated from "../../components/services/ServiceRelated.astro";
 import ServiceCTA from "../../components/services/ServiceCTA.astro";
 import { services, type Service } from "../../data/servicios";
+import {
+    buildBreadcrumb,
+    buildHowTo,
+    buildService,
+    absoluteUrl,
+} from "../../lib/seo";
 
 export function getStaticPaths() {
     return services.map((service) => ({
@@ -37,6 +43,30 @@ const relatedServices = service.related.map((ref) => {
         description: ref.description,
     };
 });
+
+const breadcrumbSchema = buildBreadcrumb([
+    { name: "Inicio", item: "/" },
+    { name: "Servicios", item: "/servicios" },
+    { name: service.name, item: canonical },
+]);
+
+const serviceSchema = buildService({
+    name: service.name,
+    description: service.seo.description,
+    url: canonical,
+    serviceType: service.name,
+    image: absoluteUrl(service.hero.bgImage),
+    includes: service.includes.items.map((it) => ({
+        title: it.title,
+        description: it.description,
+    })),
+});
+
+const howToSchema = buildHowTo(
+    service.process.title,
+    service.process.steps,
+    `Pasos que seguimos para el servicio de ${service.name.toLowerCase()} en Sevilla.`,
+);
 ---
 
 <Layout
@@ -90,4 +120,17 @@ const relatedServices = service.related.map((ref) => {
     <ServiceRelated related={relatedServices} />
 
     <ServiceCTA title={service.cta.title} text={service.cta.text} />
+
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(serviceSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(howToSchema)}
+    />
 </Layout>

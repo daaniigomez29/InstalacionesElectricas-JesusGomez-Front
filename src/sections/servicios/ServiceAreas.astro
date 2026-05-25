@@ -1,24 +1,6 @@
 ---
 import LocationIcon from "../../icons/LocationIcon.astro";
-
-const areas = [
-    "Sevilla capital",
-    "Dos Hermanas",
-    "Alcalá de Guadaíra",
-    "Mairena del Aljarafe",
-    "Tomares",
-    "Bormujos",
-    "Castilleja de la Cuesta",
-    "Camas",
-    "San Juan de Aznalfarache",
-    "Coria del Río",
-    "La Rinconada",
-    "Utrera",
-    "Los Palacios y Villafranca",
-    "Bollullos de la Mitación",
-    "Espartinas",
-    "Gines",
-];
+import { SERVICE_AREAS } from "../../lib/seo";
 ---
 
 <section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 bg-[#F5F7FA]">
@@ -37,7 +19,7 @@ const areas = [
             aria-label="Localidades cubiertas"
         >
             {
-                areas.map((a) => (
+                SERVICE_AREAS.map((a) => (
                     <li class="flex items-center gap-2 bg-white rounded-lg px-4 py-3 shadow-sm">
                         <span class="text-primary-orange shrink-0">
                             <LocationIcon />

@@ -6,6 +6,7 @@ import AboutValues from "../sections/sobre-nosotros/AboutValues.astro";
 import ServiceAreas from "../sections/servicios/ServiceAreas.astro";
 import ServiceFAQ from "../components/services/ServiceFAQ.astro";
 import ServiceCTA from "../components/services/ServiceCTA.astro";
+import { buildAboutPage, buildBreadcrumb } from "../lib/seo";
 
 const title =
     "Sobre Nosotros | Electricista en Sevilla | Instalaciones Eléctricas Jesús Gómez";
@@ -14,24 +15,12 @@ const description =
 const canonical =
     "https://www.instalacioneselectricasjesusgomez.es/sobre-nosotros";
 
-const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-        {
-            "@type": "ListItem",
-            position: 1,
-            name: "Inicio",
-            item: "https://www.instalacioneselectricasjesusgomez.es/",
-        },
-        {
-            "@type": "ListItem",
-            position: 2,
-            name: "Sobre nosotros",
-            item: canonical,
-        },
-    ],
-};
+const breadcrumbSchema = buildBreadcrumb([
+    { name: "Inicio", item: "/" },
+    { name: "Sobre nosotros", item: canonical },
+]);
+
+const aboutPageSchema = buildAboutPage(canonical, title);
 ---
 
 <Layout title={title} description={description} canonical={canonical}>
@@ -85,5 +74,9 @@ const breadcrumbSchema = {
     <script
         type="application/ld+json"
         set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(aboutPageSchema)}
     />
 </Layout>

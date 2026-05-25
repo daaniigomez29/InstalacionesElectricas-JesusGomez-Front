@@ -1,11 +1,31 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ContactSection from "../sections/contacto/ContactSection2.astro";
+import { buildBreadcrumb, buildContactPage } from "../lib/seo";
+
+const title = "Contacto | Instalaciones Eléctricas Jesús Gómez";
+const description =
+    "Contacto con Electricista en Sevilla | Instalaciones Eléctricas Jesús Gómez. Información de contacto y formulario de contacto.";
+const canonical =
+    "https://www.instalacioneselectricasjesusgomez.es/contacto";
+
+const breadcrumbSchema = buildBreadcrumb([
+    { name: "Inicio", item: "/" },
+    { name: "Contacto", item: canonical },
+]);
+
+const contactPageSchema = buildContactPage(canonical, title);
 ---
 
-<Layout
-    title="Contacto | Instalaciones Eléctricas Jesús Gómez"
-    description="Contacto con Electricista en Sevilla | Instalaciones Eléctricas Jesús Gómez. Información de contacto y formulario de contacto."
->
+<Layout title={title} description={description} canonical={canonical}>
     <ContactSection />
+
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(contactPageSchema)}
+    />
 </Layout>

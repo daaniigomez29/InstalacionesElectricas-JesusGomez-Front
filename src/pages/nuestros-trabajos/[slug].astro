@@ -7,6 +7,12 @@ import ProjectInfo from "../../components/works/ProjectInfo.astro";
 import ProjectTestimonial from "../../components/works/ProjectTestimonial.astro";
 import CTASection from "../../components/works/CTASection.astro";
 import { projects, type Project } from "../../data/projects";
+import {
+    absoluteUrl,
+    buildArticle,
+    buildBreadcrumb,
+    buildImageObject,
+} from "../../lib/seo";
 
 export function getStaticPaths() {
     return projects.map((project) => ({
@@ -25,6 +31,28 @@ const title =
     project.seo?.title ?? `${project.title} | Nuestros Trabajos | Instalaciones Eléctricas Jesús Gómez`;
 const description = project.seo?.description ?? project.summary;
 const canonical = `https://www.instalacioneselectricasjesusgomez.es/nuestros-trabajos/${project.slug}`;
+
+const breadcrumbSchema = buildBreadcrumb([
+    { name: "Inicio", item: "/" },
+    { name: "Nuestros trabajos", item: "/nuestros-trabajos" },
+    { name: project.title, item: canonical },
+]);
+
+const articleImages = [
+    absoluteUrl(project.coverImage.src),
+    ...project.gallery.map((g) => absoluteUrl(g.src)),
+];
+
+const articleSchema = buildArticle({
+    headline: project.title,
+    description: project.summary,
+    image: articleImages,
+    url: canonical,
+    articleBody: [project.problem, project.solution, project.result].join("\n\n"),
+    aboutServiceName: project.type,
+});
+
+const imageObjectsSchema = project.gallery.map((g) => buildImageObject(g));
 ---
 
 <Layout title={title} description={description} canonical={canonical}>
@@ -60,4 +88,21 @@ const canonical = `https://www.instalacioneselectricasjesusgomez.es/nuestros-tra
         title="¿Necesitas un trabajo parecido?"
         text="Si tu instalación da problemas o quieres modernizarla, te ayudamos. Pide presupuesto sin compromiso para tu vivienda o negocio en Sevilla."
     />
+
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(articleSchema)}
+    />
+    {
+        imageObjectsSchema.map((img) => (
+            <script
+                type="application/ld+json"
+                set:html={JSON.stringify(img)}
+            />
+        ))
+    }
 </Layout>

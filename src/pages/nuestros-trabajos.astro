@@ -5,12 +5,44 @@ import SectionTitle from "../components/works/SectionTitle.astro";
 import WorkCard from "../components/works/WorkCard.astro";
 import CTASection from "../components/works/CTASection.astro";
 import { projects } from "../data/projects";
+import {
+    absoluteUrl,
+    buildBreadcrumb,
+    buildCollectionPage,
+} from "../lib/seo";
 
 const title = "Nuestros Trabajos | Electricista en Sevilla | Jesús Gómez";
 const description =
     "Trabajos eléctricos realizados en Sevilla por Instalaciones Eléctricas Jesús Gómez: cuadros eléctricos, instalaciones y reformas con resultados reales.";
 const canonical =
     "https://www.instalacioneselectricasjesusgomez.es/nuestros-trabajos";
+
+const itemListId = `${canonical}#works-list`;
+
+const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": itemListId,
+    name: "Trabajos realizados",
+    itemListElement: projects.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: absoluteUrl(`/nuestros-trabajos/${p.slug}`),
+        name: p.title,
+    })),
+};
+
+const breadcrumbSchema = buildBreadcrumb([
+    { name: "Inicio", item: "/" },
+    { name: "Nuestros trabajos", item: "/nuestros-trabajos" },
+]);
+
+const collectionPageSchema = buildCollectionPage({
+    name: title,
+    url: canonical,
+    description,
+    mainEntityId: itemListId,
+});
 ---
 
 <Layout title={title} description={description} canonical={canonical}>
@@ -38,4 +70,17 @@ const canonical =
     </section>
 
     <CTASection />
+
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(collectionPageSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(itemListSchema)}
+    />
 </Layout>
