@@ -68,7 +68,7 @@ export default defineConfig({
   adapter: vercelAdapter(),
   site:'https://instalacioneselectricasjesusgomez.es',
   integrations: [sanity({
-    projectId: "67gi8gp6",
+    projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID,
     dataset: "production",
     useCdn: false, // for static builds
   }), sitemap({
