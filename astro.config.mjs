@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { loadEnv } from 'vite';
 import vercelAdapter from '@astrojs/vercel';
 
 import tailwindcss from '@tailwindcss/vite';
@@ -10,6 +11,10 @@ import sitemap from '@astrojs/sitemap';
 
 import { execSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
+
+//Carga el .env para que la configuración obtenga el projectID. De otra manera el .env cargaría más tarde que la configuración, dejando el projectID como "undefined"
+const env = loadEnv(process.env.NODE_ENV ?? 'development', process.cwd(), '');
+
 
 const SITE = 'https://instalacioneselectricasjesusgomez.es';
 
@@ -56,6 +61,7 @@ function lastCommitDate(file) {
 }
 
 const fallback = new Date(new Date().setHours(0, 0, 0, 0));
+console.log('Sanity projectId =', env.SANITY_STUDIO_PROJECT_ID);
 
 // https://astro.build/config
 export default defineConfig({
@@ -68,7 +74,7 @@ export default defineConfig({
   adapter: vercelAdapter(),
   site:'https://instalacioneselectricasjesusgomez.es',
   integrations: [sanity({
-    projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID,
+    projectId: env.SANITY_STUDIO_PROJECT_ID,
     dataset: "production",
     useCdn: false, // for static builds
   }), sitemap({

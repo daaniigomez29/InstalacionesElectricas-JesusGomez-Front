@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "vercel-build": "npm run build"
+    "vercel-build": "npm run build",
+    "import:logos": "node --env-file=.env scripts/import-partner-logos.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",

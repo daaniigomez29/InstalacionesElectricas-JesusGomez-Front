@@ -25,7 +25,6 @@ import {
 // ===== Colecciones =====
 import {service} from '../schema/documents/service'
 import {project} from '../schema/documents/project'
-import {partnerLogo} from '../schema/documents/partnerLogo'
 import {testimonial} from '../schema/documents/testimonial'
 
 /**
@@ -61,7 +60,6 @@ export const schemaTypes = [
   // Colecciones
   service,
   project,
-  partnerLogo,
   testimonial,
 ]
 

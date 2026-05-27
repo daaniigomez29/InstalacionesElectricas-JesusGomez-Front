@@ -1,13 +1,21 @@
 import { sanityClient } from "sanity:client";
-import { empresasQuery, heroQuery, serviciosQuery, trabajosQuery } from "./queries";
-import type { ServiciosSection, TrabajoSection } from "./types";
+import {
+    heroQuery,
+    partnerLogosQuery,
+    serviciosQuery,
+    trabajosQuery,
+} from "./queries";
+import type {
+    PartnerLogo,
+    ServiciosSection,
+    TrabajoSection,
+} from "./types";
 
+// ============================================================
+// HERO / SERVICIOS / TRABAJOS (esquema antiguo)
+// ============================================================
 export async function getHero() {
     return await sanityClient.fetch(heroQuery);
-}
-
-export async function getEmpresas() {
-    return await sanityClient.fetch(empresasQuery)
 }
 
 export async function getServicios(): Promise<ServiciosSection> {
@@ -16,4 +24,19 @@ export async function getServicios(): Promise<ServiciosSection> {
 
 export async function getTrabajos(): Promise<TrabajoSection> {
     return await sanityClient.fetch(trabajosQuery);
+}
+
+// ============================================================
+// EMPRESAS QUE CONFÍAN
+// ============================================================
+
+/**
+ * Devuelve los logos del slider "Empresas que confían" desde el
+ * documento `homePage`. Si no hay logos o el documento no existe
+ * todavía, devuelve un array vacío y la sección se ocultará en el front.
+ */
+export async function getPartnerLogos(): Promise<PartnerLogo[]> {
+    const logos: PartnerLogo[] | null =
+        await sanityClient.fetch(partnerLogosQuery);
+    return (logos ?? []).filter((l) => l?.url);
 }

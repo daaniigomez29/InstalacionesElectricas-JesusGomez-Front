@@ -10,7 +10,6 @@ import type {StructureResolver} from 'sanity/structure'
  *   📄 Páginas               → home, sobre nosotros, servicios, trabajos, contacto, legales
  *   🛠️ Servicios             → colección
  *   💼 Trabajos              → colección
- *   🏢 Empresas              → colección de logos
  *   💬 Testimonios           → colección
  *
  * Los singletons se muestran como documento único editable, no como
@@ -117,11 +116,6 @@ export const deskStructure: StructureResolver = (S) =>
         .title('💼 Trabajos realizados')
         .schemaType('project')
         .child(S.documentTypeList('project').title('Trabajos')),
-
-      S.listItem()
-        .title('🏢 Empresas colaboradoras')
-        .schemaType('partnerLogo')
-        .child(S.documentTypeList('partnerLogo').title('Logos')),
 
       S.listItem()
         .title('💬 Testimonios')

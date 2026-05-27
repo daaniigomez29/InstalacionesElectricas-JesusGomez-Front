@@ -52,9 +52,10 @@ export const homePage = defineType({
       group: 'about',
       fields: [
         {name: 'title', title: 'Título', type: 'string'},
-        {name: 'leadText', title: 'Frase destacada', type: 'string'},
-        {name: 'paragraphs', title: 'Párrafos', type: 'richText'},
+        //{name: 'leadText', title: 'Frase destacada', type: 'string'},
+        //{name: 'paragraphs', title: 'Párrafos', type: 'richText'},
         {name: 'image', title: 'Imagen lateral', type: 'imageWithAlt'},
+        /*
         {
           name: 'bullets',
           title: 'Puntos con icono',
@@ -86,33 +87,20 @@ export const homePage = defineType({
               preview: {select: {title: 'text', subtitle: 'icon'}},
             }),
           ],
-        },
+        }*/
         {name: 'button', title: 'Botón', type: 'link'},
       ],
     }),
 
     // --- EMPRESAS QUE CONFÍAN ---
     defineField({
-      name: 'partnersSection',
-      title: 'Empresas que confían',
-      type: 'object',
+      name: 'partnerLogos',
+      title: 'Empresas que confían (logos)',
+      type: 'array',
       group: 'partners',
-      fields: [
-        {name: 'title', title: 'Título', type: 'string'},
-        {
-          name: 'partners',
-          title: 'Logos a mostrar',
-          type: 'array',
-          of: [
-            defineArrayMember({
-              type: 'reference',
-              to: [{type: 'partnerLogo'}],
-            }),
-          ],
-          description:
-            'Arrastra logos de la colección "Logos de empresas colaboradoras". El orden aquí manda sobre el campo "order" del documento.',
-        },
-      ],
+      description:
+        'Logos del slider. Cada logo es una imagen con su texto alternativo. Arrastra para reordenar.',
+      of: [defineArrayMember({type: 'imageWithAlt'})],
     }),
 
     // --- SOLUCIONES ---
