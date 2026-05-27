@@ -7,7 +7,6 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "vercel-build": "npm run build",
     "import:logos": "node --env-file=.env scripts/import-partner-logos.mjs"
   },
   "dependencies": {
@@ -27,5 +26,8 @@
     "sanity": "^5.15.0",
     "styled-components": "^6.3.11",
     "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "vite": "^8.0.14"
   }
 }
