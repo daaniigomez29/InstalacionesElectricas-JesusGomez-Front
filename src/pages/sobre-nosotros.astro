@@ -9,11 +9,14 @@ import ServiceCTA from "../components/services/ServiceCTA.astro";
 import { buildAboutPage, buildBreadcrumb } from "../lib/seo";
 
 const title =
-    "Sobre Nosotros | Electricista en Sevilla | Instalaciones Eléctricas Jesús Gómez";
+    "Sobre Nosotros | Instalaciones Eléctricas Jesús Gómez";
 const description =
     "Conoce a Instalaciones Eléctricas Jesús Gómez: electricistas en Sevilla. Instalador autorizado, trato cercano y trabajos con garantía en Sevilla y toda Andalucía.";
 const canonical =
     "https://www.instalacioneselectricasjesusgomez.es/sobre-nosotros";
+
+const ogImage = `https://www.instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_completo.webp`
+const ogImageAlt = "Instalaciones Eléctricas Jesús Gómez - Sobre nosotros"
 
 const breadcrumbSchema = buildBreadcrumb([
     { name: "Inicio", item: "/" },
@@ -23,7 +26,7 @@ const breadcrumbSchema = buildBreadcrumb([
 const aboutPageSchema = buildAboutPage(canonical, title);
 ---
 
-<Layout title={title} description={description} canonical={canonical}>
+<Layout title={title} description={description} canonical={canonical} ogImage={ogImage} ogImageAlt={ogImageAlt}>
     <AboutHero />
 
     <AboutStory />

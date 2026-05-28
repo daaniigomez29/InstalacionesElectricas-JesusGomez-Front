@@ -70,13 +70,14 @@ export const deskStructure: StructureResolver = (S) =>
                 .title('Nuestros trabajos')
                 .id('worksPage')
                 .child(S.document().schemaType('worksPage').documentId('worksPage')),
-              S.listItem()
+              /*
+                S.listItem()
                 .title('Contacto')
                 .id('contactPage')
                 .child(
-                  S.document().schemaType('contactPage').documentId('contactPage'),
+                  S.document().schemaType('contactPage').documentId('contactPage'),    
                 ),
-
+*/
               S.divider(),
 
               S.listItem()

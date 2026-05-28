@@ -13,7 +13,7 @@ export const aboutPage = defineType({
     {name: 'hero', title: 'Hero', default: true},
     {name: 'story', title: 'Nuestra historia'},
     {name: 'values', title: 'Valores'},
-    {name: 'team', title: 'Equipo'},
+    {name: 'faq', title: 'FAQ'},
     {name: 'cta', title: 'CTA'},
     {name: 'seo', title: 'SEO'},
   ],
@@ -57,12 +57,14 @@ export const aboutPage = defineType({
             defineArrayMember({
               type: 'object',
               fields: [
+                /*
                 {
                   name: 'icon',
                   title: 'Icono (emoji)',
                   type: 'string',
                   description: 'Pega un emoji. Ej: 🛡️ ⚡ 🤝',
                 },
+                */
                 {name: 'title', title: 'Título', type: 'string', validation: (Rule) => Rule.required()},
                 {name: 'description', title: 'Descripción', type: 'text', rows: 3, validation: (Rule) => Rule.required()},
               ],
@@ -73,32 +75,12 @@ export const aboutPage = defineType({
       ],
     }),
 
+    // --- FAQ ---
     defineField({
-      name: 'team',
-      title: 'Equipo',
-      type: 'object',
-      group: 'team',
-      fields: [
-        {name: 'title', title: 'Título de la sección', type: 'string'},
-        {name: 'description', title: 'Descripción', type: 'text', rows: 3},
-        {
-          name: 'members',
-          title: 'Miembros del equipo',
-          type: 'array',
-          of: [
-            defineArrayMember({
-              type: 'object',
-              fields: [
-                {name: 'name', title: 'Nombre', type: 'string', validation: (Rule) => Rule.required()},
-                {name: 'role', title: 'Cargo', type: 'string'},
-                {name: 'photo', title: 'Foto', type: 'imageWithAlt'},
-                {name: 'bio', title: 'Biografía breve', type: 'text', rows: 3},
-              ],
-              preview: {select: {title: 'name', subtitle: 'role', media: 'photo.image'}},
-            }),
-          ],
-        },
-      ],
+      name: 'faqSection',
+      title: 'Preguntas frecuentes',
+      type: 'faq',
+      group: 'faq',
     }),
 
     defineField({name: 'cta', title: 'CTA final', type: 'cta', group: 'cta'}),

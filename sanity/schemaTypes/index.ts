@@ -4,6 +4,7 @@ import {cta} from '../schema/objects/cta'
 import {imageWithAlt} from '../schema/objects/imageWithAlt'
 import {link} from '../schema/objects/link'
 import {richText} from '../schema/objects/richText'
+import {faq} from '../schema/objects/faq'
 
 // ===== Singletons globales =====
 import {siteSettings} from '../schema/singletons/siteSettings'
@@ -15,7 +16,7 @@ import {homePage} from '../schema/singletons/homePage'
 import {aboutPage} from '../schema/singletons/aboutPage'
 import {servicesPage} from '../schema/singletons/servicesPage'
 import {worksPage} from '../schema/singletons/worksPage'
-import {contactPage} from '../schema/singletons/contactPage'
+//import {contactPage} from '../schema/singletons/contactPage'
 import {
   privacyPage,
   legalNoticePage,
@@ -41,6 +42,7 @@ export const schemaTypes = [
   imageWithAlt,
   link,
   richText,
+  faq,
 
   // Singletons globales
   siteSettings,
@@ -52,7 +54,7 @@ export const schemaTypes = [
   aboutPage,
   servicesPage,
   worksPage,
-  contactPage,
+  //contactPage,
   privacyPage,
   legalNoticePage,
   accessibilityPage,
@@ -76,7 +78,7 @@ export const SINGLETON_TYPES = new Set<string>([
   'aboutPage',
   'servicesPage',
   'worksPage',
-  'contactPage',
+  //'contactPage',
   'privacyPage',
   'legalNoticePage',
   'accessibilityPage',

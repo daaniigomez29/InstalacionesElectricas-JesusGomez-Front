@@ -10,9 +10,16 @@ import FeaturedJobs from "../sections/FeaturedJobs.astro";
 import Services from "../sections/Services.astro";
 import Solution from "../sections/Solution.astro";
 import { organizationSchema, websiteSchema } from "../lib/seo";
+
+const title = "Electricista en Sevilla | Instalaciones Eléctricas Jesús Gómez"
+const description = "Electricista en Sevilla para instalaciones eléctricas, reparaciones y mantenimiento. Atención rápida, servicio profesional y garantía."
+const canonical = "https://www.instalacioneselectricasjesusgomez.es/"
+
+const ogImage = `https://www.instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_completo.webp`
+const ogImageAlt = "Instalaciones Eléctricas Jesús Gómez - Electricista en Sevilla"
 ---
 
-<Layout>
+<Layout title={title} description={description} canonical={canonical} ogImage={ogImage} ogImageAlt={ogImageAlt}>
     <script
         type="application/ld+json"
         set:html={JSON.stringify(organizationSchema)}

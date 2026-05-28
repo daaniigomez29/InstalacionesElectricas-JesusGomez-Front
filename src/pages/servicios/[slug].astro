@@ -32,6 +32,9 @@ const { service } = Astro.props;
 
 const canonical = `https://www.instalacioneselectricasjesusgomez.es/servicios/${service.slug}`;
 
+const title = service.seo?.title ?? `${service.name} en Sevilla | Instalaciones Eléctricas Jesús Gómez`;
+
+
 // Resuelve cada referencia de "servicios relacionados" a la forma que espera
 // el componente ServiceRelated: el título se toma del servicio referenciado
 // y la URL se construye a partir de su slug.
@@ -70,9 +73,11 @@ const howToSchema = buildHowTo(
 ---
 
 <Layout
-    title={service.seo.title}
+    title={title}
     description={service.seo.description}
     canonical={canonical}
+    ogImage={absoluteUrl(service.hero.bgImage)}
+    ogImageAlt={`${service.name} - Instalaciones Eléctricas Jesús Gómez`}
 >
     <ServiceHero
         h1={service.hero.h1}

@@ -1,5 +1,17 @@
 ---
 import ServiceCard from "../../components/ServiceCard.astro";
+import { getCatalogByCategory } from "../../lib/api";
+
+/**
+ * Datos del catálogo provenientes de Sanity (servicesPage.catalogByCategory).
+ *
+ * ⚠️ Aún NO se usa en el render — el HTML sigue alimentándose del array
+ * `categories` hardcodeado de abajo. Esta llamada queda preparada para
+ * que la migración consista únicamente en cambiar `categories` por
+ * `catalogFromSanity?.categories ?? categories` en el `.map()` de la
+ * plantilla cuando el contenido esté completo en Sanity.
+ */
+const catalogFromSanity = await getCatalogByCategory();
 
 const categories = [
     {

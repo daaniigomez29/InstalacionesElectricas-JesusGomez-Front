@@ -2,7 +2,8 @@
 import FeaturedJobCard from "../components/FeaturedJobCard.astro";
 import { projects } from "../data/projects";
 
-const trabajosData = projects;
+const featuredProjects = projects.filter((p) => p.featured == true);
+const trabajosData = featuredProjects.length > 0 ? featuredProjects : projects;
 const hasMultiple = trabajosData.length > 1;
 ---
 

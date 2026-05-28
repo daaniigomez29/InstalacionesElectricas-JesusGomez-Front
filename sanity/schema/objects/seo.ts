@@ -12,10 +12,6 @@ export const seo = defineType({
   name: 'seo',
   title: 'SEO',
   type: 'object',
-  options: {
-    collapsible: true,
-    collapsed: true,
-  },
   fields: [
     defineField({
       name: 'title',
@@ -24,7 +20,7 @@ export const seo = defineType({
       description:
         'Título que aparece en la pestaña del navegador y en Google. Recomendado: 50-60 caracteres.',
       validation: (Rule) =>
-        Rule.max(70).warning('Más de 70 caracteres puede cortarse en Google.'),
+        Rule.max(90).warning('Más de 90 caracteres puede cortarse en Google.'),
     }),
     defineField({
       name: 'description',

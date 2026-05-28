@@ -104,6 +104,7 @@ export const homePage = defineType({
     }),
 
     // --- SOLUCIONES ---
+    /*
     defineField({
       name: 'solutionSection',
       title: 'Soluciones a medida',
@@ -144,7 +145,7 @@ export const homePage = defineType({
         },
       ],
     }),
-
+*/
     // --- SERVICIOS ---
     defineField({
       name: 'servicesSection',
@@ -160,8 +161,7 @@ export const homePage = defineType({
           type: 'string',
           options: {
             list: [
-              {title: 'Todos los servicios (orden del campo "order")', value: 'all'},
-              {title: 'Solo los marcados como "destacado"', value: 'featured'},
+              {title: 'Todos los servicios', value: 'all'},
               {title: 'Selección manual', value: 'manual'},
             ],
             layout: 'radio',
@@ -215,11 +215,11 @@ export const homePage = defineType({
           of: [defineArrayMember({type: 'reference', to: [{type: 'project'}]})],
           hidden: ({parent}) => parent?.mode !== 'manual',
         },
-        {name: 'buttonLabel', title: 'Texto del botón "Ver todos"', type: 'string', initialValue: 'Ver todos los trabajos'},
       ],
     }),
 
     // --- OPINIONES ---
+    /*
     defineField({
       name: 'reviewsSection',
       title: 'Opiniones de clientes',
@@ -241,31 +241,13 @@ export const homePage = defineType({
         },
       ],
     }),
-
+    */
     // --- FAQ ---
     defineField({
       name: 'faqSection',
       title: 'Preguntas frecuentes',
-      type: 'object',
+      type: 'faq',
       group: 'faq',
-      fields: [
-        {name: 'title', title: 'Título', type: 'string', initialValue: 'Preguntas frecuentes sobre nosotros'},
-        {
-          name: 'items',
-          title: 'Preguntas',
-          type: 'array',
-          of: [
-            defineArrayMember({
-              type: 'object',
-              fields: [
-                {name: 'question', title: 'Pregunta', type: 'string', validation: (Rule) => Rule.required()},
-                {name: 'answer', title: 'Respuesta', type: 'text', rows: 4, validation: (Rule) => Rule.required()},
-              ],
-              preview: {select: {title: 'question', subtitle: 'answer'}},
-            }),
-          ],
-        },
-      ],
     }),
 
     // --- CTA FINAL ---

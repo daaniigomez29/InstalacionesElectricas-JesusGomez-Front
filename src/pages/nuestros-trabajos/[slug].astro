@@ -27,8 +27,7 @@ interface Props {
 
 const { project } = Astro.props;
 
-const title =
-    project.seo?.title ?? `${project.title} | Nuestros Trabajos | Instalaciones Eléctricas Jesús Gómez`;
+const title = project.seo?.title ?? `${project.title} | Instalaciones Eléctricas Jesús Gómez`;
 const description = project.seo?.description ?? project.summary;
 const canonical = `https://www.instalacioneselectricasjesusgomez.es/nuestros-trabajos/${project.slug}`;
 
@@ -55,7 +54,13 @@ const articleSchema = buildArticle({
 const imageObjectsSchema = project.gallery.map((g) => buildImageObject(g));
 ---
 
-<Layout title={title} description={description} canonical={canonical}>
+<Layout
+    title={title}
+    description={description}
+    canonical={canonical}
+    ogImage={absoluteUrl(project.coverImage.src)}
+    ogImageAlt={project.coverImage.alt}
+>
     <WorkHero
         title={project.title}
         subtitle={project.summary}

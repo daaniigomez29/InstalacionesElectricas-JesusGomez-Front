@@ -26,14 +26,19 @@ const hero = await getHero();
       <div class="pt-7">
         <a
           href="/contacto"
-          class="btn bg-accent-blue rounded p-3 lg:p-4 text-white font-semibold text-lg"
-          >Solicita tu presupuesto ahora</a
+          class="btn-hero bg-accent-blue rounded p-3 lg:p-4 text-white font-semibold text-lg group/cta inline-flex gap-2"
+          >Solicita tu presupuesto <span
+                        aria-hidden="true"
+                        class="transition-transform group-hover/cta:translate-x-1"
+                    >
+                        →
+                    </span></a
         >
       </div>
       <div class="pt-10">
         <a
           href="tel:+34691886370"
-          class="text-accent-blue font-semibold text-lg"
+          class="text-accent-blue font-semibold text-lg hover:text-primary-orange transition duration-300"
           >O llama ahora al <span class="underline">691 88 63 70</span></a
         >
       </div>
@@ -159,18 +164,6 @@ const hero = await getHero();
       transform: translateX(0);
       opacity: 1;
     }
-  }
-
-  .btn {
-    background-image: linear-gradient(135deg, #1e3eb1 50%, transparent 50%);
-    background-position: bottom right;
-    background-size: 200% 200%;
-    transition: 0.4s;
-  }
-
-  .btn:hover {
-    background-position: top left;
-    color: white;
   }
 
   /*

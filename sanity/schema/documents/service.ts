@@ -64,14 +64,6 @@ export const service = defineType({
       validation: (Rule) => Rule.required().max(200),
     }),
     defineField({
-      name: 'order',
-      title: 'Orden de aparición',
-      type: 'number',
-      group: 'card',
-      description: 'Número menor = aparece antes en los listados.',
-      initialValue: 100,
-    }),
-    defineField({
       name: 'featured',
       title: 'Destacado en Home',
       type: 'boolean',

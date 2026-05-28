@@ -35,6 +35,8 @@ export interface Project {
     result: string;
     gallery: ProjectImage[];
     testimonial?: Testimonial;
+    /** Marca destacado para que aparezca en #inicio */
+    featured?: boolean
     /** SEO opcional por proyecto. Si se omite se generan valores por defecto. */
     seo?: {
         title?: string;
@@ -46,6 +48,7 @@ export const projects: Project[] = [
     {
         slug: "cuadro-electrico-cafeteria-sevilla",
         title: "Renovación de cuadro eléctrico en cafetería de Sevilla",
+        featured: true,
         summary:
             "Sustitución completa del cuadro eléctrico de una cafetería en Sevilla Centro para eliminar los cortes de suministro y adaptar la instalación a la normativa vigente.",
         location: "Sevilla Centro",
@@ -82,8 +85,6 @@ export const projects: Project[] = [
             author: "Negocio local, Sevilla Centro",
         },
         seo: {
-            title:
-                "Renovación de cuadro eléctrico en cafetería de Sevilla | Jesús Gómez",
             description:
                 "Caso real: sustitución de cuadro eléctrico en una cafetería de Sevilla Centro. Adaptación a normativa y fin de los cortes de suministro.",
         },

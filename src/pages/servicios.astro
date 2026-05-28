@@ -16,13 +16,30 @@ import {
     buildHowTo,
     buildService,
 } from "../lib/seo";
+import { getServiceProcess } from "../lib/api";
+
+/**
+ * Datos del bloque "Cómo trabajamos" provenientes de Sanity
+ * (servicesPage.processSection).
+ *
+ * ⚠️ Aún NO se usa en el render — la sección y el schema HowTo siguen
+ * alimentándose del array `processSteps` hardcodeado de abajo. Esta
+ * llamada queda preparada para que la migración consista únicamente
+ * en cambiar las dos referencias a `processSteps` por
+ * `processFromSanity?.steps ?? processSteps`, y de paso usar
+ * `processFromSanity?.title ?? "Cómo trabajamos"` en el <ServiceProcess>.
+ */
+const processFromSanity = await getServiceProcess();
 
 const title =
-    "Servicios de Electricista en Sevilla | Instalaciones, Averías y Mantenimiento";
+    "Servicios de Electricista en Sevilla | Instalaciones Eléctricas Jesús Gómez";
 const description =
     "Catálogo completo de servicios eléctricos en Sevilla: averías 24h, instalaciones, cuadros, boletines CIE, puntos de recarga, iluminación LED y mantenimiento.";
 
 const canonical = "https://www.instalacioneselectricasjesusgomez.es/servicios";
+
+const ogImage = `https://www.instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_completo.webp`
+const ogImageAlt = "Instalaciones Eléctricas Jesús Gómez - Servicios"
 
 const processSteps = [
     {
@@ -145,7 +162,7 @@ const howToSchema = buildHowTo(
 );
 ---
 
-<Layout title={title} description={description} canonical={canonical}>
+<Layout title={title} description={description} canonical={canonical} ogImage={ogImage} ogImageAlt={ogImageAlt}>
     <ServiciosHero />
 
     <ForWho />

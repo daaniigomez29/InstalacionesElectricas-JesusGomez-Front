@@ -24,8 +24,18 @@ export const cta = defineType({
       rows: 3,
     }),
     defineField({
-      name: 'button',
-      title: 'Botón',
+      name: 'buttonContact',
+      title: 'Botón contacto',
+      type: 'link',
+    }),
+    defineField({
+      name: 'buttonWhatsapp',
+      title: 'Botón Whatsapp',
+      type: 'link',
+    }),
+    defineField({
+      name: 'buttonTlf',
+      title: 'Botón teléfono',
       type: 'link',
     }),
   ],

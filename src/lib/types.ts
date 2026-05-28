@@ -34,3 +34,66 @@ export type PartnerLogo = {
     /** Texto alternativo obligatorio. */
     alt: string;
 };
+
+// ----- Catálogo por categoría (/servicios) -----
+
+/**
+ * Tarjeta de servicio dentro de una categoría del catálogo.
+ * Misma forma que el array hardcodeado de CatalogByCategory.astro,
+ * para permitir migrar sin tocar la plantilla.
+ */
+export type CatalogServiceCard = {
+    img: string;
+    imgAlt?: string;
+    title: string;
+    content: string;
+    href: string;
+};
+
+export type CatalogCategory = {
+    emoji?: string;
+    title: string;
+    intro?: string;
+    services: CatalogServiceCard[];
+};
+
+export type CatalogByCategory = {
+    title?: string;
+    intro?: string;
+    categories: CatalogCategory[];
+};
+
+// ----- Service Finder (/servicios) -----
+
+/**
+ * Una fila de la tabla "¿Qué servicio necesito?".
+ * Mismo shape que el array hardcodeado de ServiceFinder.astro.
+ */
+export type ServiceFinderRow = {
+    situation: string;
+    service: string;
+    href: string;
+};
+
+export type ServiceFinder = {
+    title?: string;
+    intro?: string;
+    rows: ServiceFinderRow[];
+};
+
+// ----- Cómo trabajamos / Service Process (/servicios) -----
+
+/**
+ * Un paso del proceso "Cómo trabajamos".
+ * Mismo shape que el array `processSteps` hardcodeado en servicios.astro
+ * y que la prop `steps` de <ServiceProcess>.
+ */
+export type ServiceProcessStep = {
+    title: string;
+    description: string;
+};
+
+export type ServiceProcess = {
+    title?: string;
+    steps: ServiceProcessStep[];
+};

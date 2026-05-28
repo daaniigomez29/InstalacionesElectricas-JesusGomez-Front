@@ -45,7 +45,7 @@ export interface Service {
     name: string;
     /** Metadatos SEO de la página. */
     seo: {
-        title: string;
+        title?: string;
         description: string;
     };
     hero: {
@@ -94,8 +94,6 @@ export const services: Service[] = [
         slug: "averias-electricas-sevilla",
         name: "Averías eléctricas",
         seo: {
-            title:
-                "Averías Eléctricas en Sevilla | Reparación Rápida 24h | Jesús Gómez",
             description:
                 "Electricista para averías eléctricas en Sevilla. Reparamos cortocircuitos, fallos de corriente, fusibles, diferenciales y magnetotérmicos con diagnóstico rápido y garantía.",
         },
@@ -315,8 +313,6 @@ export const services: Service[] = [
         slug: "boletines-electricos-sevilla",
         name: "Boletines y legalizaciones",
         seo: {
-            title:
-                "Boletín Eléctrico y CIE en Sevilla | Legalización de Instalaciones",
             description:
                 "Tramitamos boletines eléctricos, certificados CIE, aumentos de potencia y legalización de instalaciones en Sevilla. Instalador autorizado con experiencia.",
         },
@@ -537,8 +533,6 @@ export const services: Service[] = [
         slug: "cuadros-electricos-sevilla",
         name: "Cuadros eléctricos",
         seo: {
-            title:
-                "Cuadros Eléctricos en Sevilla | Cambio y Reforma | Jesús Gómez",
             description:
                 "Cambio y montaje de cuadros eléctricos en Sevilla. Magnetotérmicos, diferenciales, protección contra sobretensiones e instalaciones monofásicas o trifásicas.",
         },
@@ -756,8 +750,6 @@ export const services: Service[] = [
         slug: "iluminacion-led-sevilla",
         name: "Iluminación LED",
         seo: {
-            title:
-                "Iluminación LED en Sevilla | Ahorro Energético y Proyectos a Medida",
             description:
                 "Instalación de iluminación LED en Sevilla para viviendas, negocios y comunidades. Sustitución LED, proyectos decorativos y eficiencia energética.",
         },
@@ -973,8 +965,6 @@ export const services: Service[] = [
         slug: "instalaciones-electricas-sevilla",
         name: "Instalaciones eléctricas",
         seo: {
-            title:
-                "Instalaciones Eléctricas en Sevilla | Vivienda, Local y Reformas",
             description:
                 "Instalaciones eléctricas completas en Sevilla para viviendas, locales y oficinas. Canalizaciones, derivación individual, redes UTP y mecanismos. Boletín incluido.",
         },
@@ -1193,8 +1183,6 @@ export const services: Service[] = [
         slug: "instalaciones-electricas-negocios-sevilla",
         name: "Instalaciones para negocios",
         seo: {
-            title:
-                "Instalaciones Eléctricas para Negocios en Sevilla | Locales y Naves",
             description:
                 "Instalaciones eléctricas para negocios en Sevilla: locales comerciales, oficinas, naves industriales y trifásicas. Iluminación comercial y eficiencia energética.",
         },
@@ -1413,8 +1401,6 @@ export const services: Service[] = [
         slug: "mantenimiento-electrico-sevilla",
         name: "Mantenimiento eléctrico",
         seo: {
-            title:
-                "Mantenimiento Eléctrico en Sevilla | Comunidades y Empresas",
             description:
                 "Mantenimiento eléctrico en Sevilla para comunidades, empresas y oficinas. Revisiones preventivas, cumplimiento de normativa y respuesta ante incidencias.",
         },
@@ -1632,8 +1618,6 @@ export const services: Service[] = [
         slug: "punto-recarga-coche-electrico-sevilla",
         name: "Punto de recarga vehículo eléctrico",
         seo: {
-            title:
-                "Punto de Recarga Coche Eléctrico en Sevilla | Wallbox e Instalación",
             description:
                 "Instalación de cargadores wallbox para coche eléctrico en Sevilla. Viviendas, garajes y negocios. Tramitación, protecciones y legalización incluidas.",
         },

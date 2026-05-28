@@ -1,4 +1,18 @@
 ---
+import { getServiceFinder } from "../../lib/api";
+
+/**
+ * Datos del "¿Qué servicio necesito?" provenientes de Sanity
+ * (servicesPage.serviceFinder).
+ *
+ * ⚠️ Aún NO se usa en el render — la tabla sigue alimentándose del
+ * array `rows` hardcodeado de abajo. Esta llamada queda preparada
+ * para que la migración consista únicamente en cambiar `rows` por
+ * `finderFromSanity?.rows ?? rows` en el `.map()` de la plantilla
+ * cuando el contenido esté completo en Sanity.
+ */
+const finderFromSanity = await getServiceFinder();
+
 const rows = [
     {
         situation: "Se ha ido la luz en una habitación",

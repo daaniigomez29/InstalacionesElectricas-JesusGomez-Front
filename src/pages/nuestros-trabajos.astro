@@ -11,11 +11,14 @@ import {
     buildCollectionPage,
 } from "../lib/seo";
 
-const title = "Nuestros Trabajos | Electricista en Sevilla | Jesús Gómez";
+const title = "Nuestros Trabajos | Instalaciones Eléctricas Jesús Gómez";
 const description =
     "Trabajos eléctricos realizados en Sevilla por Instalaciones Eléctricas Jesús Gómez: cuadros eléctricos, instalaciones y reformas con resultados reales.";
 const canonical =
     "https://www.instalacioneselectricasjesusgomez.es/nuestros-trabajos";
+
+const ogImage = `https://www.instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_completo.webp`
+const ogImageAlt = "Instalaciones Eléctricas Jesús Gómez - Nuestros trabajos"
 
 const itemListId = `${canonical}#works-list`;
 
@@ -45,7 +48,7 @@ const collectionPageSchema = buildCollectionPage({
 });
 ---
 
-<Layout title={title} description={description} canonical={canonical}>
+<Layout title={title} description={description} canonical={canonical} ogImage={ogImage} ogImageAlt={ogImageAlt}>
     <WorkHero
         size="sm"
         title="Nuestros trabajos"
