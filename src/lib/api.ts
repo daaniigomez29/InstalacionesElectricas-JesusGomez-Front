@@ -1,21 +1,49 @@
 import { sanityClient } from "sanity:client";
 import {
+    aboutCtaQuery,
+    aboutFaqQuery,
+    aboutHeroQuery,
+    aboutStoryQuery,
+    aboutValuesQuery,
+    pageSeoQuery,
+    allProjectsForBuildQuery,
+    allServicesForBuildQuery,
     catalogByCategoryQuery,
-    heroQuery,
+    homeAboutQuery,
+    homeFaqQuery,
+    homeFeaturedWorksQuery,
+    homeFinalCtaQuery,
+    homeHeroQuery,
+    homeServicesQuery,
     partnerLogosQuery,
     serviceFinderQuery,
     serviceProcessQuery,
-    serviciosQuery,
     servicesCtaQuery,
     servicesFaqQuery,
     servicesFeaturedCasesQuery,
     servicesForWhoQuery,
     servicesHeroQuery,
     servicesWhyUsQuery,
-    trabajosQuery,
+    worksCtaQuery,
+    worksHeroQuery,
+    worksIntroQuery,
 } from "./queries";
+import type { Service } from "../data/servicios";
+import type { Project } from "../data/projects";
 import type {
+    AboutCta,
+    AboutFaqSection,
+    AboutHero,
+    AboutStory,
+    AboutValues,
     CatalogByCategory,
+    HomeAbout,
+    HomeFaqSection,
+    HomeFeaturedWorksSection,
+    HomeFinalCta,
+    HomeHero,
+    HomeServicesSection,
+    PageSeo,
     PartnerLogo,
     ServiceFinder,
     ServiceProcess,
@@ -25,24 +53,10 @@ import type {
     ServicesForWho,
     ServicesHero,
     ServicesWhyUs,
-    ServiciosSection,
-    TrabajoSection,
+    WorksCta,
+    WorksHero,
+    WorksIntro,
 } from "./types";
-
-// ============================================================
-// HERO / SERVICIOS / TRABAJOS (esquema antiguo)
-// ============================================================
-export async function getHero() {
-    return await sanityClient.fetch(heroQuery);
-}
-
-export async function getServicios(): Promise<ServiciosSection> {
-    return await sanityClient.fetch(serviciosQuery);
-}
-
-export async function getTrabajos(): Promise<TrabajoSection> {
-    return await sanityClient.fetch(trabajosQuery);
-}
 
 // ============================================================
 // EMPRESAS QUE CONFÍAN
@@ -148,4 +162,324 @@ export async function getServicesFaq(): Promise<ServicesFaqSection | null> {
 
 export async function getServicesCta(): Promise<ServicesCta | null> {
     return await sanityClient.fetch(servicesCtaQuery);
+}
+
+// ============================================================
+// /servicios/[slug] — DETALLE DE SERVICIO
+// ============================================================
+
+/**
+ * Convierte un span de Portable Text a HTML aplicando los marks
+ * disponibles en el schema richText (strong, em, underline, links).
+ * Cualquier otro mark se ignora silenciosamente y queda como texto plano.
+ */
+function spanToHtml(span: any, markDefs: any[]): string {
+    let text: string = span?.text ?? "";
+    if (!text) return "";
+    const marks: string[] = span?.marks ?? [];
+    for (const mark of marks) {
+        if (mark === "strong") {
+            text = `<b>${text}</b>`;
+        } else if (mark === "em") {
+            text = `<em>${text}</em>`;
+        } else if (mark === "underline") {
+            text = `<u>${text}</u>`;
+        } else {
+            // Es un markDef referenciado por key (p.ej. un link)
+            const def = markDefs.find((m) => m._key === mark);
+            if (def?._type === "link" && def?.href) {
+                const target = def?.isExternal
+                    ? ' target="_blank" rel="noopener noreferrer"'
+                    : "";
+                text = `<a href="${def.href}"${target}>${text}</a>`;
+            }
+        }
+    }
+    return text;
+}
+
+/**
+ * Convierte el array de bloques Portable Text de Sanity en un array
+ * de strings HTML — uno por bloque (cada bloque = un párrafo en el
+ * shape del Service local).
+ */
+function portableTextToHtmlArray(blocks: any): string[] {
+    if (!Array.isArray(blocks)) return [];
+    return blocks
+        .filter((b: any) => b?._type === "block")
+        .map((b: any) => {
+            const markDefs = b?.markDefs ?? [];
+            const children = b?.children ?? [];
+            return children
+                .map((c: any) => spanToHtml(c, markDefs))
+                .join("");
+        });
+}
+
+/**
+ * Normaliza un servicio crudo de Sanity al shape `Service` de los
+ * datos locales. Esto permite que los componentes (ServiceHero,
+ * ServiceIntro, ServiceIncludes, etc.) sigan recibiendo exactamente
+ * el mismo tipo de datos que reciben desde src/data/servicios.ts.
+ */
+function normalizeSanityService(raw: any): Service {
+    return {
+        slug: raw?.slug ?? "",
+        name: raw?.name ?? "",
+        seo: {
+            title: raw?.seo?.title,
+            description: raw?.seo?.description ?? "",
+        },
+        hero: {
+            h1: raw?.hero?.h1 ?? "",
+            subtitle: raw?.hero?.subtitle ?? "",
+            bgImage: raw?.hero?.bgImage ?? "",
+        },
+        intro: {
+            title: raw?.intro?.title ?? "",
+            paragraphs: portableTextToHtmlArray(raw?.intro?.paragraphs),
+            image: raw?.intro?.image ?? "",
+            imageAlt: raw?.intro?.imageAlt ?? "",
+        },
+        includes: {
+            title: raw?.includes?.title ?? "",
+            intro: raw?.includes?.intro,
+            items: raw?.includes?.items ?? [],
+        },
+        problems: {
+            title: raw?.problems?.title ?? "",
+            intro: raw?.problems?.intro,
+            items: raw?.problems?.items ?? [],
+        },
+        benefits: {
+            title: raw?.benefits?.title ?? "",
+            items: raw?.benefits?.items ?? [],
+        },
+        process: {
+            title: raw?.process?.title ?? "",
+            steps: raw?.process?.steps ?? [],
+        },
+        faq: {
+            title: raw?.faq?.title ?? "",
+            items: raw?.faq?.items ?? [],
+        },
+        related: (raw?.related ?? [])
+            .filter((r: any) => r?.slug)
+            .map((r: any) => ({
+                slug: r.slug,
+                description: r?.description ?? "",
+            })),
+        cta: {
+            title: raw?.cta?.title ?? "",
+            text: raw?.cta?.text ?? "",
+        },
+    };
+}
+
+/**
+ * Devuelve todos los servicios listos para alimentar `getStaticPaths`
+ * de la página /servicios/[slug], normalizados al shape `Service`.
+ *
+ * Si Sanity no devuelve nada (CMS aún vacío o fallo de red), devuelve
+ * array vacío para que la llamada haga fallback a los datos locales.
+ */
+export async function getAllServicesForBuild(): Promise<Service[]> {
+    try {
+        const raw: any[] = await sanityClient.fetch(allServicesForBuildQuery);
+        if (!Array.isArray(raw)) return [];
+        return raw
+            .filter((r) => r?.slug)
+            .map((r) => normalizeSanityService(r));
+    } catch (err) {
+        console.warn(
+            "[getAllServicesForBuild] Fallo al leer servicios de Sanity, se usará fallback local:",
+            err,
+        );
+        return [];
+    }
+}
+
+// ============================================================
+// HOME (/) — secciones desde Sanity
+// ============================================================
+
+export async function getHomeHero(): Promise<HomeHero | null> {
+    return await sanityClient.fetch(homeHeroQuery);
+}
+
+export async function getHomeAbout(): Promise<HomeAbout | null> {
+    return await sanityClient.fetch(homeAboutQuery);
+}
+
+export async function getHomeServices(): Promise<HomeServicesSection | null> {
+    return await sanityClient.fetch(homeServicesQuery);
+}
+
+export async function getHomeFeaturedWorks(): Promise<HomeFeaturedWorksSection | null> {
+    const raw: HomeFeaturedWorksSection | null = await sanityClient.fetch(
+        homeFeaturedWorksQuery,
+    );
+    if (!raw) return null;
+
+    // GROQ no permite valores dinámicos en los rangos `[...]`, así que la
+    // query trae hasta 50 proyectos en modo "latest" y aquí recortamos al
+    // `limit` real configurado (default 6).
+    if (raw.mode === "latest" && Array.isArray(raw.projects)) {
+        const limit = typeof raw.limit === "number" && raw.limit > 0 ? raw.limit : 6;
+        return { ...raw, projects: raw.projects.slice(0, limit) };
+    }
+    return raw;
+}
+
+export async function getHomeFaq(): Promise<HomeFaqSection | null> {
+    return await sanityClient.fetch(homeFaqQuery);
+}
+
+export async function getHomeFinalCta(): Promise<HomeFinalCta | null> {
+    return await sanityClient.fetch(homeFinalCtaQuery);
+}
+
+// ============================================================
+// /sobre-nosotros — secciones desde Sanity
+// ============================================================
+
+export async function getAboutHero(): Promise<AboutHero | null> {
+    return await sanityClient.fetch(aboutHeroQuery);
+}
+
+export async function getAboutStory(): Promise<AboutStory | null> {
+    const raw: any = await sanityClient.fetch(aboutStoryQuery);
+    if (!raw) return null;
+    // Convertimos el Portable Text de `content` en array de strings HTML
+    // (un párrafo por bloque), reutilizando el conversor del detalle de servicio.
+    return {
+        title: raw.title,
+        paragraphs: portableTextToHtmlArray(raw.content),
+        imageUrl: raw.imageUrl,
+        imageAlt: raw.imageAlt,
+    };
+}
+
+export async function getAboutValues(): Promise<AboutValues | null> {
+    return await sanityClient.fetch(aboutValuesQuery);
+}
+
+export async function getAboutFaq(): Promise<AboutFaqSection | null> {
+    return await sanityClient.fetch(aboutFaqQuery);
+}
+
+export async function getAboutCta(): Promise<AboutCta | null> {
+    return await sanityClient.fetch(aboutCtaQuery);
+}
+
+// ============================================================
+// /nuestros-trabajos — secciones desde Sanity
+// ============================================================
+
+export async function getWorksHero(): Promise<WorksHero | null> {
+    return await sanityClient.fetch(worksHeroQuery);
+}
+
+export async function getWorksIntro(): Promise<WorksIntro | null> {
+    return await sanityClient.fetch(worksIntroQuery);
+}
+
+export async function getWorksCta(): Promise<WorksCta | null> {
+    return await sanityClient.fetch(worksCtaQuery);
+}
+
+// ============================================================
+// /nuestros-trabajos/[slug] — DETALLE DE PROYECTO
+// ============================================================
+
+/**
+ * Normaliza un proyecto crudo de Sanity al shape `Project` de los
+ * datos locales (src/data/projects.ts), para que los componentes
+ * WorkCard / WorkHero / ProjectStory / ProjectInfo / etc. sigan
+ * recibiendo el mismo tipo de datos.
+ */
+function normalizeSanityProject(raw: any): Project {
+    return {
+        slug: raw?.slug ?? "",
+        title: raw?.title ?? "",
+        summary: raw?.summary ?? "",
+        location: raw?.location ?? "",
+        type: raw?.type ?? "",
+        duration: raw?.duration ?? "",
+        client: raw?.client ?? "",
+        coverImage: {
+            src: raw?.coverImage?.src ?? "",
+            alt: raw?.coverImage?.alt ?? "",
+        },
+        problem: raw?.problem ?? "",
+        solution: raw?.solution ?? "",
+        result: raw?.result ?? "",
+        gallery: Array.isArray(raw?.gallery)
+            ? raw.gallery
+                  .filter((g: any) => g?.src)
+                  .map((g: any) => ({ src: g.src, alt: g?.alt ?? "" }))
+            : [],
+        testimonial: raw?.testimonial?.quote
+            ? {
+                  quote: raw.testimonial.quote,
+                  author: raw.testimonial.author,
+              }
+            : undefined,
+        featured: raw?.featured ?? false,
+        seo: raw?.seo
+            ? {
+                  title: raw.seo.title,
+                  description: raw.seo.description,
+              }
+            : undefined,
+    };
+}
+
+/**
+ * Devuelve todos los proyectos de Sanity normalizados al shape
+ * `Project` de los datos locales, ordenados por publishedAt desc.
+ *
+ * Devuelve array vacío si Sanity está vacío o falla — para que la
+ * llamada haga fallback a los datos locales.
+ */
+// ============================================================
+// SEO por página (singleton)
+// ============================================================
+
+/**
+ * Singleton types soportados para SEO. Cualquiera puede tener un bloque
+ * `seo` rellenado desde el Studio que sobreescribe los hardcoded.
+ */
+export type SeoDocType =
+    | "homePage"
+    | "servicesPage"
+    | "aboutPage"
+    | "worksPage"
+    | "contactPage";
+
+/**
+ * Devuelve el bloque SEO del singleton solicitado. Cada campo es
+ * opcional: el consumidor hace fallback al valor hardcoded de la página
+ * si Sanity lo devuelve null/undefined.
+ */
+export async function getPageSeo(
+    docType: SeoDocType,
+): Promise<PageSeo | null> {
+    return await sanityClient.fetch(pageSeoQuery, { docType });
+}
+
+export async function getAllProjectsForBuild(): Promise<Project[]> {
+    try {
+        const raw: any[] = await sanityClient.fetch(allProjectsForBuildQuery);
+        if (!Array.isArray(raw)) return [];
+        return raw
+            .filter((r) => r?.slug)
+            .map((r) => normalizeSanityProject(r));
+    } catch (err) {
+        console.warn(
+            "[getAllProjectsForBuild] Fallo al leer proyectos de Sanity, se usará fallback local:",
+            err,
+        );
+        return [];
+    }
 }

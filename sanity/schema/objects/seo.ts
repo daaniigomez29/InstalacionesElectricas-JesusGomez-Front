@@ -20,7 +20,7 @@ export const seo = defineType({
       description:
         'Título que aparece en la pestaña del navegador y en Google. Recomendado: 50-60 caracteres.',
       validation: (Rule) =>
-        Rule.max(90).warning('Más de 90 caracteres puede cortarse en Google.'),
+        Rule.max(120).warning('Más de 120 caracteres puede cortarse en Google.'),
     }),
     defineField({
       name: 'description',

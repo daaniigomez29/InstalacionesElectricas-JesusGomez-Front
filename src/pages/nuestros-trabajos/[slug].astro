@@ -13,9 +13,32 @@ import {
     buildBreadcrumb,
     buildImageObject,
 } from "../../lib/seo";
+import { getAllProjectsForBuild } from "../../lib/api";
 
-export function getStaticPaths() {
-    return projects.map((project) => ({
+/**
+ * Genera una página por cada slug de proyecto.
+ *
+ * Estrategia idéntica a /servicios/[slug]: fusionamos los proyectos de
+ * Sanity con los del fichero local `src/data/projects.ts`. Si un slug
+ * existe en ambos lados, Sanity gana. Si solo existe local, se usa
+ * local (fallback). Si solo existe en Sanity (proyecto añadido nuevo
+ * en el CMS), se genera igualmente.
+ */
+export async function getStaticPaths() {
+    const sanityProjects = await getAllProjectsForBuild();
+    const sanityBySlug = new Map(sanityProjects.map((p) => [p.slug, p]));
+
+    const merged: Project[] = projects.map(
+        (local) => sanityBySlug.get(local.slug) ?? local,
+    );
+    const localSlugs = new Set(projects.map((p) => p.slug));
+    for (const sanityP of sanityProjects) {
+        if (!localSlugs.has(sanityP.slug)) {
+            merged.push(sanityP);
+        }
+    }
+
+    return merged.map((project) => ({
         params: { slug: project.slug },
         props: { project },
     }));

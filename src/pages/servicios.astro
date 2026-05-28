@@ -17,6 +17,7 @@ import {
     buildService,
 } from "../lib/seo";
 import {
+    getPageSeo,
     getServiceProcess,
     getServicesCta,
     getServicesFaq,
@@ -27,16 +28,21 @@ import {
 const processFromSanity = await getServiceProcess();
 const faqFromSanity = await getServicesFaq();
 const ctaFromSanity = await getServicesCta();
+const seo = await getPageSeo("servicesPage");
 
 const title =
+    seo?.title ??
     "Servicios de Electricista en Sevilla | Instalaciones Eléctricas Jesús Gómez";
 const description =
+    seo?.description ??
     "Catálogo completo de servicios eléctricos en Sevilla: averías 24h, instalaciones, cuadros, boletines CIE, puntos de recarga, iluminación LED y mantenimiento.";
-
-const canonical = "https://www.instalacioneselectricasjesusgomez.es/servicios";
-
-const ogImage = `https://www.instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_completo.webp`
-const ogImageAlt = "Instalaciones Eléctricas Jesús Gómez - Servicios"
+const canonical =
+    seo?.canonical ??
+    "https://www.instalacioneselectricasjesusgomez.es/servicios";
+const ogImage =
+    seo?.ogImageUrl ??
+    "https://www.instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_completo.webp";
+const ogImageAlt = "Instalaciones Eléctricas Jesús Gómez - Servicios";
 
 const processSteps = [
     {

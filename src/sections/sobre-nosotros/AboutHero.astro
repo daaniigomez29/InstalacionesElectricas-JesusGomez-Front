@@ -4,6 +4,20 @@ import CheckIcon from "../../icons/CheckIcon.astro";
 import ClockIcon from "../../icons/ClockIcon.astro";
 import HandshakeIcon from "../../icons/HandshakeIcon.astro";
 import CertificateIcon from "../../icons/CertificateIcon.astro";
+import { getAboutHero } from "../../lib/api";
+
+const hero = await getAboutHero();
+
+// Title, subtitle, bgImage vienen de Sanity (aboutPage.hero).
+// Pretitle, trust items y CTAs siguen hardcoded — no están modelados en el schema.
+const heroTitle =
+    hero?.title ??
+    "Electricistas en Sevilla comprometidos con un trabajo seguro y bien hecho";
+const heroSubtitle =
+    hero?.subtitle ??
+    "En <b>Instalaciones Eléctricas Jesús Gómez</b> nos dedicamos a las instalaciones, averías y reformas eléctricas en Sevilla y toda Andalucía. Un equipo profesional, cercano y autorizado, centrado en hacer cada trabajo bien desde el primer día.";
+const heroBgImage =
+    hero?.bgImageUrl ?? "/assets/backgrounds/aboutus-bg-black.webp";
 
 const trustItems = [
     { icon: "warranty", label: "Instalador autorizado" },
@@ -15,7 +29,7 @@ const trustItems = [
 
 <section
     class="relative overflow-hidden scroll-m-25"
-    style="background-image: url(/assets/backgrounds/aboutus-bg-black.webp); background-size: cover; background-position: center;"
+    style={`background-image: url(${heroBgImage}); background-size: cover; background-position: center;`}
 >
     <div
         class="container mx-auto px-5 md:px-10 py-20 md:py-28 flex flex-col gap-6 text-white"
@@ -26,15 +40,9 @@ const trustItems = [
             Sobre nosotros
         </p>
         <h1 class="font-bold leading-tight max-w-4xl">
-            Electricistas en Sevilla comprometidos con un trabajo seguro y bien
-            hecho
+            {heroTitle}
         </h1>
-        <p class="max-w-3xl text-base md:text-lg">
-            En <b>Instalaciones Eléctricas Jesús Gómez</b> nos dedicamos a las instalaciones,
-            averías y reformas eléctricas en Sevilla y toda Andalucía. Un equipo
-            profesional, cercano y autorizado, centrado en hacer cada trabajo bien
-            desde el primer día.
-        </p>
+        <p class="max-w-3xl text-base md:text-lg" set:html={heroSubtitle} />
 
         <ul
             class="flex flex-wrap gap-3 md:gap-4 pt-2"

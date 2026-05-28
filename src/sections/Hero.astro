@@ -1,6 +1,26 @@
 ---
-import { getHero } from "../lib/api";
-const hero = await getHero();
+import { getHomeHero } from "../lib/api";
+
+const hero = await getHomeHero();
+
+// Fallback: si Sanity no tiene rellenada la sección o algún campo,
+// usamos los textos / imagen / CTAs originales hardcodeados.
+const pretitle =
+    hero?.pretitle ?? "Electricista técnico autorizado en Sevilla";
+const titleLine1 = hero?.titleLine1 ?? "Soluciones eléctricas profesionales en";
+const titleLine2 = hero?.titleLine2 ?? "Sevilla y Andalucía";
+const description =
+    hero?.description ??
+    "Reparaciones, instalaciones y mantenimiento eléctrico con garantía. Atención rápida y servicio profesional para tu hogar o negocio.";
+const heroImage = hero?.imageUrl ?? "/assets/backgrounds/jesus-hero.webp";
+const heroImageAlt =
+    hero?.imageAlt ??
+    "CEO de Instalaciones eléctricas Jesús Gómez, encargado de todas las operaciones.";
+const ctaPrimaryLabel = hero?.ctaPrimary?.label ?? "Solicita tu presupuesto";
+const ctaPrimaryHref = hero?.ctaPrimary?.href ?? "/contacto";
+const ctaSecondaryLabel =
+    hero?.ctaSecondary?.label ?? "O llama ahora al 691 88 63 70";
+const ctaSecondaryHref = hero?.ctaSecondary?.href ?? "tel:+34691886370";
 ---
 
 <section
@@ -15,19 +35,19 @@ const hero = await getHero();
         <p
           class="text-primary-orange text-[11px]! font-bold tracking-widest uppercase mb-2"
         >
-          Electricista técnico autorizado en Sevilla
+          {pretitle}
         </p>
       </div>
       <h1 class="font-bold">
-        {hero.titleLine1}
-        <span class="background-font text-start!">{hero.titleLine2}</span>
+        {titleLine1}
+        <span class="background-font text-start!">{titleLine2}</span>
       </h1>
-      <p class="pt-5">{hero.description}</p>
+      <p class="pt-5">{description}</p>
       <div class="pt-7">
         <a
-          href="/contacto"
+          href={ctaPrimaryHref}
           class="btn-hero bg-accent-blue rounded p-3 lg:p-4 text-white font-semibold text-lg group/cta inline-flex gap-2"
-          >Solicita tu presupuesto <span
+          >{ctaPrimaryLabel} <span
                         aria-hidden="true"
                         class="transition-transform group-hover/cta:translate-x-1"
                     >
@@ -37,9 +57,9 @@ const hero = await getHero();
       </div>
       <div class="pt-10">
         <a
-          href="tel:+34691886370"
+          href={ctaSecondaryHref}
           class="text-accent-blue font-semibold text-lg hover:text-primary-orange transition duration-300"
-          >O llama ahora al <span class="underline">691 88 63 70</span></a
+          >{ctaSecondaryLabel} <span class="underline">691 88 63 70</span></a
         >
       </div>
     </div>
@@ -51,10 +71,10 @@ const hero = await getHero();
 
       <!-- IMAGEN -->
       <img
-        src="/assets/backgrounds/jesus-hero.webp"
+        src={heroImage}
         fetchpriority="high"
         class="img-size relative z-10 object-contain h-full w-auto img-animation"
-        alt="CEO de Instalaciones eléctricas Jesús Gómez, encargado de todas las operaciones."
+        alt={heroImageAlt}
       />
     </div>
   </div>

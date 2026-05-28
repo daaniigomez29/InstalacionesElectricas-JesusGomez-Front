@@ -61,7 +61,6 @@ function lastCommitDate(file) {
 }
 
 const fallback = new Date(new Date().setHours(0, 0, 0, 0));
-console.log('Sanity projectId =', env.SANITY_STUDIO_PROJECT_ID);
 
 // https://astro.build/config
 export default defineConfig({

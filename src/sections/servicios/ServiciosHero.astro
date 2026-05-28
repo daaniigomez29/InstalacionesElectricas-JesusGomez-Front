@@ -11,6 +11,9 @@ import { getServicesHero } from "../../lib/api";
 // en el schema (son piezas visuales fijas).
 const heroFromSanity = await getServicesHero();
 
+const heroBgImage =
+    heroFromSanity?.bgImageUrl ?? "/assets/backgrounds/aboutus-bg-black.webp";
+
 const trustItems = [
     { icon: "handshake", label: "Presupuesto sin compromiso" },
     { icon: "warranty", label: "Instalador autorizado" },
@@ -21,7 +24,7 @@ const trustItems = [
 
 <section
     class="relative overflow-hidden scroll-m-25"
-    style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(/assets/backgrounds/aboutus-bg-black.webp); background-size: cover; background-position: center;"
+    style={`background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${heroFromSanity?.bgImageUrl}); background-size: cover; background-position: center;`}
 >
     <div
         class="container mx-auto px-5 md:px-10 py-20 md:py-28 flex flex-col gap-6 text-white"

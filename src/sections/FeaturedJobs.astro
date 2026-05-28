@@ -1,9 +1,28 @@
 ---
 import FeaturedJobCard from "../components/FeaturedJobCard.astro";
 import { projects } from "../data/projects";
+import { getHomeFeaturedWorks } from "../lib/api";
 
-const featuredProjects = projects.filter((p) => p.featured == true);
-const trabajosData = featuredProjects.length > 0 ? featuredProjects : projects;
+const homeWorks = await getHomeFeaturedWorks();
+
+// Fallback al array hardcodeado (mismo criterio que antes: featured primero,
+// si no hay ninguno marcado, todos).
+const featuredLocal = projects.filter((p) => p.featured == true);
+const localFallback = featuredLocal.length > 0 ? featuredLocal : projects;
+
+// Si Sanity tiene proyectos, los usamos. Si no, usamos los locales.
+// Nota: los proyectos de Sanity vienen con un subset de los campos del
+// tipo `Project` local; FeaturedJobCard solo usa esos campos, así que
+// el cast a `any` es seguro.
+const trabajosData: any[] = homeWorks?.projects?.length
+    ? homeWorks.projects
+    : localFallback;
+
+const sectionTitle = homeWorks?.title ?? "Trabajos destacados";
+const sectionSubtitle =
+    homeWorks?.subtitle ??
+    "Una muestra de proyectos eléctricos que hemos realizado en Sevilla. Cada ficha cuenta lo esencial: dónde fue, cuánto duró y qué resolvimos. Entra en cualquiera para ver el caso completo.";
+
 const hasMultiple = trabajosData.length > 1;
 ---
 
@@ -28,13 +47,11 @@ const hasMultiple = trabajosData.length > 1;
 
     <div class="container relative mx-auto space-y-10 md:space-y-15 z-10">
         <div class="flex flex-col items-center lg:items-start gap-4">
-            <h2 class="background-font">Trabajos destacados</h2>
+            <h2 class="background-font">{sectionTitle}</h2>
             <p
                 class="text-white text-center lg:text-left md:text-lg max-w-3xl"
             >
-                Una muestra de proyectos eléctricos que hemos realizado en
-                Sevilla. Cada ficha cuenta lo esencial: dónde fue, cuánto duró
-                y qué resolvimos. Entra en cualquiera para ver el caso completo.
+                {sectionSubtitle}
             </p>
         </div>
 

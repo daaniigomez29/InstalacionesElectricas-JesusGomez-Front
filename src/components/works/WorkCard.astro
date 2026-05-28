@@ -9,7 +9,6 @@ export interface Props {
 
 const { project } = Astro.props;
 const href = `/nuestros-trabajos/${project.slug}`;
-console.log(project.coverImage.src)
 ---
 
 <article
@@ -40,7 +39,7 @@ console.log(project.coverImage.src)
             </h3>
 
             <p class="flex items-center gap-1.5 text-gray-500 text-sm">
-                <LocationIcon />
+                <LocationIcon fillBorder="#6a7282" />
                 {project.location}
             </p>
 

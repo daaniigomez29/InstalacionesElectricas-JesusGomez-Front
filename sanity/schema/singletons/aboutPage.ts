@@ -72,6 +72,7 @@ export const aboutPage = defineType({
             }),
           ],
         },
+        {name: 'image', title: 'Imagen lateral', type: 'imageWithAlt'},
       ],
     }),
 

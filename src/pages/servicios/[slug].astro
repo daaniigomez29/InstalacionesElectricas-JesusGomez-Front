@@ -16,36 +16,72 @@ import {
     buildService,
     absoluteUrl,
 } from "../../lib/seo";
+import { getAllServicesForBuild } from "../../lib/api";
 
-export function getStaticPaths() {
-    return services.map((service) => ({
-        params: { slug: service.slug },
-        props: { service },
-    }));
+/**
+ * Genera una página por cada slug de servicio.
+ *
+ * Estrategia: fusionamos los servicios que vengan de Sanity con los del
+ * fichero local `src/data/servicios.ts`. Si un slug existe en ambos
+ * lados, Sanity gana. Si solo existe local, se usa local (fallback). Si
+ * solo existe en Sanity (servicio añadido directamente en el CMS), se
+ * genera igualmente.
+ *
+ * Para los "servicios relacionados" usamos la lista fusionada para que
+ * los títulos se puedan resolver aunque el target solo esté en Sanity.
+ */
+export async function getStaticPaths() {
+    const sanityServices = await getAllServicesForBuild();
+    const sanityBySlug = new Map(sanityServices.map((s) => [s.slug, s]));
+
+    // Lista final: por cada local, gana Sanity si lo tiene; luego añadimos
+    // los servicios "solo Sanity" que no estén en el array local.
+    const merged: Service[] = services.map(
+        (local) => sanityBySlug.get(local.slug) ?? local,
+    );
+    const localSlugs = new Set(services.map((s) => s.slug));
+    for (const sanitySvc of sanityServices) {
+        if (!localSlugs.has(sanitySvc.slug)) {
+            merged.push(sanitySvc);
+        }
+    }
+
+    // Pre-resolvemos `related` con la lista fusionada para que los
+    // títulos siempre se encuentren (sea cual sea el origen del target).
+    const allBySlug = new Map(merged.map((s) => [s.slug, s]));
+
+    return merged.map((service) => {
+        const relatedResolved = service.related.map((ref) => {
+            const target = allBySlug.get(ref.slug);
+            return {
+                title: target?.name ?? ref.slug,
+                href: `/servicios/${ref.slug}`,
+                description: ref.description,
+            };
+        });
+        return {
+            params: { slug: service.slug },
+            props: { service, relatedResolved },
+        };
+    });
+}
+
+interface RelatedResolved {
+    title: string;
+    href: string;
+    description: string;
 }
 
 interface Props {
     service: Service;
+    relatedResolved: RelatedResolved[];
 }
 
-const { service } = Astro.props;
+const { service, relatedResolved } = Astro.props;
 
 const canonical = `https://www.instalacioneselectricasjesusgomez.es/servicios/${service.slug}`;
 
 const title = service.seo?.title ?? `${service.name} en Sevilla | Instalaciones Eléctricas Jesús Gómez`;
-
-
-// Resuelve cada referencia de "servicios relacionados" a la forma que espera
-// el componente ServiceRelated: el título se toma del servicio referenciado
-// y la URL se construye a partir de su slug.
-const relatedServices = service.related.map((ref) => {
-    const target = services.find((s) => s.slug === ref.slug);
-    return {
-        title: target?.name ?? ref.slug,
-        href: `/servicios/${ref.slug}`,
-        description: ref.description,
-    };
-});
 
 const breadcrumbSchema = buildBreadcrumb([
     { name: "Inicio", item: "/" },
@@ -122,7 +158,7 @@ const howToSchema = buildHowTo(
 
     <ServiceFAQ title={service.faq.title} faqs={service.faq.items} />
 
-    <ServiceRelated related={relatedServices} />
+    <ServiceRelated related={relatedResolved} />
 
     <ServiceCTA title={service.cta.title} text={service.cta.text} />
 
