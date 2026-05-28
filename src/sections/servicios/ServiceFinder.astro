@@ -3,13 +3,7 @@ import { getServiceFinder } from "../../lib/api";
 
 /**
  * Datos del "¿Qué servicio necesito?" provenientes de Sanity
- * (servicesPage.serviceFinder).
- *
- * ⚠️ Aún NO se usa en el render — la tabla sigue alimentándose del
- * array `rows` hardcodeado de abajo. Esta llamada queda preparada
- * para que la migración consista únicamente en cambiar `rows` por
- * `finderFromSanity?.rows ?? rows` en el `.map()` de la plantilla
- * cuando el contenido esté completo en Sanity.
+ * (servicesPage.serviceFinder). Fallback al array hardcodeado si vacío.
  */
 const finderFromSanity = await getServiceFinder();
 
@@ -60,12 +54,13 @@ const rows = [
 <section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 background-fade">
     <div class="container mx-auto max-w-5xl">
         <div class="flex justify-center mb-4">
-            <h2 class="background-font-blue">¿Qué servicio necesito?</h2>
+            <h2 class="background-font-blue">
+                {finderFromSanity?.title ?? "¿Qué servicio necesito?"}
+            </h2>
         </div>
         <p class="text-center max-w-2xl mx-auto mb-10 text-gray-700">
-            Identifica tu situación y te llevamos directo al servicio
-            adecuado. Si no encaja con ninguno, llámanos y te orientamos sin
-            compromiso.
+            {finderFromSanity?.intro ??
+                "Identifica tu situación y te llevamos directo al servicio adecuado. Si no encaja con ninguno, llámanos y te orientamos sin compromiso."}
         </p>
 
         <div class="overflow-x-auto rounded-xl shadow-md bg-white">
@@ -84,7 +79,7 @@ const rows = [
                 </thead>
                 <tbody>
                     {
-                        rows.map((r, i) => (
+                        (finderFromSanity?.rows ?? rows).map((r, i) => (
                             <tr
                                 class={
                                     i % 2 === 0

@@ -6,6 +6,12 @@ import {
     serviceFinderQuery,
     serviceProcessQuery,
     serviciosQuery,
+    servicesCtaQuery,
+    servicesFaqQuery,
+    servicesFeaturedCasesQuery,
+    servicesForWhoQuery,
+    servicesHeroQuery,
+    servicesWhyUsQuery,
     trabajosQuery,
 } from "./queries";
 import type {
@@ -13,6 +19,12 @@ import type {
     PartnerLogo,
     ServiceFinder,
     ServiceProcess,
+    ServicesCta,
+    ServicesFaqSection,
+    ServicesFeaturedCases,
+    ServicesForWho,
+    ServicesHero,
+    ServicesWhyUs,
     ServiciosSection,
     TrabajoSection,
 } from "./types";
@@ -76,7 +88,22 @@ export async function getCatalogByCategory(): Promise<CatalogByCategory | null> 
  * para que el componente pueda hacer fallback al array hardcodeado.
  */
 export async function getServiceFinder(): Promise<ServiceFinder | null> {
-    return await sanityClient.fetch(serviceFinderQuery);
+    // La query devuelve cada fila con `service` anidado como sub-objeto:
+    //   { situation, service: { service: name, href: ... } }
+    // Aplanamos aquí para que el consumidor reciba el mismo shape que el
+    // array hardcodeado de ServiceFinder.astro: { situation, service, href }.
+    const raw: any = await sanityClient.fetch(serviceFinderQuery);
+    if (!raw) return null;
+    return {
+        ...raw,
+        rows: Array.isArray(raw.rows)
+            ? raw.rows.map((r: any) => ({
+                  situation: r?.situation,
+                  service: r?.service?.service,
+                  href: r?.service?.href,
+              }))
+            : [],
+    };
 }
 
 // ============================================================
@@ -93,4 +120,32 @@ export async function getServiceFinder(): Promise<ServiceFinder | null> {
  */
 export async function getServiceProcess(): Promise<ServiceProcess | null> {
     return await sanityClient.fetch(serviceProcessQuery);
+}
+
+// ============================================================
+// /servicios — RESTO DE SECCIONES (hero, forWho, whyUs, etc.)
+// ============================================================
+
+export async function getServicesHero(): Promise<ServicesHero | null> {
+    return await sanityClient.fetch(servicesHeroQuery);
+}
+
+export async function getServicesForWho(): Promise<ServicesForWho | null> {
+    return await sanityClient.fetch(servicesForWhoQuery);
+}
+
+export async function getServicesWhyUs(): Promise<ServicesWhyUs | null> {
+    return await sanityClient.fetch(servicesWhyUsQuery);
+}
+
+export async function getServicesFeaturedCases(): Promise<ServicesFeaturedCases | null> {
+    return await sanityClient.fetch(servicesFeaturedCasesQuery);
+}
+
+export async function getServicesFaq(): Promise<ServicesFaqSection | null> {
+    return await sanityClient.fetch(servicesFaqQuery);
+}
+
+export async function getServicesCta(): Promise<ServicesCta | null> {
+    return await sanityClient.fetch(servicesCtaQuery);
 }

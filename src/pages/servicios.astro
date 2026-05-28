@@ -16,20 +16,17 @@ import {
     buildHowTo,
     buildService,
 } from "../lib/seo";
-import { getServiceProcess } from "../lib/api";
+import {
+    getServiceProcess,
+    getServicesCta,
+    getServicesFaq,
+} from "../lib/api";
 
-/**
- * Datos del bloque "Cómo trabajamos" provenientes de Sanity
- * (servicesPage.processSection).
- *
- * ⚠️ Aún NO se usa en el render — la sección y el schema HowTo siguen
- * alimentándose del array `processSteps` hardcodeado de abajo. Esta
- * llamada queda preparada para que la migración consista únicamente
- * en cambiar las dos referencias a `processSteps` por
- * `processFromSanity?.steps ?? processSteps`, y de paso usar
- * `processFromSanity?.title ?? "Cómo trabajamos"` en el <ServiceProcess>.
- */
+// Datos de Sanity para las secciones finales de /servicios. Cada uno
+// usa su array hardcodeado de fallback si Sanity está vacío.
 const processFromSanity = await getServiceProcess();
+const faqFromSanity = await getServicesFaq();
+const ctaFromSanity = await getServicesCta();
 
 const title =
     "Servicios de Electricista en Sevilla | Instalaciones Eléctricas Jesús Gómez";
@@ -155,9 +152,61 @@ const collectionPageSchema = buildCollectionPage({
     mainEntityId: itemListId,
 });
 
+// Fallback de FAQ: si Sanity no tiene faqSection rellenado, usamos este array.
+const hardcodedFaqs = [
+    {
+        question: "¿Cuánto cuesta una visita técnica?",
+        answer: "Para presupuestos de instalaciones, reformas o trabajos planificados la visita y el presupuesto son gratuitos y sin compromiso en Sevilla y alrededores. En el caso de averías, te informamos por teléfono del coste de desplazamiento antes de ir.",
+    },
+    {
+        question: "¿Vais sin compromiso?",
+        answer: "Sí. Hacemos la visita, te explicamos qué tiene tu instalación y te entregamos un presupuesto cerrado. Si decides no seguir adelante, no tienes ninguna obligación.",
+    },
+    {
+        question: "¿En cuánto tiempo soléis dar presupuesto?",
+        answer: "Para trabajos sencillos te lo damos en el momento o en menos de 24h. En obras o instalaciones más grandes solemos entregarlo en 2-3 días laborables tras la visita técnica.",
+    },
+    {
+        question: "¿Trabajáis los fines de semana?",
+        answer: "Las urgencias se atienden también fines de semana siempre que es posible. Los trabajos planificados se realizan habitualmente de lunes a viernes, salvo coordinación previa.",
+    },
+    {
+        question: "¿Qué formas de pago aceptáis?",
+        answer: "Aceptamos efectivo, transferencia bancaria y Bizum. Para obras de cierta entidad podemos acordar pago fraccionado: una parte al inicio y el resto a la finalización del trabajo.",
+    },
+    {
+        question: "¿Dais factura siempre?",
+        answer: "Sí. Todos nuestros trabajos se entregan con factura legal, detallando materiales, mano de obra e IVA correspondiente.",
+    },
+    {
+        question: "¿Sois instaladores autorizados?",
+        answer: "Sí. Estamos registrados como empresa instaladora autorizada, lo que nos habilita para emitir boletines CIE y legalizar instalaciones eléctricas ante la Junta de Andalucía.",
+    },
+    {
+        question: "¿Cubrís toda la provincia de Sevilla?",
+        answer: "Trabajamos en Sevilla capital, Aljarafe, Dos Hermanas, Alcalá de Guadaíra, Mairena y el resto del área metropolitana. Consúltanos para localidades más lejanas, también nos desplazamos en muchos casos.",
+    },
+];
+
+// Datos finales que llegan al template — Sanity con fallback hardcoded.
+const finalProcessTitle = processFromSanity?.title ?? "Cómo trabajamos";
+const finalProcessSteps = processFromSanity?.steps?.length
+    ? processFromSanity.steps
+    : processSteps;
+
+const finalFaqTitle = faqFromSanity?.title ?? "Antes de contratarnos";
+const finalFaqs = faqFromSanity?.faq?.items?.length
+    ? faqFromSanity.faq.items
+    : hardcodedFaqs;
+
+const finalCtaTitle = ctaFromSanity?.title ?? "¿No sabes qué servicio necesitas?";
+const finalCtaText =
+    ctaFromSanity?.text ??
+    "Llámanos o escríbenos por WhatsApp y te orientamos sin compromiso. Te indicamos qué hace falta, cuánto cuesta y cuándo podemos hacerlo.";
+
 const howToSchema = buildHowTo(
     "Cómo trabajamos en una instalación eléctrica",
-    processSteps,
+    finalProcessSteps,
     "Proceso paso a paso que seguimos en cualquier instalación o reparación eléctrica en Sevilla.",
 );
 ---
@@ -171,7 +220,7 @@ const howToSchema = buildHowTo(
 
     <ServiceFinder />
 
-    <ServiceProcess title="Cómo trabajamos" steps={processSteps} />
+    <ServiceProcess title={finalProcessTitle} steps={finalProcessSteps} />
 
     <WhyUs />
 
@@ -179,48 +228,9 @@ const howToSchema = buildHowTo(
 
     <ServiceAreas />
 
-    <ServiceFAQ
-        title="Antes de contratarnos"
-        faqs={[
-            {
-                question: "¿Cuánto cuesta una visita técnica?",
-                answer: "Para presupuestos de instalaciones, reformas o trabajos planificados la visita y el presupuesto son gratuitos y sin compromiso en Sevilla y alrededores. En el caso de averías, te informamos por teléfono del coste de desplazamiento antes de ir.",
-            },
-            {
-                question: "¿Vais sin compromiso?",
-                answer: "Sí. Hacemos la visita, te explicamos qué tiene tu instalación y te entregamos un presupuesto cerrado. Si decides no seguir adelante, no tienes ninguna obligación.",
-            },
-            {
-                question: "¿En cuánto tiempo soléis dar presupuesto?",
-                answer: "Para trabajos sencillos te lo damos en el momento o en menos de 24h. En obras o instalaciones más grandes solemos entregarlo en 2-3 días laborables tras la visita técnica.",
-            },
-            {
-                question: "¿Trabajáis los fines de semana?",
-                answer: "Las urgencias se atienden también fines de semana siempre que es posible. Los trabajos planificados se realizan habitualmente de lunes a viernes, salvo coordinación previa.",
-            },
-            {
-                question: "¿Qué formas de pago aceptáis?",
-                answer: "Aceptamos efectivo, transferencia bancaria y Bizum. Para obras de cierta entidad podemos acordar pago fraccionado: una parte al inicio y el resto a la finalización del trabajo.",
-            },
-            {
-                question: "¿Dais factura siempre?",
-                answer: "Sí. Todos nuestros trabajos se entregan con factura legal, detallando materiales, mano de obra e IVA correspondiente.",
-            },
-            {
-                question: "¿Sois instaladores autorizados?",
-                answer: "Sí. Estamos registrados como empresa instaladora autorizada, lo que nos habilita para emitir boletines CIE y legalizar instalaciones eléctricas ante la Junta de Andalucía.",
-            },
-            {
-                question: "¿Cubrís toda la provincia de Sevilla?",
-                answer: "Trabajamos en Sevilla capital, Aljarafe, Dos Hermanas, Alcalá de Guadaíra, Mairena y el resto del área metropolitana. Consúltanos para localidades más lejanas, también nos desplazamos en muchos casos.",
-            },
-        ]}
-    />
+    <ServiceFAQ title={finalFaqTitle} faqs={finalFaqs} />
 
-    <ServiceCTA
-        title="¿No sabes qué servicio necesitas?"
-        text="Llámanos o escríbenos por WhatsApp y te orientamos sin compromiso. Te indicamos qué hace falta, cuánto cuesta y cuándo podemos hacerlo."
-    />
+    <ServiceCTA title={finalCtaTitle} text={finalCtaText} />
 
     <script
         type="application/ld+json"

@@ -4,12 +4,7 @@ import { getCatalogByCategory } from "../../lib/api";
 
 /**
  * Datos del catálogo provenientes de Sanity (servicesPage.catalogByCategory).
- *
- * ⚠️ Aún NO se usa en el render — el HTML sigue alimentándose del array
- * `categories` hardcodeado de abajo. Esta llamada queda preparada para
- * que la migración consista únicamente en cambiar `categories` por
- * `catalogFromSanity?.categories ?? categories` en el `.map()` de la
- * plantilla cuando el contenido esté completo en Sanity.
+ * Si Sanity está vacío, hacemos fallback al array `categories` hardcodeado.
  */
 const catalogFromSanity = await getCatalogByCategory();
 
@@ -100,16 +95,18 @@ const categories = [
 >
     <div class="container mx-auto">
         <div class="flex justify-center mb-4">
-            <h2 class="background-font">Nuestro catálogo de servicios</h2>
+            <h2 class="background-font">
+                {catalogFromSanity?.title ?? "Nuestro catálogo de servicios"}
+            </h2>
         </div>
         <p class="text-center max-w-2xl mx-auto mb-12 text-gray-700">
-            Agrupados por tipo de intervención para que encuentres lo que
-            necesitas más rápido.
+            {catalogFromSanity?.intro ??
+                "Agrupados por tipo de intervención para que encuentres lo que necesitas más rápido."}
         </p>
 
         <div class="flex flex-col gap-14">
             {
-                categories.map((cat) => (
+                (catalogFromSanity?.categories ?? categories).map((cat) => (
                     <div>
                         <h3 class="text-xl md:text-2xl font-bold text-primary-blue flex items-center gap-3 mb-2">
                             <span aria-hidden="true">{cat.emoji}</span>

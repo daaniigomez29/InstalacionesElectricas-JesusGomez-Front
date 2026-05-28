@@ -1,4 +1,8 @@
 ---
+import { getServicesFeaturedCases } from "../../lib/api";
+
+const featuredFromSanity = await getServicesFeaturedCases();
+
 const cases = [
     {
         img: "/assets/ourJobs/trabajo-luz.webp",
@@ -19,12 +23,18 @@ const cases = [
             "Instalación de wallbox 7,4 kW con protecciones específicas y subcontador. Tramitación del boletín y coordinación con la comunidad para la canalización.",
     },
 ];
+
+const casesToShow = featuredFromSanity?.cases?.length
+    ? featuredFromSanity.cases
+    : cases;
 ---
 
 <section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 bg-[#F5F7FA]">
     <div class="container mx-auto">
         <div class="flex justify-center mb-4">
-            <h2 class="background-font">Proyectos destacados</h2>
+            <h2 class="background-font">
+                {featuredFromSanity?.title ?? "Proyectos destacados"}
+            </h2>
         </div>
         <p class="text-center max-w-2xl mx-auto mb-10 text-gray-700">
             Una muestra de algunos trabajos recientes que reflejan el tipo
@@ -33,7 +43,7 @@ const cases = [
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {
-                cases.map((c) => (
+                casesToShow.map((c) => (
                     <article class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col hover:-translate-y-1 transition duration-300">
                         <div class="h-48 overflow-hidden">
                             <img

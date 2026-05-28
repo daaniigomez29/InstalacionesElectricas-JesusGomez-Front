@@ -4,6 +4,12 @@ import HandshakeIcon from "../../icons/HandshakeIcon.astro";
 import WarrantyIcon from "../../icons/WarrantyIcon.astro";
 import ClockIcon from "../../icons/ClockIcon.astro";
 import CertificateIcon from "../../icons/CertificateIcon.astro";
+import { getServicesHero } from "../../lib/api";
+
+// Título y subtítulo desde Sanity (servicesPage.hero). El listado de
+// trust items y las CTAs siguen hardcodeados porque no están modelados
+// en el schema (son piezas visuales fijas).
+const heroFromSanity = await getServicesHero();
 
 const trustItems = [
     { icon: "handshake", label: "Presupuesto sin compromiso" },
@@ -21,13 +27,11 @@ const trustItems = [
         class="container mx-auto px-5 md:px-10 py-20 md:py-28 flex flex-col gap-6 text-white"
     >
         <h1 class="font-bold leading-tight max-w-4xl">
-            Servicios de Electricista en Sevilla
+            {heroFromSanity?.title ?? "Servicios de Electricista en Sevilla"}
         </h1>
         <p class="max-w-3xl text-base md:text-lg">
-            Desde una avería puntual hasta la instalación eléctrica completa
-            de un local: atendemos a particulares, comunidades y empresas en
-            Sevilla y provincia, con boletín, garantía y atención el mismo
-            día.
+            {heroFromSanity?.subtitle ??
+                "Desde una avería puntual hasta la instalación eléctrica completa de un local: atendemos a particulares, comunidades y empresas en Sevilla y provincia, con boletín, garantía y atención el mismo día."}
         </p>
 
         <ul

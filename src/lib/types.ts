@@ -97,3 +97,71 @@ export type ServiceProcess = {
     title?: string;
     steps: ServiceProcessStep[];
 };
+
+// ----- /servicios secciones simples -----
+
+export type ServicesHero = {
+    title?: string;
+    subtitle?: string;
+    bgImageUrl?: string;
+    bgImageAlt?: string;
+};
+
+export type ForWhoAudience = {
+    title: string;
+    description: string;
+    href?: string;
+};
+
+export type ServicesForWho = {
+    title?: string;
+    subtitle?: string;
+    audiences: ForWhoAudience[];
+};
+
+export type WhyUsReason = {
+    /** Sanity guarda el icono como string (emoji o id corto). En el front lo
+     *  mapeamos a un componente icon o lo mostramos directamente. */
+    icon?: string;
+    title: string;
+    description: string;
+};
+
+export type ServicesWhyUs = {
+    title?: string;
+    reasons: WhyUsReason[];
+};
+
+export type FeaturedCase = {
+    img: string;
+    imgAlt?: string;
+    title: string;
+    description: string;
+};
+
+export type ServicesFeaturedCases = {
+    title?: string;
+    cases: FeaturedCase[];
+};
+
+export type ServicesFaqItem = {
+    question: string;
+    answer: string;
+};
+
+/**
+ * El schema `faq` envuelve los items en un sub-objeto `faq`. Reflejamos esa
+ * estructura literalmente para no inventar shapes intermedios.
+ */
+export type ServicesFaqSection = {
+    title?: string;
+    faq?: {
+        title?: string;
+        items: ServicesFaqItem[];
+    };
+};
+
+export type ServicesCta = {
+    title: string;
+    text?: string;
+};

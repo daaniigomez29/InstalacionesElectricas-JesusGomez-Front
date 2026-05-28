@@ -157,6 +157,7 @@ async function buildServiceDocBase(service, slugToId) {
     const cardImage = await buildImageWithAlt(service.hero.bgImage, service.name)
 
     return {
+        //NO GENERAR NUNCA ID CON . DE SLUGS, QUE SANITY LO GENERE AUTOMÁTICAMENTE
         _id: slugToId.get(service.slug),
         _type: 'service',
 

@@ -5,6 +5,9 @@ import QualityIcon from "../../icons/QualityIcon.astro";
 import HandshakeIcon from "../../icons/HandshakeIcon.astro";
 import ToolsIcon2 from "../../icons/ToolsIcon2.astro";
 import HeartIcon from "../../icons/HeartIcon.astro";
+import { getServicesWhyUs } from "../../lib/api";
+
+const whyUsFromSanity = await getServicesWhyUs();
 
 const reasons = [
     {
@@ -38,12 +41,28 @@ const reasons = [
         text: "Te explicamos lo que hacemos y por qué. Sin tecnicismos innecesarios y con disponibilidad para resolver dudas.",
     },
 ];
+
+/**
+ * Si Sanity tiene `reasons`, normalizamos: title/description vienen de
+ * Sanity, el icono se mapea por posición desde el array hardcodeado
+ * (porque el schema guarda el icono como emoji y nuestro front usa
+ * iconos vectoriales propios).
+ */
+const reasonsToShow = whyUsFromSanity?.reasons?.length
+    ? whyUsFromSanity.reasons.map((r, i) => ({
+          icon: reasons[i % reasons.length]?.icon ?? "warranty",
+          title: r.title,
+          text: r.description,
+      }))
+    : reasons;
 ---
 
 <section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 background-fade">
     <div class="container mx-auto">
         <div class="flex justify-center mb-4">
-            <h2 class="background-font-blue">Por qué elegirnos</h2>
+            <h2 class="background-font-blue">
+                {whyUsFromSanity?.title ?? "Por qué elegirnos"}
+            </h2>
         </div>
         <p class="text-center max-w-2xl mx-auto mb-12 text-gray-700">
             No solo hacemos el trabajo: lo hacemos de forma que puedas
@@ -52,7 +71,7 @@ const reasons = [
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {
-                reasons.map((r) => (
+                reasonsToShow.map((r) => (
                     <article class="bg-white rounded-xl shadow-md p-6 flex flex-col gap-3">
                         <span class="w-12 h-12 flex items-center justify-center rounded-full bg-primary-orange/15 text-primary-orange">
                             {r.icon === "warranty" && <WarrantyIcon fillBorder="orange" fillBg="transparent" />}

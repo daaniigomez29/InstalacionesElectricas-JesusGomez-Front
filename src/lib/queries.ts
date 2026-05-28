@@ -119,3 +119,77 @@ export const serviceProcessQuery = `*[_type == "servicesPage"][0].processSection
     description
   }
 }`;
+
+// ============================================================
+// /servicios — HERO
+// ============================================================
+export const servicesHeroQuery = `*[_type == "servicesPage"][0].hero{
+  title,
+  subtitle,
+  "bgImageUrl": bgImage.image.asset->url,
+  "bgImageAlt": bgImage.alt
+}`;
+
+// ============================================================
+// /servicios — PARA QUIÉN TRABAJAMOS
+// ============================================================
+export const servicesForWhoQuery = `*[_type == "servicesPage"][0].forWhoSection{
+  title,
+  subtitle,
+  audiences[]{
+    title,
+    description,
+    href
+  }
+}`;
+
+// ============================================================
+// /servicios — POR QUÉ ELEGIRNOS
+// ============================================================
+export const servicesWhyUsQuery = `*[_type == "servicesPage"][0].whyUsSection{
+  title,
+  reasons[]{
+    icon,
+    title,
+    description
+  }
+}`;
+
+// ============================================================
+// /servicios — CASOS DESTACADOS
+// ============================================================
+/**
+ * Resuelve los proyectos referenciados al shape que consume FeaturedCases.astro:
+ *   { img, title, description }
+ */
+export const servicesFeaturedCasesQuery = `*[_type == "servicesPage"][0].featuredCases{
+  title,
+  "cases": projects[]->{
+    "img": coverImage.image.asset->url,
+    "imgAlt": coverImage.alt,
+    title,
+    "description": summary
+  }
+}`;
+
+// ============================================================
+// /servicios — FAQ FINAL DE LA PÁGINA
+// ============================================================
+export const servicesFaqQuery = `*[_type == "servicesPage"][0].faqSection{
+  title,
+  faq{
+    title,
+    items[]{
+      question,
+      answer
+    }
+  }
+}`;
+
+// ============================================================
+// /servicios — CTA FINAL
+// ============================================================
+export const servicesCtaQuery = `*[_type == "servicesPage"][0].cta{
+  title,
+  text
+}`;

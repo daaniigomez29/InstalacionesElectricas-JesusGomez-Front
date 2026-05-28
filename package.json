@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "import:logos": "node --env-file=.env scripts/import-partner-logos.mjs",
-    "import:services": "node --env-file=.env --import tsx/esm scripts/import-services.mjs"
+    "import:services": "node --env-file=.env --import tsx/esm scripts/import-services.mjs",
+    "publish:services": "node --env-file=.env scripts/publish-service-drafts.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",

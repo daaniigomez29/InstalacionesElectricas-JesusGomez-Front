@@ -20,6 +20,7 @@ export const deskStructure: StructureResolver = (S) =>
     .title('Contenido')
     .items([
       // ===== CONFIGURACIÓN GLOBAL =====
+      /*
       S.listItem()
         .title('⚙️ Configuración global')
         .child(
@@ -44,7 +45,7 @@ export const deskStructure: StructureResolver = (S) =>
         ),
 
       S.divider(),
-
+*/
       // ===== PÁGINAS =====
       S.listItem()
         .title('📄 Páginas')

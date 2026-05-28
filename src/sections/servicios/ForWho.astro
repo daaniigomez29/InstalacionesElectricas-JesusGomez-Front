@@ -2,6 +2,9 @@
 import HeartIcon from "../../icons/HeartIcon.astro";
 import HandshakeIcon from "../../icons/HandshakeIcon.astro";
 import ToolsIcon from "../../icons/ToolsIcon.astro";
+import { getServicesForWho } from "../../lib/api";
+
+const forWhoFromSanity = await getServicesForWho();
 
 const segments = [
     {
@@ -26,20 +29,41 @@ const segments = [
         href: "/servicios/instalaciones-electricas-negocios-sevilla",
     },
 ];
+
+/**
+ * Si hay audiences en Sanity, las normalizamos al shape del array
+ * hardcodeado (icon + linkText los rotamos del array por posición ya
+ * que el schema no los modela). Si no hay datos, usamos los segments
+ * hardcodeados completos.
+ */
+const segmentsToShow = forWhoFromSanity?.audiences?.length
+    ? forWhoFromSanity.audiences.map((a, i) => {
+          const fallback = segments[i % segments.length];
+          return {
+              icon: fallback?.icon ?? "tools",
+              title: a.title,
+              text: a.description,
+              linkText: fallback?.linkText ?? "Ver más",
+              href: a.href ?? "#",
+          };
+      })
+    : segments;
 ---
 
 <section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 background-fade">
     <div class="container mx-auto">
         <div class="flex justify-center mb-4">
-            <h2 class="background-font-blue">Para quién trabajamos</h2>
+            <h2 class="background-font-blue">
+                {forWhoFromSanity?.title ?? "Para quién trabajamos"}
+            </h2>
         </div>
         <p class="text-center max-w-2xl mx-auto mb-10 text-gray-700">
-            Adaptamos cada intervención al tipo de cliente. Encuentra el
-            servicio más habitual según tu situación.
+            {forWhoFromSanity?.subtitle ??
+                "Adaptamos cada intervención al tipo de cliente. Encuentra el servicio más habitual según tu situación."}
         </p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {
-                segments.map((s) => (
+                segmentsToShow.map((s) => (
                     <article class="bg-white rounded-xl shadow-md p-6 flex flex-col gap-4 hover:-translate-y-1 transition duration-300">
                         <span class="w-12 h-12 flex items-center justify-center rounded-full bg-primary-orange/15 text-primary-orange">
                             {s.icon === "heart" && <HeartIcon />}
