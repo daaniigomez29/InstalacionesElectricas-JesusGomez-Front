@@ -10,10 +10,14 @@ import FeaturedJobs from "../sections/FeaturedJobs.astro";
 import Services from "../sections/Services.astro";
 import Solution from "../sections/Solution.astro";
 import { organizationSchema, websiteSchema } from "../lib/seo";
-import { getHomeFaq, getHomeFinalCta, getPageSeo } from "../lib/api";
+import { getHomeFaq, getHomeFinalCta, getHomeHero, getPageSeo } from "../lib/api";
 
 // SEO desde Sanity (homePage.seo) con fallback hardcoded.
 const seo = await getPageSeo("homePage");
+
+// Hero precargado para LCP — preload de la imagen real (Sanity o fallback).
+const heroData = await getHomeHero();
+const heroImageUrl = heroData?.imageUrl ?? "/assets/backgrounds/jesus-hero.webp";
 
 const title =
     seo?.title ??
@@ -76,6 +80,20 @@ const homeCtaText =
 ---
 
 <Layout title={title} description={description} canonical={canonical} ogImage={ogImage} ogImageAlt={ogImageAlt}>
+    <Fragment slot="head">
+        <link
+            rel="preload"
+            as="image"
+            href="/assets/backgrounds/fondo-circulo.webp"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            as="image"
+            href={heroImageUrl}
+            fetchpriority="high"
+        />
+    </Fragment>
     <script
         type="application/ld+json"
         set:html={JSON.stringify(organizationSchema)}

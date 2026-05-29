@@ -80,6 +80,8 @@ const {
 			type="application/ld+json"
 			set:html={JSON.stringify(localBusinessSchema)}
 		/>
+
+		<slot name="head" />
 	</head>
 	<body>
 		<!--Whatsapp button-->
