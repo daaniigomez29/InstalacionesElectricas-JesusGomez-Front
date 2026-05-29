@@ -1,3 +1,10 @@
+---
+import { getFooterServices } from "../lib/api"
+
+const services = await getFooterServices()
+---
+
+
 <header class="bg-[#F6F6F6F6] shadow sticky top-0 z-50">
   <nav class="w-full">
     <div
@@ -116,54 +123,15 @@
                     class="block px-4 py-2 hover:bg-gray-100 hover:text-primary-orange transition"
                     >Ver todos los servicios</a>
                 </li>
-                <li>
+
+                {services.map((s) => (
+                  <li>
                   <a
-                    href="/servicios/averias-electricas-sevilla"
+                    href={`/servicios/${s.slug}`}
                     class="block px-4 py-2 hover:bg-gray-100 hover:text-primary-orange transition"
-                    >Averías eléctricas</a>
+                    >{s.name}</a>
                 </li>
-                <li>
-                  <a
-                    href="/servicios/boletines-electricos-sevilla"
-                    class="block px-4 py-2 hover:bg-gray-100 hover:text-primary-orange transition"
-                    >Boletines y legalizaciones</a>
-                </li>
-                <li>
-                  <a
-                    href="/servicios/cuadros-electricos-sevilla"
-                    class="block px-4 py-2 hover:bg-gray-100 hover:text-primary-orange transition"
-                    >Cuadros eléctricos</a>
-                </li>
-                <li>
-                  <a
-                    href="/servicios/punto-recarga-coche-electrico-sevilla"
-                    class="block px-4 py-2 hover:bg-gray-100 hover:text-primary-orange transition"
-                    >Punto de recarga coche eléctrico</a>
-                </li>
-                <li>
-                  <a
-                    href="/servicios/instalaciones-electricas-sevilla"
-                    class="block px-4 py-2 hover:bg-gray-100 hover:text-primary-orange transition"
-                    >Instalaciones eléctricas</a>
-                </li>
-                <li>
-                  <a
-                    href="/servicios/iluminacion-led-sevilla"
-                    class="block px-4 py-2 hover:bg-gray-100 hover:text-primary-orange transition"
-                    >Iluminación LED</a>
-                </li>
-                <li>
-                  <a
-                    href="/servicios/mantenimiento-electrico-sevilla"
-                    class="block px-4 py-2 hover:bg-gray-100 hover:text-primary-orange transition"
-                    >Mantenimiento eléctrico</a>
-                </li>
-                <li>
-                  <a
-                    href="/servicios/instalaciones-electricas-negocios-sevilla"
-                    class="block px-4 py-2 hover:bg-gray-100 hover:text-primary-orange transition"
-                    >Instalaciones para negocios</a>
-                </li>
+                ))}
               </ul>
             </div>
           </li>

@@ -201,6 +201,16 @@ export const servicesCtaQuery = `*[_type == "servicesPage"][0].cta{
  * `related[].slug` se resuelve siguiendo la referencia. La descripción
  * contextual se mantiene tal cual.
  */
+/**
+ * Lista ligera de servicios (solo slug + nombre) para enlaces de navegación
+ * como el footer. Ordenada alfabéticamente para que el orden en el footer
+ * sea estable y predecible.
+ */
+export const footerServicesQuery = `*[_type == "service" && defined(slug.current)] | order(name asc){
+  "slug": slug.current,
+  name
+}`;
+
 export const allServicesForBuildQuery = `*[_type == "service" && defined(slug.current)]{
   "slug": slug.current,
   name,

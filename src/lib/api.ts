@@ -9,6 +9,7 @@ import {
     allProjectsForBuildQuery,
     allServicesForBuildQuery,
     catalogByCategoryQuery,
+    footerServicesQuery,
     homeAboutQuery,
     homeFaqQuery,
     homeFeaturedWorksQuery,
@@ -28,8 +29,13 @@ import {
     worksHeroQuery,
     worksIntroQuery,
 } from "./queries";
-import type { Service } from "../data/servicios";
+import { services as localServices, type Service } from "../data/servicios";
 import type { Project } from "../data/projects";
+
+export interface FooterService {
+    slug: string;
+    name: string;
+}
 import type {
     AboutCta,
     AboutFaqSection,
@@ -297,6 +303,30 @@ export async function getAllServicesForBuild(): Promise<Service[]> {
         );
         return [];
     }
+}
+
+/**
+ * Devuelve la lista de servicios (solo slug + nombre) para el footer.
+ * Si Sanity falla o devuelve vacío, hace fallback al array local
+ * src/data/servicios.ts para que el footer nunca quede sin enlaces.
+ */
+export async function getFooterServices(): Promise<FooterService[]> {
+    try {
+        const raw: any[] = await sanityClient.fetch(footerServicesQuery);
+        if (Array.isArray(raw) && raw.length > 0) {
+            return raw
+                .filter((r) => r?.slug && r?.name)
+                .map((r) => ({ slug: r.slug, name: r.name }));
+        }
+    } catch (err) {
+        console.warn(
+            "[getFooterServices] Fallo al leer servicios de Sanity, se usará fallback local:",
+            err,
+        );
+    }
+    return localServices
+        .map((s) => ({ slug: s.slug, name: s.name }))
+        .sort((a, b) => a.name.localeCompare(b.name, "es"));
 }
 
 // ============================================================
