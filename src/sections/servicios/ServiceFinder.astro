@@ -1,0 +1,108 @@
+---
+import { getServiceFinder } from "../../lib/api";
+
+/**
+ * Datos del "¿Qué servicio necesito?" provenientes de Sanity
+ * (servicesPage.serviceFinder). Fallback al array hardcodeado si vacío.
+ */
+const finderFromSanity = await getServiceFinder();
+
+const rows = [
+    {
+        situation: "Se ha ido la luz en una habitación",
+        service: "Averías eléctricas",
+        href: "/servicios/averias-electricas-sevilla",
+    },
+    {
+        situation: "Voy a dar de alta una vivienda nueva",
+        service: "Boletín CIE",
+        href: "/servicios/boletines-electricos-sevilla",
+    },
+    {
+        situation: "Quiero cargar el coche eléctrico en casa",
+        service: "Punto de recarga",
+        href: "/servicios/punto-recarga-coche-electrico-sevilla",
+    },
+    {
+        situation: "El cuadro tiene plomos antiguos o salta",
+        service: "Cuadros eléctricos",
+        href: "/servicios/cuadros-electricos-sevilla",
+    },
+    {
+        situation: "Acabo de alquilar un local y necesito adecuarlo",
+        service: "Instalaciones para negocios",
+        href: "/servicios/instalaciones-electricas-negocios-sevilla",
+    },
+    {
+        situation: "Quiero cambiar las luces de toda la vivienda a LED",
+        service: "Iluminación LED",
+        href: "/servicios/iluminacion-led-sevilla",
+    },
+    {
+        situation: "Necesito mantenimiento periódico de mi comunidad",
+        service: "Mantenimiento eléctrico",
+        href: "/servicios/mantenimiento-electrico-sevilla",
+    },
+    {
+        situation: "Estoy reformando la casa y hay que rehacer la instalación",
+        service: "Instalaciones eléctricas",
+        href: "/servicios/instalaciones-electricas-sevilla",
+    },
+];
+---
+
+<section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 background-fade">
+    <div class="container mx-auto max-w-5xl">
+        <div class="flex justify-center mb-4">
+            <h2 class="background-font-blue">
+                {finderFromSanity?.title ?? "¿Qué servicio necesito?"}
+            </h2>
+        </div>
+        <p class="text-center max-w-2xl mx-auto mb-10 text-gray-700">
+            {finderFromSanity?.intro ??
+                "Identifica tu situación y te llevamos directo al servicio adecuado. Si no encaja con ninguno, llámanos y te orientamos sin compromiso."}
+        </p>
+
+        <div class="overflow-x-auto rounded-xl shadow-md bg-white">
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="bg-primary-blue text-white">
+                        <th
+                            class="text-left p-4 font-semibold text-sm md:text-base"
+                            >Tu situación</th
+                        >
+                        <th
+                            class="text-left p-4 font-semibold text-sm md:text-base"
+                            >Servicio recomendado</th
+                        >
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        (finderFromSanity?.rows ?? rows).map((r, i) => (
+                            <tr
+                                class={
+                                    i % 2 === 0
+                                        ? "bg-white"
+                                        : "bg-[#F5F7FA]"
+                                }
+                            >
+                                <td class="p-4 text-gray-800 text-sm md:text-base">
+                                    {r.situation}
+                                </td>
+                                <td class="p-4">
+                                    <a
+                                        href={r.href}
+                                        class="text-accent-blue font-semibold hover:text-primary-orange transition text-sm md:text-base"
+                                    >
+                                        {r.service} →
+                                    </a>
+                                </td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

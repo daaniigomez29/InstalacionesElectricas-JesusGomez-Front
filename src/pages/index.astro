@@ -1,25 +1,99 @@
 ---
+import ServiceCTA from "../components/services/ServiceCTA.astro";
+import ServiceFAQ from "../components/services/ServiceFAQ.astro";
 import Layout from "../layouts/Layout.astro";
 import AboutUs from "../sections/AboutUs.astro";
-import Contact from "../sections/Contact.astro";
 import Hero from "../sections/Hero.astro";
 import LogoSliderSection from "../sections/LogoSliderSection.astro";
-import Opinions from "../sections/Opinions.astro";
-import OurJobs from "../sections/OurJobs.astro";
+import GoogleReviews from "../sections/GoogleReviews.astro";
+import FeaturedJobs from "../sections/FeaturedJobs.astro";
 import Services from "../sections/Services.astro";
 import Solution from "../sections/Solution.astro";
+import { organizationSchema, websiteSchema } from "../lib/seo";
+import { getHomeFaq, getHomeFinalCta, getPageSeo } from "../lib/api";
+
+// SEO desde Sanity (homePage.seo) con fallback hardcoded.
+const seo = await getPageSeo("homePage");
+
+const title =
+    seo?.title ??
+    "Electricista en Sevilla | Instalaciones Eléctricas Jesús Gómez";
+const description =
+    seo?.description ??
+    "Electricista en Sevilla para instalaciones eléctricas, reparaciones y mantenimiento. Atención rápida, servicio profesional y garantía.";
+const canonical =
+    seo?.canonical ?? "https://www.instalacioneselectricasjesusgomez.es/";
+const ogImage =
+    seo?.ogImageUrl ??
+    "https://www.instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_completo.webp";
+const ogImageAlt =
+    "Instalaciones Eléctricas Jesús Gómez - Electricista en Sevilla";
+
+// FAQ y CTA finales — Sanity con fallback hardcoded.
+const homeFaq = await getHomeFaq();
+const homeFinalCta = await getHomeFinalCta();
+
+const fallbackHomeFaqs = [
+    {
+        question: "¿Quién es Instalaciones Eléctricas Jesús Gómez?",
+        answer: "Somos una empresa de electricistas con sede en Sevilla, fundada por Jesús Gómez. Realizamos instalaciones, averías, reformas y mantenimiento eléctrico para viviendas, comunidades y negocios en Sevilla y toda Andalucía.",
+    },
+    {
+        question: "¿Qué tipo de trabajos eléctricos realizáis?",
+        answer: "Realizamos instalaciones eléctricas completas, reformas, reparación de averías, cambio de cuadros eléctricos, boletines y legalizaciones, iluminación LED, puntos de recarga para coche eléctrico y mantenimiento, tanto en viviendas como en locales y negocios.",
+    },
+    {
+        question: "¿Sois instaladores eléctricos autorizados?",
+        answer: "Sí. Estamos registrados como empresa instaladora autorizada, lo que nos habilita para emitir boletines eléctricos (CIE) y legalizar instalaciones ante la Junta de Andalucía.",
+    },
+    {
+        question: "¿Trabajáis tanto para particulares como para empresas?",
+        answer: "Sí. Atendemos a particulares, comunidades de propietarios y empresas. Adaptamos cada proyecto a las necesidades de viviendas, locales, oficinas y naves industriales.",
+    },
+    {
+        question: "¿En qué zonas de Sevilla trabajáis?",
+        answer: "Cubrimos Sevilla capital y los principales municipios del Aljarafe y el área metropolitana, como Dos Hermanas, Alcalá de Guadaíra o Mairena del Aljarafe. Si tu localidad no aparece en el listado, consúltanos: probablemente también te atendemos.",
+    },
+    {
+        question: "¿Ofrecéis garantía en los trabajos?",
+        answer: "Sí. Todos nuestros trabajos se entregan con factura y garantía por escrito. Usamos materiales homologados y cumplimos el Reglamento Electrotécnico de Baja Tensión (REBT).",
+    },
+    {
+        question: "¿Cómo puedo pedir un presupuesto?",
+        answer: "Puedes llamarnos al 691 88 63 70, escribirnos por WhatsApp o rellenar el formulario de la página de contacto. Te orientamos sin compromiso y te preparamos un presupuesto cerrado.",
+    },
+];
+
+const homeFaqTitle = homeFaq?.title ?? "Preguntas frecuentes sobre nosotros";
+const homeFaqs = homeFaq?.faq?.items?.length
+    ? homeFaq.faq.items
+    : fallbackHomeFaqs;
+
+const homeCtaTitle = homeFinalCta?.title ?? "¿Hablamos de tu proyecto?";
+const homeCtaText =
+    homeFinalCta?.text ??
+    "Cuéntanos qué necesitas y te asesoramos sin compromiso. Trabajo eléctrico profesional, autorizado y con garantía en Sevilla y Andalucía.";
 ---
 
-<Layout>
+<Layout title={title} description={description} canonical={canonical} ogImage={ogImage} ogImageAlt={ogImageAlt}>
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(organizationSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(websiteSchema)}
+    />
     <main>
         <Hero />
         <AboutUs />
         <LogoSliderSection />
         <Solution />
         <Services />
-        <OurJobs />
-        <Opinions />
-        <Contact />
+        <FeaturedJobs />
+        <GoogleReviews />
+        <ServiceFAQ title={homeFaqTitle} faqs={homeFaqs} />
+        <ServiceCTA title={homeCtaTitle} text={homeCtaText} />
     </main>
     <script>
         import { initFlowbite } from "flowbite";

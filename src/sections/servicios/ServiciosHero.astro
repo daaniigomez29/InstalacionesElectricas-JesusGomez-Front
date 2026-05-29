@@ -1,0 +1,82 @@
+---
+import CheckIcon from "../../icons/CheckIcon.astro";
+import HandshakeIcon from "../../icons/HandshakeIcon.astro";
+import WarrantyIcon from "../../icons/WarrantyIcon.astro";
+import ClockIcon from "../../icons/ClockIcon.astro";
+import CertificateIcon from "../../icons/CertificateIcon.astro";
+import { getServicesHero } from "../../lib/api";
+
+// Título y subtítulo desde Sanity (servicesPage.hero). El listado de
+// trust items y las CTAs siguen hardcodeados porque no están modelados
+// en el schema (son piezas visuales fijas).
+const heroFromSanity = await getServicesHero();
+
+const heroBgImage =
+    heroFromSanity?.bgImageUrl ?? "/assets/backgrounds/aboutus-bg-black.webp";
+
+const trustItems = [
+    { icon: "handshake", label: "Presupuesto sin compromiso" },
+    { icon: "warranty", label: "Instalador autorizado" },
+    { icon: "certificate", label: "Boletín CIE incluido" },
+    { icon: "clock", label: "Atención el mismo día" },
+];
+---
+
+<section
+    class="relative overflow-hidden scroll-m-25"
+    style={`background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${heroFromSanity?.bgImageUrl}); background-size: cover; background-position: center;`}
+>
+    <div
+        class="container mx-auto px-5 md:px-10 py-20 md:py-28 flex flex-col gap-6 text-white"
+    >
+        <h1 class="font-bold leading-tight max-w-4xl">
+            {heroFromSanity?.title ?? "Servicios de Electricista en Sevilla"}
+        </h1>
+        <p class="max-w-3xl text-base md:text-lg">
+            {heroFromSanity?.subtitle ??
+                "Desde una avería puntual hasta la instalación eléctrica completa de un local: atendemos a particulares, comunidades y empresas en Sevilla y provincia, con boletín, garantía y atención el mismo día."}
+        </p>
+
+        <ul
+            class="flex flex-wrap gap-3 md:gap-4 pt-2"
+            aria-label="Garantías del servicio"
+        >
+            {
+                trustItems.map((t) => (
+                    <li class="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-2 text-xs md:text-sm font-semibold">
+                        <span class="w-5 h-5 shrink-0 flex items-center justify-center text-primary-orange">
+                            {t.icon === "handshake" && <HandshakeIcon fillBorder="orange" fillBg="transparent" />}
+                            {t.icon === "warranty" && <WarrantyIcon fillBorder="orange" fillBg="transparent" />}
+                            {t.icon === "certificate" && <CertificateIcon fillBorder="orange" fillBg="transparent" />}
+                            {t.icon === "clock" && <ClockIcon />}
+                        </span>
+                        {t.label}
+                    </li>
+                ))
+            }
+        </ul>
+
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+            <a
+                href="/contacto"
+                class="btn-hero bg-accent-blue rounded p-3 lg:p-4 text-white font-semibold text-center"
+            >
+                Solicita tu presupuesto gratis
+            </a>
+            <a
+                href="https://wa.me/691886370"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-[#25d366] hover:bg-[#1eb955] transition rounded p-3 lg:p-4 text-white font-semibold text-center"
+            >
+                Escríbenos por WhatsApp
+            </a>
+            <a
+                href="tel:+34691886370"
+                class="bg-primary-orange hover:bg-orange-600 transition rounded p-3 lg:p-4 text-white font-semibold text-center"
+            >
+                Llamar: 691 88 63 70
+            </a>
+        </div>
+    </div>
+</section>

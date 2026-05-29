@@ -1,0 +1,88 @@
+---
+import HeartIcon from "../../icons/HeartIcon.astro";
+import HandshakeIcon from "../../icons/HandshakeIcon.astro";
+import ToolsIcon from "../../icons/ToolsIcon.astro";
+import { getServicesForWho } from "../../lib/api";
+
+const forWhoFromSanity = await getServicesForWho();
+
+const segments = [
+    {
+        icon: "heart",
+        title: "Particulares",
+        text: "Viviendas, pisos y chalets. Reparamos averías, renovamos cuadros, hacemos boletines y modernizamos instalaciones antiguas.",
+        linkText: "Ver averías eléctricas",
+        href: "/servicios/averias-electricas-sevilla",
+    },
+    {
+        icon: "handshake",
+        title: "Comunidades de vecinos",
+        text: "Mantenimiento de zonas comunes, alumbrado de portales y escaleras, garajes y cuadros generales con plan preventivo.",
+        linkText: "Ver mantenimiento eléctrico",
+        href: "/servicios/mantenimiento-electrico-sevilla",
+    },
+    {
+        icon: "tools",
+        title: "Empresas y locales",
+        text: "Instalaciones trifásicas, iluminación comercial, eficiencia energética y mantenimiento para oficinas, naves y comercios.",
+        linkText: "Ver instalaciones para negocios",
+        href: "/servicios/instalaciones-electricas-negocios-sevilla",
+    },
+];
+
+/**
+ * Si hay audiences en Sanity, las normalizamos al shape del array
+ * hardcodeado (icon + linkText los rotamos del array por posición ya
+ * que el schema no los modela). Si no hay datos, usamos los segments
+ * hardcodeados completos.
+ */
+const segmentsToShow = forWhoFromSanity?.audiences?.length
+    ? forWhoFromSanity.audiences.map((a, i) => {
+          const fallback = segments[i % segments.length];
+          return {
+              icon: fallback?.icon ?? "tools",
+              title: a.title,
+              text: a.description,
+              linkText: fallback?.linkText ?? "Ver más",
+              href: a.href ?? "#",
+          };
+      })
+    : segments;
+---
+
+<section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 background-fade">
+    <div class="container mx-auto">
+        <div class="flex justify-center mb-4">
+            <h2 class="background-font-blue">
+                {forWhoFromSanity?.title ?? "Para quién trabajamos"}
+            </h2>
+        </div>
+        <p class="text-center max-w-2xl mx-auto mb-10 text-gray-700">
+            {forWhoFromSanity?.subtitle ??
+                "Adaptamos cada intervención al tipo de cliente. Encuentra el servicio más habitual según tu situación."}
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {
+                segmentsToShow.map((s) => (
+                    <article class="bg-white rounded-xl shadow-md p-6 flex flex-col gap-4 hover:-translate-y-1 transition duration-300">
+                        <span class="w-12 h-12 flex items-center justify-center rounded-full bg-primary-orange/15 text-primary-orange">
+                            {s.icon === "heart" && <HeartIcon />}
+                            {s.icon === "handshake" && <HandshakeIcon fillBorder="orange" fillBg="transparent" />}
+                            {s.icon === "tools" && <ToolsIcon fillBorder="orange"/>}
+                        </span>
+                        <h3 class="font-bold text-primary-blue text-lg">
+                            {s.title}
+                        </h3>
+                        <p class="text-gray-700 text-sm flex-1">{s.text}</p>
+                        <a
+                            href={s.href}
+                            class="text-accent-blue font-semibold text-sm hover:text-primary-orange transition"
+                        >
+                            {s.linkText} →
+                        </a>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>

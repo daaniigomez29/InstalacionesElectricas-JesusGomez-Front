@@ -7,9 +7,12 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "vercel-build":"npm run build"
+    "import:logos": "node --env-file=.env scripts/import-partner-logos.mjs",
+    "import:services": "node --env-file=.env --import tsx/esm scripts/import-services.mjs",
+    "publish:services": "node --env-file=.env scripts/publish-service-drafts.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "@astrojs/vercel": "^9.0.2",
     "@sanity/astro": "^3.3.1",
     "@sanity/client": "^7.17.0",
@@ -25,5 +28,9 @@
     "sanity": "^5.15.0",
     "styled-components": "^6.3.11",
     "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "vite": "^8.0.14"
   }
 }

@@ -1,0 +1,174 @@
+---
+/**
+ * Sección de reseñas de Google.
+ *
+ * Renderiza en HTML las mismas reseñas (y rating agregado) que se inyectan en
+ * el schema `LocalBusiness` desde `seo.ts`. Es importante que coincidan: si el
+ * schema las declara pero el usuario no las ve, Google lo trata como contenido
+ * engañoso.
+ *
+ * Si la API de Places falla o no hay reseñas, la sección se oculta por
+ * completo para que el HTML siga siendo coherente con el schema (que tampoco
+ * incluirá `review` ni `aggregateRating` en ese caso).
+ */
+import { placesData, visibleReviews } from "../lib/seo";
+
+const rating = placesData?.rating;
+const totalReviews = placesData?.userRatingCount;
+const hasReviews = visibleReviews.length > 0;
+
+const dateFormatter = new Intl.DateTimeFormat("es-ES", {
+    year: "numeric",
+    month: "long",
+});
+
+const googleReviewsUrl =
+    "https://www.google.com/maps/place/?q=place_id:ChIJr6dsg6dpEg0RGY-cPsVkxp4";
+---
+
+{
+    hasReviews && (
+        <section
+            id="opiniones"
+            class="bg-[url(/assets/backgrounds/fondo-opiniones.webp)] bg-black/60 bg-blend-darken bg-center bg-no-repeat bg-cover p-5 md:p-10 py-15 md:py-20 scroll-m-25"
+        >
+            <div class="container mx-auto max-w-6xl">
+                <div class="flex flex-col gap-10">
+                    <div class="flex flex-col items-center gap-4 text-center">
+                        <h2 class="background-font">
+                            Opiniones de nuestros clientes
+                        </h2>
+
+                        {rating && totalReviews && (
+                            <div class="flex flex-col items-center gap-1 text-white">
+                                <div
+                                    class="flex items-center gap-2"
+                                    aria-label={`Valoración media ${rating} sobre 5`}
+                                >
+                                    <span class="text-3xl font-bold">
+                                        {rating.toFixed(1)}
+                                    </span>
+                                    <div
+                                        class="flex"
+                                        aria-hidden="true"
+                                    >
+                                        {Array.from({ length: 5 }).map((_, i) => (
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill={
+                                                    i < Math.round(rating)
+                                                        ? "#FBBF24"
+                                                        : "rgba(255,255,255,0.3)"
+                                                }
+                                                class="w-6 h-6"
+                                            >
+                                                <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                            </svg>
+                                        ))}
+                                    </div>
+                                </div>
+                                <p class="text-sm text-white/90">
+                                    Basado en {totalReviews} reseñas de Google
+                                </p>
+                            </div>
+                        )}
+                    </div>
+
+                    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {visibleReviews.map((r) => {
+                            const body =
+                                r.originalText?.text ?? r.text?.text ?? "";
+                            const publishedDate = new Date(r.publishTime);
+                            const publishedLabel = isNaN(publishedDate.getTime())
+                                ? r.relativePublishTimeDescription
+                                : dateFormatter.format(publishedDate);
+                            return (
+                                <li class="bg-white rounded-xl shadow-lg p-6 flex flex-col gap-3">
+                                    <div class="flex items-center gap-3">
+                                        {r.authorAttribution.photoUri ? (
+                                            <img
+                                                src={r.authorAttribution.photoUri}
+                                                alt={`Foto de ${r.authorAttribution.displayName}`}
+                                                loading="lazy"
+                                                referrerpolicy="no-referrer"
+                                                width="40"
+                                                height="40"
+                                                class="w-10 h-10 rounded-full object-cover"
+                                            />
+                                        ) : (
+                                            <div
+                                                class="w-10 h-10 rounded-full bg-primary-blue text-white flex items-center justify-center font-bold"
+                                                aria-hidden="true"
+                                            >
+                                                {r.authorAttribution.displayName.charAt(
+                                                    0,
+                                                )}
+                                            </div>
+                                        )}
+                                        <div class="flex flex-col">
+                                            <span class="font-semibold text-primary-blue">
+                                                {r.authorAttribution.displayName}
+                                            </span>
+                                            <time
+                                                datetime={r.publishTime}
+                                                class="text-xs text-gray-500"
+                                            >
+                                                {publishedLabel}
+                                            </time>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="flex"
+                                        aria-label={`${r.rating} de 5 estrellas`}
+                                    >
+                                        {Array.from({ length: 5 }).map((_, i) => (
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill={
+                                                    i < r.rating
+                                                        ? "#F39615"
+                                                        : "#E5E7EB"
+                                                }
+                                                class="w-5 h-5"
+                                                aria-hidden="true"
+                                            >
+                                                <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                            </svg>
+                                        ))}
+                                    </div>
+
+                                    <p class="text-gray-700 text-sm leading-relaxed">
+                                        {body}
+                                    </p>
+                                </li>
+                            );
+                        })}
+                    </ul>
+
+                    <div class="flex justify-center">
+                        <a
+                            href={googleReviewsUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 bg-white text-primary-blue font-semibold px-6 py-3 rounded-full shadow hover:scale-105 transition"
+                        >
+                            Ver todas las reseñas en Google
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                class="w-4 h-4"
+                                aria-hidden="true"
+                            >
+                                <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}

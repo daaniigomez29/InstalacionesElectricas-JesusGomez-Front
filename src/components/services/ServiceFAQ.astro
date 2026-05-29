@@ -1,0 +1,46 @@
+---
+export interface Props {
+    title: string;
+    faqs: { question: string; answer: string }[];
+}
+
+const { title, faqs } = Astro.props;
+
+const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.question,
+        acceptedAnswer: {
+            "@type": "Answer",
+            text: f.answer,
+        },
+    })),
+};
+---
+
+<section id="faq" class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 background-fade">
+    <div class="container mx-auto max-w-4xl">
+        <div class="flex justify-center mb-10">
+            <h2 class="background-font-blue">{title}</h2>
+        </div>
+        <div class="flex flex-col gap-4">
+            {
+                faqs.map((faq) => (
+                    <details class="bg-white rounded-xl shadow-md p-5 group">
+                        <summary class="font-semibold text-primary-blue cursor-pointer flex justify-between items-center list-none">
+                            <h3>{faq.question}</h3>
+                            <span class="text-primary-orange text-2xl group-open:rotate-45 transition-transform duration-300">
+                                +
+                            </span>
+                        </summary>
+                        <p class="mt-3 text-gray-700">{faq.answer}</p>
+                    </details>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

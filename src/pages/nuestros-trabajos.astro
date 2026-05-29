@@ -1,0 +1,133 @@
+---
+import Layout from "../layouts/Layout.astro";
+import WorkHero from "../components/works/WorkHero.astro";
+import SectionTitle from "../components/works/SectionTitle.astro";
+import WorkCard from "../components/works/WorkCard.astro";
+import CTASection from "../components/works/CTASection.astro";
+import { projects } from "../data/projects";
+import {
+    absoluteUrl,
+    buildBreadcrumb,
+    buildCollectionPage,
+} from "../lib/seo";
+import {
+    getAllProjectsForBuild,
+    getPageSeo,
+    getWorksCta,
+    getWorksHero,
+    getWorksIntro,
+} from "../lib/api";
+
+// Fetch en paralelo del marco de la página, SEO y los proyectos.
+const [worksHero, worksIntro, worksCta, sanityProjects, seo] = await Promise.all([
+    getWorksHero(),
+    getWorksIntro(),
+    getWorksCta(),
+    getAllProjectsForBuild(),
+    getPageSeo("worksPage"),
+]);
+
+const title =
+    seo?.title ?? "Nuestros Trabajos | Instalaciones Eléctricas Jesús Gómez";
+const description =
+    seo?.description ??
+    "Trabajos eléctricos realizados en Sevilla por Instalaciones Eléctricas Jesús Gómez: cuadros eléctricos, instalaciones y reformas con resultados reales.";
+const canonical =
+    seo?.canonical ??
+    "https://www.instalacioneselectricasjesusgomez.es/nuestros-trabajos";
+const ogImage =
+    seo?.ogImageUrl ??
+    "https://www.instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_completo.webp";
+const ogImageAlt = "Instalaciones Eléctricas Jesús Gómez - Nuestros trabajos";
+
+// Merge Sanity + local: Sanity gana, los locales solo aparecen si su
+// slug no existe en Sanity (fallback para proyectos no migrados aún).
+const sanityBySlug = new Map(sanityProjects.map((p) => [p.slug, p]));
+const localOnly = projects.filter((p) => !sanityBySlug.has(p.slug));
+const projectsToShow = [...sanityProjects, ...localOnly];
+
+const heroTitle = worksHero?.title ?? "Nuestros trabajos";
+const heroSubtitle =
+    worksHero?.subtitle ??
+    "Proyectos eléctricos reales realizados en Sevilla. Cada trabajo refleja nuestra forma de trabajar: seguridad, cumplimiento de normativa y acabados limpios.";
+const heroBgImage =
+    worksHero?.bgImageUrl ??
+    "/assets/worksSection/instalaciones-electricas.webp";
+
+const introTitle = worksIntro?.title ?? "Trabajos que hablan por nosotros";
+const introSubtitle =
+    worksIntro?.subtitle ??
+    "Estos son algunos de los proyectos que hemos ejecutado para viviendas y negocios. Entra en cualquiera para ver el detalle completo: problema, solución y resultado.";
+
+const ctaTitle = worksCta?.title ?? "¿Tienes un proyecto eléctrico en mente?";
+const ctaText =
+    worksCta?.text ??
+    "Cuéntanos qué necesitas y te preparamos un presupuesto sin compromiso. Trabajamos en Sevilla y alrededores.";
+
+const itemListId = `${canonical}#works-list`;
+
+const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": itemListId,
+    name: "Trabajos realizados",
+    itemListElement: projectsToShow.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: absoluteUrl(`/nuestros-trabajos/${p.slug}`),
+        name: p.title,
+    })),
+};
+
+const breadcrumbSchema = buildBreadcrumb([
+    { name: "Inicio", item: "/" },
+    { name: "Nuestros trabajos", item: "/nuestros-trabajos" },
+]);
+
+const collectionPageSchema = buildCollectionPage({
+    name: title,
+    url: canonical,
+    description,
+    mainEntityId: itemListId,
+});
+---
+
+<Layout title={title} description={description} canonical={canonical} ogImage={ogImage} ogImageAlt={ogImageAlt}>
+    <WorkHero
+        size="sm"
+        title={heroTitle}
+        subtitle={heroSubtitle}
+        bgImage={heroBgImage}
+    />
+
+    <section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 background-fade">
+        <div class="container mx-auto flex flex-col gap-10">
+            <SectionTitle
+                title={introTitle}
+                subtitle={introSubtitle}
+                variant="blue"
+            />
+
+            <div
+                class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto w-full"
+            >
+                {projectsToShow.map((project) => <WorkCard project={project} />)}
+            </div>
+        </div>
+    </section>
+
+    <CTASection title={ctaTitle} text={ctaText} />
+
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(collectionPageSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(itemListSchema)}
+    />
+</Layout>

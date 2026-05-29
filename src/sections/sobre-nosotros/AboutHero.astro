@@ -1,0 +1,102 @@
+---
+import WarrantyIcon from "../../icons/WarrantyIcon.astro";
+import CheckIcon from "../../icons/CheckIcon.astro";
+import ClockIcon from "../../icons/ClockIcon.astro";
+import HandshakeIcon from "../../icons/HandshakeIcon.astro";
+import CertificateIcon from "../../icons/CertificateIcon.astro";
+import { getAboutHero } from "../../lib/api";
+
+const hero = await getAboutHero();
+
+// Title, subtitle, bgImage vienen de Sanity (aboutPage.hero).
+// Pretitle, trust items y CTAs siguen hardcoded — no están modelados en el schema.
+const heroTitle =
+    hero?.title ??
+    "Electricistas en Sevilla comprometidos con un trabajo seguro y bien hecho";
+const heroSubtitle =
+    hero?.subtitle ??
+    "En <b>Instalaciones Eléctricas Jesús Gómez</b> nos dedicamos a las instalaciones, averías y reformas eléctricas en Sevilla y toda Andalucía. Un equipo profesional, cercano y autorizado, centrado en hacer cada trabajo bien desde el primer día.";
+const heroBgImage =
+    hero?.bgImageUrl ?? "/assets/backgrounds/aboutus-bg-black.webp";
+
+const trustItems = [
+    { icon: "warranty", label: "Instalador autorizado" },
+    { icon: "certificate", label: "Boletín CIE incluido" },
+    { icon: "clock", label: "Atención el mismo día" },
+    { icon: "handshake", label: "Trato cercano y directo" },
+];
+---
+
+<section
+    class="relative overflow-hidden scroll-m-25"
+    style={`background-image: url(${heroBgImage}); background-size: cover; background-position: center;`}
+>
+    <div
+        class="container mx-auto px-5 md:px-10 py-20 md:py-28 flex flex-col gap-6 text-white"
+    >
+        <p
+            class="text-primary-orange font-semibold uppercase tracking-wide text-sm"
+        >
+            Sobre nosotros
+        </p>
+        <h1 class="font-bold leading-tight max-w-4xl">
+            {heroTitle}
+        </h1>
+        <p class="max-w-3xl text-base md:text-lg" set:html={heroSubtitle} />
+
+        <ul
+            class="flex flex-wrap gap-3 md:gap-4 pt-2"
+            aria-label="Por qué confiar en nosotros"
+        >
+            {
+                trustItems.map((t) => (
+                    <li class="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-2 text-xs md:text-sm font-semibold">
+                        <span class="w-5 h-5 shrink-0 flex items-center justify-center text-primary-orange">
+                            {t.icon === "warranty" && <WarrantyIcon fillBorder="orange" fillBg="transparent" />}
+                            {t.icon === "certificate" && <CertificateIcon fillBorder="orange" fillBg="transparent" />}
+                            {t.icon === "clock" && <ClockIcon />}
+                            {t.icon === "handshake" && <HandshakeIcon fillBorder="orange" fillBg="transparent" />}
+                        </span>
+                        {t.label}
+                    </li>
+                ))
+            }
+        </ul>
+
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+            <a
+                href="/contacto"
+                class="btn-hero bg-accent-blue rounded p-3 lg:p-4 text-white font-semibold text-center"
+            >
+                Solicita tu presupuesto gratis
+            </a>
+            <a
+                href="https://wa.me/691886370"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-[#25d366] hover:bg-[#1eb955] transition rounded p-3 lg:p-4 text-white font-semibold text-center"
+            >
+                Escríbenos por WhatsApp
+            </a>
+            <a
+                href="tel:+34691886370"
+                class="bg-primary-orange hover:bg-orange-600 transition rounded p-3 lg:p-4 text-white font-semibold text-center"
+            >
+                Llamar: 691 88 63 70
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .btn-hero {
+        background-image: linear-gradient(135deg, #1e3eb1 50%, transparent 50%);
+        background-position: bottom right;
+        background-size: 200% 200%;
+        transition: 0.4s;
+    }
+    .btn-hero:hover {
+        background-position: top left;
+        color: white;
+    }
+</style>

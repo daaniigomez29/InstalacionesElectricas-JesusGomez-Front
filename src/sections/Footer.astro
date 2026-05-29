@@ -1,10 +1,13 @@
 ---
 import FacebookIcon from "../icons/FacebookIcon.astro"
 import WhatsappIcon from "../icons/WhatsappIcon.astro"
-import InstagramIcon from "../icons/InstagramIcon.astro"
+import InstagramIcon from "../icons/InstagramIcon.astro"    
+import { getFooterServices } from "../lib/api"
+
+const servicios = await getFooterServices()
 ---
 
-<footer class="p-5 md:p-10 flex flex-col lg:flex-row gap-10 lg:gap-30 justify-center">
+<footer class="p-5 md:p-10 flex flex-col lg:flex-row gap-10 lg:gap-20 justify-center">
     <div class="flex flex-col gap-3">
         <img src="/assets/logos/logo_jesus_completo.webp" alt="Logo completo de Instalaciones Eléctricas Jesús Gómez" class="w-40" alt="">
         <p class="font-medium">Confianza, rapidez y profesionalidad.</p>
@@ -20,14 +23,25 @@ import InstagramIcon from "../icons/InstagramIcon.astro"
             <li>
                <a href="/#inicio" class="hover:text-primary-orange transition duration-200">Inicio</a>
             </li>
-            <li><a href="/#sobre-nosotros" class="hover:text-primary-orange transition duration-200">Sobre nosotros</a></li>
+            <li><a href="/sobre-nosotros" class="hover:text-primary-orange transition duration-200">Sobre nosotros</a></li>
             <li><a href="/#soluciones" class="hover:text-primary-orange transition duration-200">Soluciones</a></li>
-            <li><a href="/#servicios" class="hover:text-primary-orange transition duration-200">Servicios</a></li>
-            <li><a href="/#nuestros-trabajos" class="hover:text-primary-orange transition duration-200">Nuestros trabajos</a></li>
+            <li><a href="/nuestros-trabajos" class="hover:text-primary-orange transition duration-200">Nuestros trabajos</a></li>
             <li><a href="/#opiniones" class="hover:text-primary-orange transition duration-200">Opiniones</a></li>
-            <li><a href="/#contacto" class="hover:text-primary-orange transition duration-200">Contacto</a></li>
+            <li><a href="/#faq" class="hover:text-primary-orange transition duration-200">FAQ</a></li>
+            <li><a href="/contacto" class="hover:text-primary-orange transition duration-200">Contacto</a></li>
         </ul>
     </div>
+    {servicios.length > 0 && (
+        <div class="flex flex-col gap-2">
+            <h6 class="text-primary-orange text-2xl">Servicios</h6>
+            <ul class="font-medium">
+                <li><a href="/servicios" class="hover:text-primary-orange transition duration-200">Todos los servicios</a></li>
+                {servicios.map((s) => (
+                    <li><a href={`/servicios/${s.slug}`} class="hover:text-primary-orange transition duration-200">{s.name}</a></li>
+                ))}
+            </ul>
+        </div>
+    )}
     <div class="flex flex-col gap-2">
         <h6 class="text-primary-orange text-2xl">Contacta con nosotros</h6>
         <ul class="font-medium">
@@ -45,6 +59,7 @@ import InstagramIcon from "../icons/InstagramIcon.astro"
         <ul class="font-medium">
             <li><a href="/aviso-legal" class="hover:text-primary-orange transition duration-200">Aviso legal</a></li>
             <li><a href="/politica-privacidad" class="hover:text-primary-orange transition duration-200">Política de privacidad</a></li>
+            <li><a href="/politica-cookies" class="hover:text-primary-orange transition duration-200">Política de cookies</a></li>
             <li><a href="/accesibilidad" class="hover:text-primary-orange transition duration-200">Accesibilidad</a></li>
         </ul>
     </div>

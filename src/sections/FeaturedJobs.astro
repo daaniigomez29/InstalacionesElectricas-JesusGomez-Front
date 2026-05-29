@@ -1,0 +1,173 @@
+---
+import FeaturedJobCard from "../components/FeaturedJobCard.astro";
+import { projects } from "../data/projects";
+import { getHomeFeaturedWorks } from "../lib/api";
+
+const homeWorks = await getHomeFeaturedWorks();
+
+// Fallback al array hardcodeado (mismo criterio que antes: featured primero,
+// si no hay ninguno marcado, todos).
+const featuredLocal = projects.filter((p) => p.featured == true);
+const localFallback = featuredLocal.length > 0 ? featuredLocal : projects;
+
+// Si Sanity tiene proyectos, los usamos. Si no, usamos los locales.
+// Nota: los proyectos de Sanity vienen con un subset de los campos del
+// tipo `Project` local; FeaturedJobCard solo usa esos campos, así que
+// el cast a `any` es seguro.
+const trabajosData: any[] = homeWorks?.projects?.length
+    ? homeWorks.projects
+    : localFallback;
+
+const sectionTitle = homeWorks?.title ?? "Trabajos destacados";
+const sectionSubtitle =
+    homeWorks?.subtitle ??
+    "Una muestra de proyectos eléctricos que hemos realizado en Sevilla. Cada ficha cuenta lo esencial: dónde fue, cuánto duró y qué resolvimos. Entra en cualquiera para ver el caso completo.";
+
+const hasMultiple = trabajosData.length > 1;
+---
+
+<section
+    id="trabajos-destacados"
+    class="p-5 md:p-10 py-15 md:py-25 scroll-m-25 relative overflow-hidden"
+>
+    <!-- Imagen de fondo con filtro de desenfoque -->
+    <div
+        id="bg-slide-featured"
+        class="absolute inset-0 flex transition-transform duration-500 filter blur-sm w-[110%] h-[110%] -top-5 -left-5"
+    >
+        {
+            trabajosData.map((p) => (
+                <div
+                    class="w-full h-full shrink-0 bg-center bg-cover bg-black/60 bg-blend-darken"
+                    style={`background-image: url(${p.coverImage.src});`}
+                />
+            ))
+        }
+    </div>
+
+    <div class="container relative mx-auto space-y-10 md:space-y-15 z-10">
+        <div class="flex flex-col items-center lg:items-start gap-4">
+            <h2 class="background-font">{sectionTitle}</h2>
+            <p
+                class="text-white text-center lg:text-left md:text-lg max-w-3xl"
+            >
+                {sectionSubtitle}
+            </p>
+        </div>
+
+        <article class="embla embla-featured">
+            <div class="embla__viewport">
+                <div class="embla__container">
+                    {trabajosData.map((p) => <FeaturedJobCard project={p} />)}
+                </div>
+            </div>
+
+            {
+                hasMultiple && (
+                    <div class="embla__controls">
+                        <div class="embla__buttons">
+                            <button
+                                class="embla__button embla__button--prev"
+                                type="button"
+                                aria-label="Anterior"
+                            >
+                                <svg
+                                    class="embla__button__svg"
+                                    viewBox="0 0 532 532"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill="white"
+                                        d="M355.66 11.354c13.793-13.805 36.208-13.805 50.001 0 13.785 13.804 13.785 36.238 0 50.034L201.22 266l204.442 204.61c13.785 13.805 13.785 36.239 0 50.044-13.793 13.796-36.208 13.796-50.002 0a5994246.277 5994246.277 0 0 0-229.332-229.454 35.065 35.065 0 0 1-10.326-25.126c0-9.2 3.393-18.26 10.326-25.2C172.192 194.973 332.731 34.31 355.66 11.354Z"
+                                    />
+                                </svg>
+                            </button>
+
+                            <button
+                                class="embla__button embla__button--next"
+                                type="button"
+                                aria-label="Siguiente"
+                            >
+                                <svg
+                                    class="embla__button__svg"
+                                    viewBox="0 0 532 532"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill="white"
+                                        d="M176.34 520.646c-13.793 13.805-36.208 13.805-50.001 0-13.785-13.804-13.785-36.238 0-50.034L330.78 266 126.34 61.391c-13.785-13.805-13.785-36.239 0-50.044 13.793-13.796 36.208-13.796 50.002 0 22.928 22.947 206.395 206.507 229.332 229.454a35.065 35.065 0 0 1 10.326 25.126c0 9.2-3.393 18.26-10.326 25.2-45.865 45.901-206.404 206.564-229.332 229.52Z"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                )
+            }
+        </article>
+
+        <div class="flex justify-center pt-10">
+            <a
+                href="/nuestros-trabajos"
+                class="bg-primary-orange hover:bg-orange-600 transition rounded p-3 lg:p-4 text-white font-semibold inline-flex items-center gap-2 hover:duration-300 duration-500 hover:scale-110"
+            >
+                Ver todos los trabajos
+                <span aria-hidden="true">→</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        import EmblaCarousel from "embla-carousel";
+        import type { EmblaCarouselType } from "embla-carousel";
+        import { addPrevNextBtnsClickHandlers } from "../scripts/embla/EmblaCarouselArrowButtons.js";
+        import "../css/embla.css";
+
+        const OPTIONS = { loop: true };
+
+        const emblaNode = document.querySelector(
+            ".embla-featured",
+        ) as HTMLElement;
+
+        if (emblaNode) {
+            const viewportNode = emblaNode.querySelector(
+                ".embla__viewport",
+            ) as HTMLElement;
+            const prevBtnNode = emblaNode.querySelector(
+                ".embla__button--prev",
+            );
+            const nextBtnNode = emblaNode.querySelector(
+                ".embla__button--next",
+            );
+
+            const emblaApi: EmblaCarouselType = EmblaCarousel(
+                viewportNode,
+                OPTIONS,
+            );
+
+            if (prevBtnNode && nextBtnNode) {
+                const removePrevNextBtnsClickHandlers =
+                    addPrevNextBtnsClickHandlers(
+                        emblaApi,
+                        prevBtnNode,
+                        nextBtnNode,
+                    );
+
+                emblaApi.on("destroy", removePrevNextBtnsClickHandlers);
+            }
+
+            const section = document.querySelector(
+                "#bg-slide-featured",
+            ) as HTMLElement;
+
+            if (section) {
+                const updateBackgroundSlide = () => {
+                    const index = emblaApi.selectedScrollSnap();
+                    section.style.transform = `translateX(-${index * 100}%)`;
+                };
+
+                emblaApi.on("select", updateBackgroundSlide);
+                updateBackgroundSlide();
+            }
+        }
+    </script>
+</section>

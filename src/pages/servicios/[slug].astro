@@ -1,0 +1,177 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceHero from "../../components/services/ServiceHero.astro";
+import ServiceIntro from "../../components/services/ServiceIntro.astro";
+import ServiceIncludes from "../../components/services/ServiceIncludes.astro";
+import ServiceProblems from "../../components/services/ServiceProblems.astro";
+import ServiceBenefits from "../../components/services/ServiceBenefits.astro";
+import ServiceProcess from "../../components/services/ServiceProcess.astro";
+import ServiceFAQ from "../../components/services/ServiceFAQ.astro";
+import ServiceRelated from "../../components/services/ServiceRelated.astro";
+import ServiceCTA from "../../components/services/ServiceCTA.astro";
+import { services, type Service } from "../../data/servicios";
+import {
+    buildBreadcrumb,
+    buildHowTo,
+    buildService,
+    absoluteUrl,
+} from "../../lib/seo";
+import { getAllServicesForBuild } from "../../lib/api";
+
+/**
+ * Genera una página por cada slug de servicio.
+ *
+ * Estrategia: fusionamos los servicios que vengan de Sanity con los del
+ * fichero local `src/data/servicios.ts`. Si un slug existe en ambos
+ * lados, Sanity gana. Si solo existe local, se usa local (fallback). Si
+ * solo existe en Sanity (servicio añadido directamente en el CMS), se
+ * genera igualmente.
+ *
+ * Para los "servicios relacionados" usamos la lista fusionada para que
+ * los títulos se puedan resolver aunque el target solo esté en Sanity.
+ */
+export async function getStaticPaths() {
+    const sanityServices = await getAllServicesForBuild();
+    const sanityBySlug = new Map(sanityServices.map((s) => [s.slug, s]));
+
+    // Lista final: por cada local, gana Sanity si lo tiene; luego añadimos
+    // los servicios "solo Sanity" que no estén en el array local.
+    const merged: Service[] = services.map(
+        (local) => sanityBySlug.get(local.slug) ?? local,
+    );
+    const localSlugs = new Set(services.map((s) => s.slug));
+    for (const sanitySvc of sanityServices) {
+        if (!localSlugs.has(sanitySvc.slug)) {
+            merged.push(sanitySvc);
+        }
+    }
+
+    // Pre-resolvemos `related` con la lista fusionada para que los
+    // títulos siempre se encuentren (sea cual sea el origen del target).
+    const allBySlug = new Map(merged.map((s) => [s.slug, s]));
+
+    return merged.map((service) => {
+        const relatedResolved = service.related.map((ref) => {
+            const target = allBySlug.get(ref.slug);
+            return {
+                title: target?.name ?? ref.slug,
+                href: `/servicios/${ref.slug}`,
+                description: ref.description,
+            };
+        });
+        return {
+            params: { slug: service.slug },
+            props: { service, relatedResolved },
+        };
+    });
+}
+
+interface RelatedResolved {
+    title: string;
+    href: string;
+    description: string;
+}
+
+interface Props {
+    service: Service;
+    relatedResolved: RelatedResolved[];
+}
+
+const { service, relatedResolved } = Astro.props;
+
+const canonical = `https://www.instalacioneselectricasjesusgomez.es/servicios/${service.slug}`;
+
+const title = service.seo?.title ?? `${service.name} en Sevilla | Instalaciones Eléctricas Jesús Gómez`;
+
+const breadcrumbSchema = buildBreadcrumb([
+    { name: "Inicio", item: "/" },
+    { name: "Servicios", item: "/servicios" },
+    { name: service.name, item: canonical },
+]);
+
+const serviceSchema = buildService({
+    name: service.name,
+    description: service.seo.description,
+    url: canonical,
+    serviceType: service.name,
+    image: absoluteUrl(service.hero.bgImage),
+    includes: service.includes.items.map((it) => ({
+        title: it.title,
+        description: it.description,
+    })),
+});
+
+const howToSchema = buildHowTo(
+    service.process.title,
+    service.process.steps,
+    `Pasos que seguimos para el servicio de ${service.name.toLowerCase()} en Sevilla.`,
+);
+---
+
+<Layout
+    title={title}
+    description={service.seo.description}
+    canonical={canonical}
+    ogImage={absoluteUrl(service.hero.bgImage)}
+    ogImageAlt={`${service.name} - Instalaciones Eléctricas Jesús Gómez`}
+>
+    <ServiceHero
+        h1={service.hero.h1}
+        subtitle={service.hero.subtitle}
+        bgImage={service.hero.bgImage}
+        breadcrumbs={[
+            {label: "Inicio", href: "/"},
+            {label: "Servicios", href: "/servicios"},
+            {label: service.name},
+
+        ]}
+    />
+
+    <ServiceIntro
+        title={service.intro.title}
+        paragraphs={service.intro.paragraphs}
+        image={service.intro.image}
+        imageAlt={service.intro.imageAlt}
+    />
+
+    <ServiceIncludes
+        title={service.includes.title}
+        intro={service.includes.intro}
+        items={service.includes.items}
+    />
+
+    <ServiceProblems
+        title={service.problems.title}
+        intro={service.problems.intro}
+        problems={service.problems.items}
+    />
+
+    <ServiceBenefits
+        title={service.benefits.title}
+        benefits={service.benefits.items}
+    />
+
+    <ServiceProcess
+        title={service.process.title}
+        steps={service.process.steps}
+    />
+
+    <ServiceFAQ title={service.faq.title} faqs={service.faq.items} />
+
+    <ServiceRelated related={relatedResolved} />
+
+    <ServiceCTA title={service.cta.title} text={service.cta.text} />
+
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(serviceSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(howToSchema)}
+    />
+</Layout>

@@ -3,6 +3,25 @@ import Header from "../sections/Header.astro";
 import HeaderSecondary from "../sections/HeaderSecondary.astro";
 import Footer from "../sections/Footer.astro";
 import WhatsappIcon from "../icons/WhatsappIcon.astro";
+import { localBusinessSchema } from "../lib/seo";
+
+export interface Props {
+	title?: string;
+	description?: string;
+	canonical?: string;
+	ogImage?: string;
+	ogImageAlt?: string;
+}
+
+const SITE_URL = "https://www.instalacioneselectricasjesusgomez.es";
+
+const {
+	title,
+	description,
+	canonical,
+	ogImage,
+	ogImageAlt
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -10,16 +29,25 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" href="/favicon.ico" sizes="any">
-		<link rel="icon" type="image/png" sizes="48x48" href="/assets/logos/logo_jesus_web_48.png">
-		<link rel="icon" type="image/png" sizes="64x64" href="/assets/logos/logo_jesus_web_64.png">
-
-		<title>Electricista en Sevilla | Instalaciones Eléctricas Jesús Gómez</title>
-
-		<meta
-			name="description"
-			content="Electricista en Sevilla para instalaciones eléctricas, reparaciones y mantenimiento. Atención rápida, servicio profesional y garantía."
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="48x48"
+			href="/assets/logos/logo_jesus_web_48.png"
 		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="64x64"
+			href="/assets/logos/logo_jesus_web_64.png"
+		/>
+
+		<title>
+			{title}
+		</title>
+
+		<meta name="description" content={description} />
 		<meta
 			name="keywords"
 			content="electricista Sevilla, servicios eléctricos Andalucía, instalación eléctrica, electricista urgente Sevilla, reparación eléctrica, mantenimiento eléctrico, urgencias eléctricas, presupuesto electricista, electricista profesional"
@@ -27,51 +55,49 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 		<meta name="author" content="daaniigomez29" />
 		<meta name="robots" content="index, follow" />
 
-		<meta
-			property="og:title"
-			content="Electricista en Sevilla | Instalaciones Eléctricas Jesús Gómez"
-		/>
-		<meta
-			property="og:description"
-			content="Electricista en Sevilla para instalaciones eléctricas, reparaciones y mantenimiento. Atención rápida, servicio profesional y garantía."
-		/>
-		<meta
-			property="og:image"
-			content="https://www.instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_completo.webp"
-		/>
+		<link rel="canonical" href={canonical} />
 
-		<link rel="canonical" href="https://www.instalacioneselectricasjesusgomez.es/" />
-
-		<meta property="og:url" content="https://www.instalacioneselectricasjesusgomez.es/" />
-
+		<!-- Open Graph (Facebook, WhatsApp, LinkedIn, Telegram) -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
 		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="es_ES" />
+		<meta property="og:site_name" content="Instalaciones Eléctricas Jesús Gómez" />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:alt" content={ogImageAlt} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
 
-		<script type="application/ld+json">
-			{
-				"@context": "https://schema.org",
-				"@type": "Electrician",
-				"name": "Electricista en Sevilla | Instalaciones Eléctricas Jesús Gómez",
-				"url": "https://www.instalacioneselectricasjesusgomez.es",
-				"logo": "https://www.instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_web_512.png",
-				"sameAs": [
-					"https://www.facebook.com/jesus.gomez.94214508/",
-					"https://www.instagram.com/instalaciones_electricas_jesus/"
-				],
-				"description": "Electricista en Sevilla especializado en instalaciones, reparaciones y mantenimiento eléctrico. Servicio rápido, profesional y con garantía."
-			}
-		</script>
+		<!-- Twitter / X -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+		<meta name="twitter:image:alt" content={ogImageAlt} />
+
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify(localBusinessSchema)}
+		/>
 	</head>
 	<body>
 		<!--Whatsapp button-->
 		<a
 			href="https://wa.me/691886370"
 			target="_blank"
-			class="group hover:scale-110 transition duration-300 rounded-full fixed bottom-0 end-0 m-4 whatsapp-icon flex justify-center items-center"
+			class="group hover:scale-110 transition duration-300 rounded-full fixed bottom-0 inset-e-0 m-4 whatsapp-icon flex justify-center items-center"
 			style="z-index: 1001;"
 			aria-label="Enviar mensaje por WhatsApp"
 			rel="noopener noreferrer"
 		>
-			<WhatsappIcon class="" fill="#FFFF" width="30" height="30" aria-hidden="true"/>
+			<WhatsappIcon
+				class=""
+				fill="#FFFF"
+				width="30"
+				height="30"
+				aria-hidden="true"
+			/>
 		</a>
 
 		<div class="min-h-full">
@@ -80,6 +106,50 @@ import WhatsappIcon from "../icons/WhatsappIcon.astro";
 			<slot />
 			<Footer />
 		</div>
+
+		<script>
+			import { initFlowbite } from "flowbite";
+			initFlowbite();
+			document.addEventListener("DOMContentLoaded", () => initFlowbite());
+		</script>
+		<script>
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add(
+							"opacity-100",
+							"translate-y-0",
+						);
+						entry.target.classList.remove(
+							"opacity-0",
+							"translate-y-10",
+						);
+					}
+				});
+			});
+
+			const observer2 = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add(
+							"opacity-100",
+							"translate-x-0",
+						);
+						entry.target.classList.remove(
+							"opacity-0",
+							"translate-x-20",
+						);
+					}
+				});
+			});
+
+			document
+				.querySelectorAll(".reveal")
+				.forEach((el) => observer.observe(el));
+			document
+				.querySelectorAll(".reveal-2")
+				.forEach((el) => observer2.observe(el));
+		</script>
 	</body>
 </html>
 

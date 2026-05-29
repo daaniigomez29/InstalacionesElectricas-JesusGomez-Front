@@ -1,0 +1,71 @@
+---
+/** Narrativa del proyecto: problema -> solución -> resultado. */
+import SectionTitle from "./SectionTitle.astro";
+
+export interface Props {
+    title?: string;
+    problem: string;
+    solution: string;
+    result: string;
+}
+
+const {
+    title = "El proyecto, paso a paso",
+    problem,
+    solution,
+    result,
+} = Astro.props;
+
+const blocks = [
+    {
+        label: "El problema",
+        text: problem,
+        borderClass: "border-red-400",
+        badgeClass: "bg-red-500",
+    },
+    {
+        label: "La solución",
+        text: solution,
+        borderClass: "border-accent-blue",
+        badgeClass: "bg-accent-blue",
+    },
+    {
+        label: "El resultado",
+        text: result,
+        borderClass: "border-green-500",
+        badgeClass: "bg-green-600",
+    },
+];
+---
+
+<section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 background-fade">
+    <div class="container mx-auto flex flex-col gap-10">
+        <SectionTitle title={title} variant="blue" />
+
+        <div class="grid gap-6 md:grid-cols-3 max-w-6xl mx-auto w-full">
+            {
+                blocks.map((block, index) => (
+                    <article
+                        class:list={[
+                            "bg-white rounded-2xl shadow-md p-6 border-t-4 flex flex-col gap-3 reveal opacity-0 translate-y-10 duration-700",
+                            block.borderClass,
+                        ]}
+                    >
+                        <span
+                            class:list={[
+                                "text-white w-10 h-10 rounded-full flex items-center justify-center font-bold",
+                                block.badgeClass,
+                            ]}
+                        >
+                            {index + 1}
+                        </span>
+                        <h3 class="font-bold text-primary-blue text-lg">
+                            {block.label}
+                        </h3>
+                        <p class="text-gray-700">{block.text}</p>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>

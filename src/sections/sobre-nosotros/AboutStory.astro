@@ -1,0 +1,82 @@
+---
+import BoltIcon from "../../icons/BoltIcon.astro";
+import { getAboutStory } from "../../lib/api";
+
+const story = await getAboutStory();
+
+// Fallback hardcodeado: cada string es un párrafo. El primero tiene
+// énfasis (semibold, primary-blue). El resto van con text-gray-700.
+const fallbackParagraphs = [
+    "Detrás de cada instalación hay una persona: Jesús Gómez, electricista de profesión y fundador del proyecto.",
+    "<b>Instalaciones Eléctricas Jesús Gómez</b> nació en Sevilla con una idea clara: ofrecer un trabajo eléctrico bien hecho, seguro y explicado con transparencia. Es un proyecto joven, construido sobre la vocación de su fundador por el oficio y sobre una forma muy concreta de entender el trabajo: la del electricista que querrías que entrara en tu propia casa.",
+    "En <b>Instalaciones Eléctricas Jesús Gómez</b> ofrecemos soluciones eléctricas completas para viviendas, negocios, oficinas, comunidades y naves industriales en Sevilla y provincia. Somos especialistas en instalaciones eléctricas, reformas, reparación de averías, cuadros eléctricos, iluminación LED, instalación de cargador de coche eléctrico y mantenimiento preventivo.",
+    "Somos una empresa instaladora autorizada, lo que nos habilita para emitir boletines eléctricos (CIE) y legalizar instalaciones ante la Junta de Andalucía. Para ti, eso se traduce en la tranquilidad de saber que tu instalación cumple la normativa y queda correctamente documentada.",
+    "Sabemos que la confianza se gana trabajo a trabajo, y por eso cuidamos cada detalle. Un buen electricista no solo resuelve un problema: te explica qué ha pasado, qué opciones tienes y por qué, sin tecnicismos innecesarios y sin sorpresas en la factura. Ese trato cercano y honesto es la base sobre la que queremos crecer.",
+];
+
+const storyTitle = story?.title ?? "Quiénes somos";
+const storyParagraphs = story?.paragraphs?.length
+    ? story.paragraphs
+    : fallbackParagraphs;
+const storyImage = story?.imageUrl ?? "/assets/team/furgoneta.webp";
+const storyImageAlt =
+    story?.imageAlt ??
+    "Furgoneta de Instalaciones Eléctricas Jesús Gómez, electricistas en Sevilla";
+
+// Callout final (con BoltIcon): hardcoded — no está modelado en el schema.
+const calloutText =
+    "Nuestro objetivo no es hacer un trabajo más, sino que te olvides de tu instalación eléctrica durante años.";
+---
+
+<section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 background-fade">
+    <div class="container mx-auto max-w-6xl">
+        <div class="flex justify-center mb-10">
+            <h2 class="background-font">{storyTitle}</h2>
+        </div>
+
+        <div
+            class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start"
+        >
+            <div
+                class="flex flex-col gap-4 reveal opacity-0 translate-y-10 duration-1000"
+            >
+                {
+                    storyParagraphs.map((p, i) =>
+                        i === 0 ? (
+                            <p
+                                class="text-lg font-semibold text-primary-blue"
+                                set:html={p}
+                            />
+                        ) : (
+                            <p class="text-gray-700" set:html={p} />
+                        ),
+                    )
+                }
+
+                <div
+                    class="flex items-center gap-4 bg-[#1A1A1A] rounded-2xl border border-[#D4AF37]/20 px-6 py-5 mt-2"
+                >
+                    <span
+                        class="w-8 h-8 shrink-0 flex items-center justify-center text-primary-orange"
+                    >
+                        <BoltIcon />
+                    </span>
+                    <p class="text-white text-sm md:text-base font-medium">
+                        {calloutText}
+                    </p>
+                </div>
+            </div>
+
+            <div
+                class="w-full flex justify-center lg:sticky lg:top-28 overflow-hidden"
+            >
+                <img
+                    src={storyImage}
+                    alt={storyImageAlt}
+                    loading="lazy"
+                    class="w-full max-w-95 h-auto rounded-2xl border border-[#D4AF37]/20 shadow-lg object-cover reveal-2 opacity-0 translate-x-20 transition-all duration-1000"
+                />
+            </div>
+        </div>
+    </div>
+</section>

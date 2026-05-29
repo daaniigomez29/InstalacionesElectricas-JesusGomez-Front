@@ -1,0 +1,32 @@
+---
+/**
+ * Título de sección reutilizable.
+ * Reproduce el estilo de "badge" (background-font) usado en el resto de la web.
+ */
+export interface Props {
+    title: string;
+    subtitle?: string;
+    variant?: "orange" | "blue";
+    align?: "center" | "start";
+    as?: "h2" | "h3";
+}
+
+const {
+    title,
+    subtitle,
+    variant = "orange",
+    align = "center",
+    as = "h2",
+} = Astro.props;
+
+const HeadingTag = as;
+const badgeClass =
+    variant === "blue" ? "background-font-blue" : "background-font";
+const alignClass =
+    align === "center" ? "items-center text-center" : "items-start text-left";
+---
+
+<div class:list={["flex flex-col gap-4", alignClass]}>
+    <HeadingTag class={badgeClass}>{title}</HeadingTag>
+    {subtitle && <p class="max-w-2xl text-gray-600">{subtitle}</p>}
+</div>

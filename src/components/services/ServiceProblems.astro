@@ -1,0 +1,36 @@
+---
+export interface Props {
+    title: string;
+    intro?: string;
+    problems: { title: string; description: string }[];
+}
+
+const { title, intro, problems } = Astro.props;
+---
+
+<section
+    class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 bg-[url(/assets/backgrounds/aboutus-bg-black.webp)] bg-cover bg-center text-white"
+>
+    <div class="container mx-auto">
+        <div class="flex justify-center mb-6">
+            <h2 class="background-font">{title}</h2>
+        </div>
+        {
+            intro && (
+                <p class="text-center max-w-3xl mx-auto mb-10">{intro}</p>
+            )
+        }
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {
+                problems.map((p) => (
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 reveal opacity-0 translate-y-10 duration-700">
+                        <h3 class="font-bold text-primary-orange text-lg mb-2">
+                            {p.title}
+                        </h3>
+                        <p>{p.description}</p>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>

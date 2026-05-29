@@ -1,0 +1,35 @@
+---
+/** Galería de imágenes del proyecto. Se oculta si no hay imágenes. */
+import type { ProjectImage } from "../../data/projects";
+import SectionTitle from "./SectionTitle.astro";
+
+export interface Props {
+    images: ProjectImage[];
+    title?: string;
+}
+
+const { images, title = "Galería del trabajo" } = Astro.props;
+---
+
+{
+    images.length > 0 && (
+        <section class="p-5 md:p-10 py-15 md:py-20 scroll-m-25 bg-[#F5F7FA]">
+            <div class="container mx-auto flex flex-col gap-10">
+                <SectionTitle title={title} />
+
+                <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto w-full">
+                    {images.map((image) => (
+                        <figure class="overflow-hidden rounded-2xl shadow-md group reveal opacity-0 translate-y-10 duration-700">
+                            <img
+                                src={image.src}
+                                alt={image.alt}
+                                loading="lazy"
+                                class="w-full h-64 md:h-72 object-cover group-hover:scale-105 transition duration-500"
+                            />
+                        </figure>
+                    ))}
+                </div>
+            </div>
+        </section>
+    )
+}

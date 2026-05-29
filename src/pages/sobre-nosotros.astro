@@ -1,0 +1,100 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AboutHero from "../sections/sobre-nosotros/AboutHero.astro";
+import AboutStory from "../sections/sobre-nosotros/AboutStory.astro";
+import AboutValues from "../sections/sobre-nosotros/AboutValues.astro";
+import ServiceAreas from "../sections/servicios/ServiceAreas.astro";
+import ServiceFAQ from "../components/services/ServiceFAQ.astro";
+import ServiceCTA from "../components/services/ServiceCTA.astro";
+import { buildAboutPage, buildBreadcrumb } from "../lib/seo";
+import { getAboutCta, getAboutFaq, getPageSeo } from "../lib/api";
+
+// FAQ y CTA finales + SEO — Sanity con fallback hardcoded.
+const aboutFaq = await getAboutFaq();
+const aboutCta = await getAboutCta();
+const seo = await getPageSeo("aboutPage");
+
+const title =
+    seo?.title ?? "Sobre Nosotros | Instalaciones Eléctricas Jesús Gómez";
+const description =
+    seo?.description ??
+    "Conoce a Instalaciones Eléctricas Jesús Gómez: electricistas en Sevilla. Instalador autorizado, trato cercano y trabajos con garantía en Sevilla y toda Andalucía.";
+const canonical =
+    seo?.canonical ??
+    "https://www.instalacioneselectricasjesusgomez.es/sobre-nosotros";
+const ogImage =
+    seo?.ogImageUrl ??
+    "https://www.instalacioneselectricasjesusgomez.es/assets/logos/logo_jesus_completo.webp";
+const ogImageAlt = "Instalaciones Eléctricas Jesús Gómez - Sobre nosotros";
+
+const breadcrumbSchema = buildBreadcrumb([
+    { name: "Inicio", item: "/" },
+    { name: "Sobre nosotros", item: canonical },
+]);
+
+const aboutPageSchema = buildAboutPage(canonical, title);
+
+const fallbackAboutFaqs = [
+    {
+        question: "¿Quién es Instalaciones Eléctricas Jesús Gómez?",
+        answer: "Somos una empresa de electricistas con sede en Sevilla, fundada por Jesús Gómez. Realizamos instalaciones, averías, reformas y mantenimiento eléctrico para viviendas, comunidades y negocios en Sevilla y toda Andalucía.",
+    },
+    {
+        question: "¿Qué tipo de trabajos eléctricos realizáis?",
+        answer: "Realizamos instalaciones eléctricas completas, reformas, reparación de averías, cambio de cuadros eléctricos, boletines y legalizaciones, iluminación LED, puntos de recarga para coche eléctrico y mantenimiento, tanto en viviendas como en locales y negocios.",
+    },
+    {
+        question: "¿Sois instaladores eléctricos autorizados?",
+        answer: "Sí. Estamos registrados como empresa instaladora autorizada, lo que nos habilita para emitir boletines eléctricos (CIE) y legalizar instalaciones ante la Junta de Andalucía.",
+    },
+    {
+        question: "¿Trabajáis tanto para particulares como para empresas?",
+        answer: "Sí. Atendemos a particulares, comunidades de propietarios y empresas. Adaptamos cada proyecto a las necesidades de viviendas, locales, oficinas y naves industriales.",
+    },
+    {
+        question: "¿En qué zonas de Sevilla trabajáis?",
+        answer: "Cubrimos Sevilla capital y los principales municipios del Aljarafe y el área metropolitana, como Dos Hermanas, Alcalá de Guadaíra o Mairena del Aljarafe. Si tu localidad no aparece en el listado, consúltanos: probablemente también te atendemos.",
+    },
+    {
+        question: "¿Ofrecéis garantía en los trabajos?",
+        answer: "Sí. Todos nuestros trabajos se entregan con factura y garantía por escrito. Usamos materiales homologados y cumplimos el Reglamento Electrotécnico de Baja Tensión (REBT).",
+    },
+    {
+        question: "¿Cómo puedo pedir un presupuesto?",
+        answer: "Puedes llamarnos al 691 88 63 70, escribirnos por WhatsApp o rellenar el formulario de la página de contacto. Te orientamos sin compromiso y te preparamos un presupuesto cerrado.",
+    },
+];
+
+const aboutFaqTitle = aboutFaq?.title ?? "Preguntas frecuentes sobre nosotros";
+const aboutFaqs = aboutFaq?.faq?.items?.length
+    ? aboutFaq.faq.items
+    : fallbackAboutFaqs;
+
+const aboutCtaTitle = aboutCta?.title ?? "¿Hablamos de tu proyecto?";
+const aboutCtaText =
+    aboutCta?.text ??
+    "Cuéntanos qué necesitas y te asesoramos sin compromiso. Trabajo eléctrico profesional, autorizado y con garantía en Sevilla y toda Andalucía.";
+---
+
+<Layout title={title} description={description} canonical={canonical} ogImage={ogImage} ogImageAlt={ogImageAlt}>
+    <AboutHero />
+
+    <AboutStory />
+
+    <AboutValues />
+
+    <ServiceAreas />
+
+    <ServiceFAQ title={aboutFaqTitle} faqs={aboutFaqs} />
+
+    <ServiceCTA title={aboutCtaTitle} text={aboutCtaText} />
+
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(breadcrumbSchema)}
+    />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(aboutPageSchema)}
+    />
+</Layout>
