@@ -18,7 +18,7 @@ const servicios = await getFooterServices()
         </div>
     </div>
     <div class="flex flex-col gap-2">
-        <h4 class="text-primary-orange text-2xl">Acceso directo</h4>
+        <h3 class="text-primary-orange text-2xl font-bold">Acceso directo</h3>
         <ul class="font-medium flex flex-col gap-2">
             <li>
                <a href="/#inicio" class="hover:text-primary-orange transition duration-200">Inicio</a>
@@ -33,7 +33,7 @@ const servicios = await getFooterServices()
     </div>
     {servicios.length > 0 && (
         <div class="flex flex-col gap-2">
-            <h4 class="text-primary-orange text-2xl">Servicios</h4>
+            <h3 class="text-primary-orange text-2xl font-bold">Servicios</h3>
             <ul class="font-medium flex flex-col gap-2">
                 <li><a href="/servicios" class="hover:text-primary-orange transition duration-200">Todos los servicios</a></li>
                 {servicios.map((s) => (
@@ -43,7 +43,7 @@ const servicios = await getFooterServices()
         </div>
     )}
     <div class="flex flex-col gap-2">
-        <h4 class="text-primary-orange text-2xl">Contacta con nosotros</h4>
+        <h3 class="text-primary-orange text-2xl font-bold">Contacta con nosotros</h3>
         <ul class="font-medium flex flex-col gap-2">
             <li>C. Tungsteno, Norte, 41007 Sevilla</li>
             <li>691 88 63 70</li>
@@ -55,7 +55,7 @@ const servicios = await getFooterServices()
         </ul>
     </div>
     <div class="flex flex-col gap-2">
-        <h4 class="text-primary-orange text-2xl">Enlaces de interés</h4>
+        <h3 class="text-primary-orange text-2xl font-bold">Enlaces de interés</h3>
         <ul class="font-medium flex flex-col gap-2">
             <li><a href="/aviso-legal" class="hover:text-primary-orange transition duration-200">Aviso legal</a></li>
             <li><a href="/politica-privacidad" class="hover:text-primary-orange transition duration-200">Política de privacidad</a></li>
