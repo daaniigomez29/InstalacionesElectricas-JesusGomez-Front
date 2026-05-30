@@ -1,4 +1,6 @@
 ---
+import { sanityImg, sanitySrcSet } from "../../lib/sanityImage";
+
 /**
  * Hero reutilizable para la sección de trabajos.
  * - Página principal: úsalo con `size="sm"` (hero pequeño).
@@ -30,10 +32,24 @@ const {
 const verticalPadding = size === "sm" ? "py-16 md:py-20" : "py-20 md:py-28";
 ---
 
-<section
-    class="relative overflow-hidden scroll-m-25 bg-primary-blue"
-    style={`background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.6)), url(${bgImage}); background-size: cover; background-position: center;`}
->
+<section class="relative isolate overflow-hidden scroll-m-25 bg-primary-blue">
+    <img
+        src={sanityImg(bgImage, 1280)}
+        srcset={sanitySrcSet(bgImage, [720, 1080, 1280, 1920])}
+        sizes="100vw"
+        alt=""
+        aria-hidden="true"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+        class="absolute inset-0 w-full h-full object-cover -z-20"
+    />
+    <div
+        class="absolute inset-0 -z-10"
+        style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.6));"
+        aria-hidden="true"
+    >
+    </div>
     <div
         class:list={[
             "container mx-auto px-5 md:px-10 flex flex-col gap-5 text-white",

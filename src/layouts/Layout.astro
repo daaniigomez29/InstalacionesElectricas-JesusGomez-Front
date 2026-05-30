@@ -1,4 +1,8 @@
 ---
+import "@fontsource/montserrat/400.css";
+import "@fontsource/montserrat/500.css";
+import "@fontsource/montserrat/600.css";
+import "@fontsource/montserrat/700.css";
 import Header from "../sections/Header.astro";
 import HeaderSecondary from "../sections/HeaderSecondary.astro";
 import Footer from "../sections/Footer.astro";
@@ -103,9 +107,13 @@ const {
 		</a>
 
 		<div class="min-h-full">
-			<HeaderSecondary />
-			<Header />
-			<slot />
+			<header class="sticky -top-19 md:-top-10 z-50">
+				<HeaderSecondary />
+				<Header/>
+			</header>
+			<main>
+				<slot />
+			</main>
 			<Footer />
 		</div>
 

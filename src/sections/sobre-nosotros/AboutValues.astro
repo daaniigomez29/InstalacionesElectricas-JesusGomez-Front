@@ -4,6 +4,7 @@ import WarrantyIcon from "../../icons/WarrantyIcon.astro";
 import CheckIcon from "../../icons/CheckIcon.astro";
 import HeartIcon from "../../icons/HeartIcon.astro";
 import { getAboutValues } from "../../lib/api";
+import { sanityImg, sanitySrcSet } from "../../lib/sanityImage";
 
 const valuesFromSanity = await getAboutValues();
 
@@ -83,9 +84,14 @@ const valuesImageAlt = valuesFromSanity?.imageAlt ?? "Valores de Instalaciones E
 
             <div class="w-full">
                 <img
-                    src={valuesImage}
+                    src={sanityImg(valuesImage, 900)}
+                    srcset={sanitySrcSet(valuesImage, [480, 720, 900, 1280])}
+                    sizes="(max-width: 1024px) 100vw, 600px"
                     alt={valuesImageAlt}
+                    width="900"
+                    height="900"
                     loading="lazy"
+                    decoding="async"
                     class="w-full h-64 sm:h-96 lg:h-full object-cover rounded-2xl shadow-md"
                 />
             </div>
