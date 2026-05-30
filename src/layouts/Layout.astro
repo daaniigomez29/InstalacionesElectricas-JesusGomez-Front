@@ -107,9 +107,13 @@ const {
 		</a>
 
 		<div class="min-h-full">
-			<HeaderSecondary />
-			<Header />
-			<slot />
+			<header>
+				<HeaderSecondary />
+				<Header />
+			</header>
+			<main>
+				<slot />
+			</main>
 			<Footer />
 		</div>
 
