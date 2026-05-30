@@ -5,6 +5,7 @@ import ClockIcon from "../../icons/ClockIcon.astro";
 import HandshakeIcon from "../../icons/HandshakeIcon.astro";
 import CertificateIcon from "../../icons/CertificateIcon.astro";
 import { getAboutHero } from "../../lib/api";
+import { sanityImg, sanitySrcSet } from "../../lib/sanityImage";
 
 const hero = await getAboutHero();
 
@@ -27,12 +28,20 @@ const trustItems = [
 ];
 ---
 
-<section
-    class="relative overflow-hidden scroll-m-25"
-    style={`background-image: url(${heroBgImage}); background-size: cover; background-position: center;`}
->
+<section class="relative overflow-hidden scroll-m-25">
+    <img
+        src={sanityImg(heroBgImage, 1280)}
+        srcset={sanitySrcSet(heroBgImage, [720, 1080, 1280, 1920])}
+        sizes="100vw"
+        alt=""
+        aria-hidden="true"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+        class="absolute inset-0 w-full h-full object-cover -z-10"
+    />
     <div
-        class="container mx-auto px-5 md:px-10 py-20 md:py-28 flex flex-col gap-6 text-white"
+        class="relative container mx-auto px-5 md:px-10 py-20 md:py-28 flex flex-col gap-6 text-white"
     >
         <p
             class="text-primary-orange font-semibold uppercase tracking-wide text-sm"
