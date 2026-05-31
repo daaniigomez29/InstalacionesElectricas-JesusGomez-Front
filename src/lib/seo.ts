@@ -141,7 +141,6 @@ const reviewSchemas = visibleReviews.map((r) => ({
     reviewBody: r.originalText?.text ?? r.text?.text ?? "",
     inLanguage: r.originalText?.languageCode ?? r.text?.languageCode ?? "es",
     datePublished: r.publishTime,
-    itemReviewed: { "@id": BUSINESS_ID },
 }));
 
 const aggregateRatingSchema =
