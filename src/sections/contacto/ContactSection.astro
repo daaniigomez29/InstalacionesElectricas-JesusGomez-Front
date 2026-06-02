@@ -60,10 +60,14 @@ import LocationIcon from "../../icons/LocationIcon.astro";
                                 >Teléfono *</label
                             ><input
                                 required=""
-                                placeholder="6XX XXX XXX"
+                                placeholder="612345678"
                                 class="w-full bg-[#141414] border border-[#333] focus:border-primary-orange text-white text-sm px-4 py-3 rounded-lg outline-none transition-colors placeholder-[#555]"
                                 type="tel"
                                 name="telefono"
+                                inputmode="numeric"
+                                maxlength="9"
+                                pattern="[0-9]{9}"
+
                             />
                         </div>
                     </div><div>
