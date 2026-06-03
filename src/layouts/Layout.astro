@@ -9,6 +9,9 @@ import Footer from "../sections/Footer.astro";
 import WhatsappIcon from "../icons/WhatsappIcon.astro";
 import { localBusinessSchema } from "../lib/seo";
 
+import montserrat700Url from "@fontsource/montserrat/files/montserrat-latin-700-normal.woff2?url";
+
+
 export interface Props {
 	title?: string;
 	description?: string;
@@ -35,6 +38,7 @@ const {
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PDPS4HTR');</script>
 	<!-- End Google Tag Manager -->
 
+		<link rel="preload" as="font" type="font/woff2" crossorigin href={montserrat700Url}>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" href="/favicon.ico" sizes="any" />
