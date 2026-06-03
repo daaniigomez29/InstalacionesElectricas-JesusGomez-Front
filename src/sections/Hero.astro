@@ -32,16 +32,16 @@ const ctaSecondaryHref = hero?.ctaSecondary?.href ?? "tel:+34691886370";
   >
     <div class="flex flex-col">
       <div class="">
-        <p
+        <h1
           class="text-primary-orange text-[11px]! font-bold tracking-widest uppercase mb-2"
         >
           {pretitle}
-        </p>
+        </h1>
       </div>
-      <h1 class="font-bold">
+      <h2 class="font-bold text-[28.8px]! md:text-[40px]! xl:text-[46px]!">
         {titleLine1}
         <span class="background-font text-start!">{titleLine2}</span>
-      </h1>
+      </h2>
       <p class="pt-5">{description}</p>
       <div class="pt-7">
         <a
@@ -185,15 +185,5 @@ const ctaSecondaryHref = hero?.ctaSecondary?.href ?? "tel:+34691886370";
     }
   }
 
-  /*
-h1 {
-		font-size: 1.875rem;
-}
-*/
-
-  @media (min-width: 1440px) {
-    h1 {
-      font-size: 2.875rem;
-    } /* 46px */
-  }
+ 
 </style>
