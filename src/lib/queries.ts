@@ -263,6 +263,21 @@ export const homeAboutQuery = `*[_type == "homePage"][0].aboutSection{
 }`;
 
 // ============================================================
+// HOME — SOLUCIONES A MEDIDA
+// ============================================================
+/**
+ * Devuelve el bloque "solutionSection" del singleton homePage.
+ * `paragraphs` viene como Portable Text y se convierte a array de
+ * strings HTML en api.ts (mismo patrón que aboutStory).
+ */
+export const homeSolutionQuery = `*[_type == "homePage"][0].solutionSection{
+  title,
+  paragraphs,
+  "imageUrl": image.image.asset->url,
+  "imageAlt": image.alt
+}`;
+
+// ============================================================
 // HOME — SERVICIOS DESTACADOS
 // ============================================================
 /**
