@@ -179,6 +179,14 @@ export type HomeAbout = {
     button?: SanityLink;
 };
 
+export type HomeSolution = {
+    title?: string;
+    /** Ya viene convertido a array de strings HTML (un párrafo por elemento). */
+    paragraphs: string[];
+    imageUrl?: string;
+    imageAlt?: string;
+};
+
 export type HomeServiceCard = {
     img: string;
     imgAlt?: string;

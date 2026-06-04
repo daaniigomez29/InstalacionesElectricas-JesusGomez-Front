@@ -52,8 +52,8 @@ export const homePage = defineType({
       group: 'about',
       fields: [
         {name: 'title', title: 'Título', type: 'string'},
-        //{name: 'leadText', title: 'Frase destacada', type: 'string'},
-        //{name: 'paragraphs', title: 'Párrafos', type: 'richText'},
+        {name: 'leadText', title: 'Frase destacada', type: 'string'},
+        {name: 'paragraphs', title: 'Párrafos', type: 'richText'},
         {name: 'image', title: 'Imagen lateral', type: 'imageWithAlt'},
         /*
         {
@@ -104,7 +104,6 @@ export const homePage = defineType({
     }),
 
     // --- SOLUCIONES ---
-    /*
     defineField({
       name: 'solutionSection',
       title: 'Soluciones a medida',
@@ -114,7 +113,7 @@ export const homePage = defineType({
         {name: 'title', title: 'Título', type: 'string'},
         {name: 'paragraphs', title: 'Párrafos', type: 'richText'},
         {name: 'image', title: 'Imagen', type: 'imageWithAlt'},
-        {name: 'benefitsTitle', title: 'Subtítulo (beneficios)', type: 'string'},
+        /*{name: 'benefitsTitle', title: 'Subtítulo (beneficios)', type: 'string'},
         {
           name: 'benefits',
           title: 'Beneficios (3 columnas)',
@@ -142,10 +141,10 @@ export const homePage = defineType({
             }),
           ],
           validation: (Rule) => Rule.max(3),
-        },
+        },*/
       ],
     }),
-*/
+
     // --- SERVICIOS ---
     defineField({
       name: 'servicesSection',

@@ -16,6 +16,7 @@ import {
     homeFinalCtaQuery,
     homeHeroQuery,
     homeServicesQuery,
+    homeSolutionQuery,
     partnerLogosQuery,
     serviceFinderQuery,
     serviceProcessQuery,
@@ -49,6 +50,7 @@ import type {
     HomeFinalCta,
     HomeHero,
     HomeServicesSection,
+    HomeSolution,
     PageSeo,
     PartnerLogo,
     ServiceFinder,
@@ -339,6 +341,17 @@ export async function getHomeHero(): Promise<HomeHero | null> {
 
 export async function getHomeAbout(): Promise<HomeAbout | null> {
     return await sanityClient.fetch(homeAboutQuery);
+}
+
+export async function getHomeSolution(): Promise<HomeSolution | null> {
+    const raw: any = await sanityClient.fetch(homeSolutionQuery);
+    if (!raw) return null;
+    return {
+        title: raw.title,
+        paragraphs: portableTextToHtmlArray(raw.paragraphs),
+        imageUrl: raw.imageUrl,
+        imageAlt: raw.imageAlt,
+    };
 }
 
 export async function getHomeServices(): Promise<HomeServicesSection | null> {
