@@ -17,7 +17,7 @@ import { existsSync } from 'node:fs';
 const env = loadEnv(process.env.NODE_ENV ?? 'development', process.cwd(), '');
 
 
-const SITE = 'https://instalacioneselectricasjesusgomez.es';
+const SITE = 'https://www.instalacioneselectricasjesusgomez.es';
 
 // ---------------------------------------------------------------
 // Pre-carga de fechas de última actualización desde Sanity
@@ -161,7 +161,7 @@ export default defineConfig({
 
   output: 'static',
   adapter: vercelAdapter(),
-  site:'https://instalacioneselectricasjesusgomez.es',
+  site: SITE,
   integrations: [sanity({
     projectId: env.SANITY_STUDIO_PROJECT_ID,
     dataset: "production",
