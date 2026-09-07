@@ -1,66 +1,189 @@
 ---
-import FacebookIcon from "../icons/FacebookIcon.astro"
-import WhatsappIcon from "../icons/WhatsappIcon.astro"
-import InstagramIcon from "../icons/InstagramIcon.astro"    
-import { getFooterServices } from "../lib/api"
+import FacebookIcon from "../icons/FacebookIcon.astro";
+import WhatsappIcon from "../icons/WhatsappIcon.astro";
+import InstagramIcon from "../icons/InstagramIcon.astro";
+import { getFooterServices } from "../lib/api";
+import DevelopedBy from "../components/DevelopedBy.astro";
 
-const servicios = await getFooterServices()
+const servicios = await getFooterServices();
 ---
 
-<footer class="p-5 md:p-10 flex flex-col lg:flex-row gap-10 lg:gap-20 justify-center">
-    <div class="flex flex-col gap-3">
-        <img src="/assets/logos/logo_jesus_completo.webp" alt="Logo completo de Instalaciones Eléctricas Jesús Gómez" class="w-40" alt="">
-        <p class="font-medium">Confianza, rapidez y profesionalidad.</p>
-        <div class="flex gap-2">
-            <a href="https://www.facebook.com/jesus.gomez.94214508/" target="_blank" aria-label="Facebook de Instalaciones Eléctricas Jesús Gómez" rel="noopener noreferrer"><FacebookIcon /></a>
-            <a href="https://wa.me/691886370" target="_blank" id="whatsapp-button-footer" aria-label="Enviar mensaje por WhatsApp" rel="noopener noreferrer"><WhatsappIcon /></a>
-            <a href="https://www.instagram.com/instalaciones_electricas_jesus/" target="_blank" aria-label="Instagram de Instalaciones Eléctricas Jesús Gómez" rel="noopener noreferrer"><InstagramIcon /></a>
+<footer
+    class=""
+>
+    <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 justify-center p-5 md:p-10">
+        <div class="flex flex-col gap-3">
+            <img
+                src="/assets/logos/logo_jesus_completo.webp"
+                alt="Logo completo de Instalaciones Eléctricas Jesús Gómez"
+                class="w-40"
+                alt=""
+            />
+            <p class="font-medium">Confianza, rapidez y profesionalidad.</p>
+            <div class="flex gap-2">
+                <a
+                    href="https://www.facebook.com/jesus.gomez.94214508/"
+                    target="_blank"
+                    aria-label="Facebook de Instalaciones Eléctricas Jesús Gómez"
+                    rel="noopener noreferrer"><FacebookIcon /></a
+                >
+                <a
+                    href="https://wa.me/691886370"
+                    target="_blank"
+                    id="whatsapp-button-footer"
+                    aria-label="Enviar mensaje por WhatsApp"
+                    rel="noopener noreferrer"><WhatsappIcon /></a
+                >
+                <a
+                    href="https://www.instagram.com/instalaciones_electricas_jesus/"
+                    target="_blank"
+                    aria-label="Instagram de Instalaciones Eléctricas Jesús Gómez"
+                    rel="noopener noreferrer"><InstagramIcon /></a
+                >
+            </div>
         </div>
-    </div>
-    <div class="flex flex-col gap-2">
-        <h3 class="text-primary-orange text-2xl font-bold">Acceso directo</h3>
-        <ul class="font-medium flex flex-col gap-2">
-            <li>
-               <a href="/#inicio" class="hover:text-primary-orange transition duration-200">Inicio</a>
-            </li>
-            <li><a href="/sobre-nosotros" class="hover:text-primary-orange transition duration-200">Sobre nosotros</a></li>
-            <li><a href="/#soluciones" class="hover:text-primary-orange transition duration-200">Soluciones</a></li>
-            <li><a href="/nuestros-trabajos" class="hover:text-primary-orange transition duration-200">Nuestros trabajos</a></li>
-            <li><a href="/#opiniones" class="hover:text-primary-orange transition duration-200">Opiniones</a></li>
-            <li><a href="/#faq" class="hover:text-primary-orange transition duration-200">FAQ</a></li>
-            <li><a href="/contacto" class="hover:text-primary-orange transition duration-200">Contacto</a></li>
-        </ul>
-    </div>
-    {servicios.length > 0 && (
         <div class="flex flex-col gap-2">
-            <h3 class="text-primary-orange text-2xl font-bold">Servicios</h3>
+            <h3 class="text-primary-orange text-2xl font-bold">
+                Acceso directo
+            </h3>
             <ul class="font-medium flex flex-col gap-2">
-                <li><a href="/servicios" class="hover:text-primary-orange transition duration-200">Todos los servicios</a></li>
-                {servicios.map((s) => (
-                    <li><a href={`/servicios/${s.slug}`} class="hover:text-primary-orange transition duration-200">{s.name}</a></li>
-                ))}
+                <li>
+                    <a
+                        href="/#inicio"
+                        class="hover:text-primary-orange transition duration-200"
+                        >Inicio</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="/sobre-nosotros"
+                        class="hover:text-primary-orange transition duration-200"
+                        >Sobre nosotros</a>
+                </li>
+                <li>
+                    <a
+                        href="/#soluciones"
+                        class="hover:text-primary-orange transition duration-200"
+                        >Soluciones</a>
+                </li>
+                <li>
+                    <a
+                        href="/nuestros-trabajos"
+                        class="hover:text-primary-orange transition duration-200"
+                        >Nuestros trabajos</a>
+                </li>
+                <li>
+                    <a
+                        href="/#opiniones"
+                        class="hover:text-primary-orange transition duration-200"
+                        >Opiniones</a>
+                </li>
+                <li>
+                    <a
+                        href="/#faq"
+                        class="hover:text-primary-orange transition duration-200"
+                        >FAQ</a>
+                </li>
+                <li>
+                    <a
+                        href="/contacto"
+                        class="hover:text-primary-orange transition duration-200"
+                        >Contacto</a>
+                </li>
             </ul>
         </div>
-    )}
-    <div class="flex flex-col gap-2">
-        <h3 class="text-primary-orange text-2xl font-bold">Contacta con nosotros</h3>
-        <ul class="font-medium flex flex-col gap-2">
-            <li>C. Tungsteno, Norte, 41007 Sevilla</li>
-            <li>691 88 63 70</li>
-            <li>jesusgomezgranado@gmail.com</li>
-            <li><a href="https://wa.me/691886370" target="_blank" class="underline hover:text-green-500 transition duration-200">Whatsapp</a></li>
-            <li><a href="https://www.facebook.com/jesus.gomez.94214508/" target="_blank" class="underline hover:text-blue-500 transition duration-200">Facebook</a></li>
-            <li><a href="https://www.instagram.com/instalaciones_electricas_jesus/" target="_blank" class="underline hover:text-[#d62976] transition duration-200">Instagram</a></li>
-            <li>Lunes a Sábado: 7:00 - 22:00</li>
-        </ul>
+        {
+            servicios.length > 0 && (
+                <div class="flex flex-col gap-2">
+                    <h3 class="text-primary-orange text-2xl font-bold">
+                        Servicios
+                    </h3>
+                    <ul class="font-medium flex flex-col gap-2">
+                        <li>
+                            <a
+                                href="/servicios"
+                                class="hover:text-primary-orange transition duration-200"
+                            >
+                                Todos los servicios
+                            </a>
+                        </li>
+                        {servicios.map((s) => (
+                            <li>
+                                <a
+                                    href={`/servicios/${s.slug}`}
+                                    class="hover:text-primary-orange transition duration-200"
+                                >
+                                    {s.name}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
+        <div class="flex flex-col gap-2">
+            <h3 class="text-primary-orange text-2xl font-bold">
+                Contacta con nosotros
+            </h3>
+            <ul class="font-medium flex flex-col gap-2">
+                <li>C. Tungsteno, Norte, 41007 Sevilla</li>
+                <li>691 88 63 70</li>
+                <li>jesusgomezgranado@gmail.com</li>
+                <li>
+                    <a
+                        href="https://wa.me/691886370"
+                        target="_blank"
+                        class="underline hover:text-green-500 transition duration-200"
+                        >Whatsapp</a>
+                </li>
+                <li>
+                    <a
+                        href="https://www.facebook.com/jesus.gomez.94214508/"
+                        target="_blank"
+                        class="underline hover:text-blue-500 transition duration-200"
+                        >Facebook</a>
+                </li>
+                <li>
+                    <a
+                        href="https://www.instagram.com/instalaciones_electricas_jesus/"
+                        target="_blank"
+                        class="underline hover:text-[#d62976] transition duration-200"
+                        >Instagram</a>
+                </li>
+                <li>Lunes a Sábado: 7:00 - 22:00</li>
+            </ul>
+        </div>
+        <div class="flex flex-col gap-2">
+            <h3 class="text-primary-orange text-2xl font-bold">
+                Enlaces de interés
+            </h3>
+            <ul class="font-medium flex flex-col gap-2">
+                <li>
+                    <a
+                        href="/aviso-legal"
+                        class="hover:text-primary-orange transition duration-200"
+                        >Aviso legal</a>
+                </li>
+                <li>
+                    <a
+                        href="/politica-privacidad"
+                        class="hover:text-primary-orange transition duration-200"
+                        >Política de privacidad</a>
+                </li>
+                <li>
+                    <a
+                        href="/politica-cookies"
+                        class="hover:text-primary-orange transition duration-200"
+                        >Política de cookies</a>
+                </li>
+                <li>
+                    <a
+                        href="/accesibilidad"
+                        class="hover:text-primary-orange transition duration-200"
+                        >Accesibilidad</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="flex flex-col gap-2">
-        <h3 class="text-primary-orange text-2xl font-bold">Enlaces de interés</h3>
-        <ul class="font-medium flex flex-col gap-2">
-            <li><a href="/aviso-legal" class="hover:text-primary-orange transition duration-200">Aviso legal</a></li>
-            <li><a href="/politica-privacidad" class="hover:text-primary-orange transition duration-200">Política de privacidad</a></li>
-            <li><a href="/politica-cookies" class="hover:text-primary-orange transition duration-200">Política de cookies</a></li>
-            <li><a href="/accesibilidad" class="hover:text-primary-orange transition duration-200">Accesibilidad</a></li>
-        </ul>
-    </div>
+    <DevelopedBy />
 </footer>
